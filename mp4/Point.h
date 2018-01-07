@@ -10,52 +10,53 @@
 #include <sstream>
 
 /**
- * Simple Point class containing a public unsigned `x` and `y` for representing 2D points on an image.
+ * Simple Point class containing a public unsigned `x` and `y` for representing
+ * 2D points on an image.
  */
 struct Point {
-  unsigned x;
-  unsigned y;
+    unsigned x;
+    unsigned y;
 
-  /**
-   * Default constructor, set the point to (0, 0)
-   */
-  Point() : Point(0, 0) { }
-  /**
-   * Constructor
-   * @param x coordinate of a point
-   * @param y coordinate of a point
-   */
-  Point(unsigned x, unsigned y) : x(x), y(y) { }
+    /**
+     * Default constructor, set the point to (0, 0)
+     */
+    Point() : Point(0, 0) {}
+    /**
+     * Constructor
+     * @param x coordinate of a point
+     * @param y coordinate of a point
+     */
+    Point(unsigned x, unsigned y) : x(x), y(y) {}
 
-  /**
-   * overload operator <
-   * @param other The other point
-   * @return True for smaller, false for otherwise
-   */
-  bool operator<(const Point &other) const {
-    return (x < other.x || y < other.y);
-  }
+    /**
+     * overload operator <
+     * @param other The other point
+     * @return True for smaller, false for otherwise
+     */
+    bool operator<(const Point &other) const {
+        return (x < other.x || y < other.y);
+    }
 
-  /**
-   * overload operator ==
-   * @param other The other point
-   * @return True for smaller, false for otherwise
-   */
-  bool operator==(const Point &other) const {
-    return (x == other.x && y == other.y);
-  }
+    /**
+     * overload operator ==
+     * @param other The other point
+     * @return True for smaller, false for otherwise
+     */
+    bool operator==(const Point &other) const {
+        return (x == other.x && y == other.y);
+    }
 };
 
-  /**
-   * overload operator <<
-   * print out a point
-   * @param out Output stream
-   * @param point The point to print
-   * @return Output stream
-   */
-inline std::ostream & operator<<(std::ostream & out, Point const & point) {
-  out << "(" << point.x << ", " << point.y << ")";
-  return out;
+/**
+ * overload operator <<
+ * print out a point
+ * @param out Output stream
+ * @param point The point to print
+ * @return Output stream
+ */
+inline std::ostream &operator<<(std::ostream &out, Point const &point) {
+    out << "(" << point.x << ", " << point.y << ")";
+    return out;
 }
 
 #endif

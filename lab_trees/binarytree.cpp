@@ -11,8 +11,7 @@
  *  that the height of an empty tree is -1.
  */
 template <typename T>
-int BinaryTree<T>::height() const
-{
+int BinaryTree<T>::height() const {
     // Call recursive helper function on root
     return height(root);
 }
@@ -23,8 +22,7 @@ int BinaryTree<T>::height() const
  * @return The height of the subtree
  */
 template <typename T>
-int BinaryTree<T>::height(const Node* subRoot) const
-{
+int BinaryTree<T>::height(const Node *subRoot) const {
     // Base case
     if (subRoot == NULL)
         return -1;
@@ -40,8 +38,7 @@ int BinaryTree<T>::height(const Node* subRoot) const
  * that node.
  */
 template <typename T>
-void BinaryTree<T>::printLeftToRight() const
-{
+void BinaryTree<T>::printLeftToRight() const {
     // Call recursive helper function on the root
     printLeftToRight(root);
 
@@ -54,8 +51,7 @@ void BinaryTree<T>::printLeftToRight() const
  * @param subRoot
  */
 template <typename T>
-void BinaryTree<T>::printLeftToRight(const Node* subRoot) const
-{
+void BinaryTree<T>::printLeftToRight(const Node *subRoot) const {
     // Base case - null node
     if (subRoot == NULL)
         return;
@@ -75,9 +71,8 @@ void BinaryTree<T>::printLeftToRight(const Node* subRoot) const
  *  (not creating a flipped copy).
  */
 template <typename T>
-void BinaryTree<T>::mirror()
-{
-    //your code here
+void BinaryTree<T>::mirror() {
+    // your code here
     mirror(root);
 }
 
@@ -88,8 +83,7 @@ void BinaryTree<T>::mirror()
  *  criterion for a binary tree to be a binary search tree.
  */
 template <typename T>
-bool BinaryTree<T>::isOrderedIterative() const
-{
+bool BinaryTree<T>::isOrderedIterative() const {
     // your code here
     InorderTraversal<int> iot(root);
     int prev = (*iot.begin())->elem;
@@ -109,24 +103,21 @@ bool BinaryTree<T>::isOrderedIterative() const
  *  criterion for a binary tree to be a binary search tree.
  */
 template <typename T>
-bool BinaryTree<T>::isOrderedRecursive() const
-{
-
+bool BinaryTree<T>::isOrderedRecursive() const {
     // your code here
     return isOrderedRecursive(root);
 }
 
 /**
- * creates vectors of all the possible paths from the root of the tree to any leaf
- * node and adds it to another vector.
- * Path is, all sequences starting at the root node and continuing
- * downwards, ending at a leaf node. Paths ending in a left node should be
- * added before paths ending in a node further to the right.
+ * creates vectors of all the possible paths from the root of the tree to any
+ * leaf node and adds it to another vector. Path is, all sequences starting at
+ * the root node and continuing downwards, ending at a leaf node. Paths ending
+ * in a left node should be added before paths ending in a node further to the
+ * right.
  * @param paths vector of vectors that contains path of nodes
  */
 template <typename T>
-void BinaryTree<T>::printPaths(vector<vector<T> > &paths) const
-{
+void BinaryTree<T>::printPaths(vector<vector<T>> &paths) const {
     // your code here
     stack<Node *> s;
     printPaths(paths, root, s);
@@ -144,15 +135,14 @@ void BinaryTree<T>::printPaths(vector<vector<T> > &paths) const
  * @return The sum of the distances of all nodes to the root
  */
 template <typename T>
-int BinaryTree<T>::sumDistances() const
-{
+int BinaryTree<T>::sumDistances() const {
     // your code here
     int distSum = 0;
     return sumDistances(root, -1, distSum);
 }
 
 template <typename T>
-void BinaryTree<T>::mirror(Node* &subRoot) {
+void BinaryTree<T>::mirror(Node *&subRoot) {
     if (subRoot == NULL) {
         return;
     } else {
@@ -171,18 +161,24 @@ bool BinaryTree<T>::isOrderedRecursive(Node *subRoot) const {
     if (subRoot == NULL) {
         return true;
     } else if (subRoot->left != NULL && subRoot->right != NULL) {
-        return isOrderedRecursive(subRoot->left) && isOrderedRecursive(subRoot->right) && (subRoot->elem >= subRoot->left->elem) && (subRoot->elem <= subRoot->right->elem);
+        return isOrderedRecursive(subRoot->left) &&
+               isOrderedRecursive(subRoot->right) &&
+               (subRoot->elem >= subRoot->left->elem) &&
+               (subRoot->elem <= subRoot->right->elem);
     } else if (subRoot->left != NULL) {
-        return isOrderedRecursive(subRoot->left) && (subRoot->elem >= subRoot->left->elem);
+        return isOrderedRecursive(subRoot->left) &&
+               (subRoot->elem >= subRoot->left->elem);
     } else if (subRoot->right != NULL) {
-        return isOrderedRecursive(subRoot->right) && (subRoot->elem <= subRoot->right->elem);
+        return isOrderedRecursive(subRoot->right) &&
+               (subRoot->elem <= subRoot->right->elem);
     } else {
         return true;
     }
 }
 
 template <typename T>
-void BinaryTree<T>::printPaths(vector<vector<T>> &paths, Node *subRoot, stack<Node *> &s) const {
+void BinaryTree<T>::printPaths(vector<vector<T>> &paths, Node *subRoot,
+                               stack<Node *> &s) const {
     s.push(subRoot);
 
     if (subRoot->left == NULL && subRoot->right == NULL) {
@@ -203,7 +199,8 @@ void BinaryTree<T>::printPaths(vector<vector<T>> &paths, Node *subRoot, stack<No
 }
 
 template <typename T>
-void BinaryTree<T>::pushStkToVec(stack<Node *> &s, vector<vector<T>> &paths) const {
+void BinaryTree<T>::pushStkToVec(stack<Node *> &s,
+                                 vector<vector<T>> &paths) const {
     stack<Node *> temp;
     paths.push_back(vector<T>());
 
@@ -235,7 +232,8 @@ void BinaryTree<T>::printVector(vector<vector<T>> &paths) const {
 }
 
 template <typename T>
-int & BinaryTree<T>::sumDistances(const Node *subRoot, int currDist, int &distSum) const {
+int &BinaryTree<T>::sumDistances(const Node *subRoot, int currDist,
+                                 int &distSum) const {
     ++currDist;
     distSum += currDist;
 

@@ -27,9 +27,10 @@ Point<Dim>::Point(double arr[Dim]) {
  * Point constructor with mines, used for grading.
  */
 template <int Dim>
-Point<Dim>::Point(double arr[Dim], bool isMine, const MineAction * mineAction) : Point<Dim>(arr) {
-  isMine_ = isMine;
-  mineAction_ = mineAction;
+Point<Dim>::Point(double arr[Dim], bool isMine, const MineAction *mineAction)
+    : Point<Dim>(arr) {
+    isMine_ = isMine;
+    mineAction_ = mineAction;
 }
 
 template <int Dim>
@@ -52,8 +53,7 @@ Point<Dim>::Point(T x, ...) {
 }
 
 template <int Dim>
-Point<Dim>& Point<Dim>::operator=(const Point<Dim>& other) 
-{
+Point<Dim> &Point<Dim>::operator=(const Point<Dim> &other) {
     for (int i = 0; i < Dim; i++) {
         vals[i] = other.vals[i];
     }
@@ -70,18 +70,22 @@ double Point<Dim>::operator[](int index) const {
         throw e;
     }
 
-    if (isMine_) { mineAction_->onMine(*this); }
+    if (isMine_) {
+        mineAction_->onMine(*this);
+    }
     return vals[index];
 }
 
 template <int Dim>
-double& Point<Dim>::operator[](int index) {
+double &Point<Dim>::operator[](int index) {
     if (index >= Dim) {
         out_of_range e("Point index out of range");
         throw e;
     }
 
-    if (isMine_) { mineAction_->onMine(*this); }
+    if (isMine_) {
+        mineAction_->onMine(*this);
+    }
     return vals[index];
 }
 
@@ -95,7 +99,7 @@ void Point<Dim>::set(int index, double val) {
 }
 
 template <int Dim>
-void Point<Dim>::print(std::ostream& out /* = cout */) const {
+void Point<Dim>::print(std::ostream &out /* = cout */) const {
     out << '(';
 
     for (int i = 0; i < Dim - 1; ++i)
@@ -106,7 +110,7 @@ void Point<Dim>::print(std::ostream& out /* = cout */) const {
 }
 
 template <int Dim>
-std::ostream& operator<<(std::ostream& out, const Point<Dim>& p) {
+std::ostream &operator<<(std::ostream &out, const Point<Dim> &p) {
     p.print(out);
     return out;
 }
@@ -152,5 +156,5 @@ bool Point<Dim>::operator>=(const Point<Dim> p) const {
 
 template <int Dim>
 bool Point<Dim>::isMine() const {
-  return isMine_;
+    return isMine_;
 }

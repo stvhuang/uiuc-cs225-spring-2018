@@ -9,24 +9,23 @@
 
 #include "char_counter.h"
 
+#include <algorithm>
 #include <iostream>
 #include <sstream>
-#include <algorithm>
 
-using std::istringstream;
 using std::cout;
 using std::endl;
-using std::vector;
-using std::string;
+using std::istringstream;
 using std::sort;
+using std::string;
+using std::vector;
 
 template <template <class K, class V> class Dict>
-void countCharacters(const string& file, int frequency)
-{
+void countCharacters(const string &file, int frequency) {
     CharFreq<Dict> cf(file);
     vector<pair<char, int>> ret = cf.getChars(frequency);
     sort(ret.begin(), ret.end(),
-         [](const pair<char, int>& a, const pair<char, int>& b) -> bool {
+         [](const pair<char, int> &a, const pair<char, int> &b) -> bool {
              return (a.second == b.second) ? (a.first < b.first)
                                            : (a.second > b.second);
          });
@@ -34,8 +33,7 @@ void countCharacters(const string& file, int frequency)
         cout << ret[i].second << "\t" << ret[i].first << endl;
 }
 
-void printUsage(const string& progname)
-{
+void printUsage(const string &progname) {
     cout << progname << " filename frequency tabletype" << endl;
     cout << "\tfilename: path to the file to count characters in" << endl;
     cout << "\tfrequency: threshold at which a character's frequency must "
@@ -46,8 +44,7 @@ void printUsage(const string& progname)
         << endl;
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char **argv) {
     vector<string> args(argv, argv + argc);
     if (argc < 4) {
         printUsage(args[0]);

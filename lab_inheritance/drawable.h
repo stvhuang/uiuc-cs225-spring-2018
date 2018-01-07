@@ -15,11 +15,9 @@ using namespace cs225;
 /**
  * @brief A pure virtual interface class that can draw itself to a canvas.
  */
-class Drawable
-{
+class Drawable {
   public:
-    virtual ~Drawable()
-    { /* Nothing */
+    virtual ~Drawable() { /* Nothing */
     }
 
     /**
@@ -27,7 +25,7 @@ class Drawable
      *
      * @param canvas to draw onto.
      */
-    virtual void draw(PNG* canvas) const = 0;
+    virtual void draw(PNG *canvas) const = 0;
 };
 
-#endif // DRAWABLE_H_
+#endif  // DRAWABLE_H_

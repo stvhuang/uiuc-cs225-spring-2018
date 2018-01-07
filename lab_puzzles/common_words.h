@@ -9,13 +9,13 @@
 #ifndef COMMON_WORDS_H
 #define COMMON_WORDS_H
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
 
 using std::map;
-using std::vector;
 using std::string;
+using std::vector;
 
 /**
  * CommonWords class. Definition of a class to find all the common words across
@@ -24,14 +24,13 @@ using std::string;
  * @author Zach Widder
  * @date October 2014
  */
-class CommonWords
-{
+class CommonWords {
   public:
     /**
      * Constructs a CommonWords object from a vector of filenames.
      * @param filenames The list of filenames to read.
      */
-    CommonWords(const std::vector<std::string>& filenames);
+    CommonWords(const std::vector<std::string> &filenames);
 
     /**
      * @param n The number of times to word has to appear.
@@ -58,7 +57,7 @@ class CommonWords
      * Initializes #file_word_maps.
      * @param filenames The vector of names of the files that will be used
      */
-    void init_file_word_maps(const vector<string>& filenames);
+    void init_file_word_maps(const vector<string> &filenames);
 
     /**
      * Initializes #common.
@@ -69,7 +68,7 @@ class CommonWords
      * Takes a filename and transforms it to a vector of all words in that file.
      * @param filename The name of the file that will fill the vector
      */
-    vector<string> file_to_vector(const string& filename) const;
+    vector<string> file_to_vector(const string &filename) const;
 };
 
 #endif

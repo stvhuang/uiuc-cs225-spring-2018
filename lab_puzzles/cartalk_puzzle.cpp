@@ -20,9 +20,8 @@ using namespace std;
  * @param d The PronounceDict to be used to solve the puzzle.
  * @param word_list_fname The filename of the word list to be used.
  */
-vector<std::tuple<std::string, std::string, std::string>> cartalk_puzzle(PronounceDict d,
-                                    const string& word_list_fname)
-{
+vector<std::tuple<std::string, std::string, std::string>>
+cartalk_puzzle(PronounceDict d, const string &word_list_fname) {
     vector<std::tuple<std::string, std::string, std::string>> ret;
 
     /* Your code goes here! */

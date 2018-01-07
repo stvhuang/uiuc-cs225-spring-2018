@@ -9,15 +9,15 @@
 #ifndef _WORDFREQ_H_
 #define _WORDFREQ_H_
 
-#include "schashtable.h"
 #include "lphashtable.h"
+#include "schashtable.h"
 #include "textfile.h"
 
-#include <vector>
-#include <string>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <sstream>
+#include <string>
+#include <vector>
 
 /**
  * WordFreq: counts the frequency with which words appear in a file.
@@ -27,15 +27,14 @@
  * @date Summer 2012
  */
 template <template <class K, class V> class Dict>
-class WordFreq
-{
+class WordFreq {
   public:
     /**
      * Constructs a WordFreq from the given filename.
      *
      * @param filename File to read in words from.
      */
-    WordFreq(const std::string& filename);
+    WordFreq(const std::string &filename);
 
     /**
      * Returns all words, along with their frequencies, that are above

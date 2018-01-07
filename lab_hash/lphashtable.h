@@ -20,8 +20,7 @@
  * @date Summer 2012
  */
 template <class K, class V>
-class LPHashTable : public HashTable<K, V>
-{
+class LPHashTable : public HashTable<K, V> {
   private:
     // so we can refer to hash, elems, and size directly, and use the
     // makeIterator function without having to scope it.
@@ -60,30 +59,28 @@ class LPHashTable : public HashTable<K, V>
      *  one.
      * @return A const reference to the current LPHashTable.
      */
-    const LPHashTable<K, V>& operator=(const LPHashTable<K, V>& rhs);
+    const LPHashTable<K, V> &operator=(const LPHashTable<K, V> &rhs);
 
     /**
      * Copy constructor.
      *
      * @param other The LPHashTable to be copied.
      */
-    LPHashTable(const LPHashTable<K, V>& other);
+    LPHashTable(const LPHashTable<K, V> &other);
 
     // functions inherited from HashTable
-    virtual void insert(const K& key, const V& value);
-    virtual void remove(const K& key);
-    virtual V find(const K& key) const;
-    virtual bool keyExists(const K& key) const;
+    virtual void insert(const K &key, const V &value);
+    virtual void remove(const K &key);
+    virtual V find(const K &key) const;
+    virtual bool keyExists(const K &key) const;
     virtual void clear();
-    virtual V& operator[](const K& key);
+    virtual V &operator[](const K &key);
 
-    iterator begin() const
-    {
+    iterator begin() const {
         return makeIterator(new LPIteratorImpl(*this, 0));
     }
 
-    iterator end() const
-    {
+    iterator end() const {
         return makeIterator(new LPIteratorImpl(*this, size));
     }
 
@@ -96,7 +93,7 @@ class LPHashTable : public HashTable<K, V>
      * case since the check for an "empty" slot is simply a check against
      * NULL in that cell.
      */
-    std::pair<K, V>** table;
+    std::pair<K, V> **table;
 
     /**
      * Flags for whether or not to probe forward when looking at a
@@ -106,7 +103,7 @@ class LPHashTable : public HashTable<K, V>
      * (or previously was) occupied. This allows us determine whether
      * or not we need to probe forward to look for our key.
      */
-    bool* should_probe;
+    bool *should_probe;
 
     /**
      * Helper function to determine the index where a given key lies in
@@ -116,12 +113,12 @@ class LPHashTable : public HashTable<K, V>
      * @param key The key to look for.
      * @return The index of this key, or -1 if it was not found.
      */
-    int findIndex(const K& key) const;
+    int findIndex(const K &key) const;
 
     // inherited from HashTable
     virtual void resizeTable();
 };
 
-#include "lpiterator.h"
 #include "lphashtable.cpp"
+#include "lpiterator.h"
 #endif

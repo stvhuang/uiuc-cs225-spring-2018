@@ -22,8 +22,7 @@
  */
 template <class K, class V>
 class HashTable<K, V>::iterator
-    : public std::iterator<std::forward_iterator_tag, std::pair<K, V>>
-{
+    : public std::iterator<std::forward_iterator_tag, std::pair<K, V>> {
   public:
     // hash table can build iterators with our private constructor
     friend class HashTable<K, V>;
@@ -37,14 +36,14 @@ class HashTable<K, V>::iterator
      * Copy constructor for an iterator.
      * @param other The iterator to be copied.
      */
-    iterator(const iterator& other);
+    iterator(const iterator &other);
 
     /**
      * iterator assignment operator.
      * @param rhs The iterator to assign into the current iterator.
      * @return A reference to the current iterator for chaining.
      */
-    const iterator& operator=(const iterator& rhs);
+    const iterator &operator=(const iterator &rhs);
 
     /**
      * Destructor. Required since we are implementing polymorphic
@@ -56,7 +55,7 @@ class HashTable<K, V>::iterator
     /**
      * Pre-increment operator.
      */
-    iterator& operator++();
+    iterator &operator++();
 
     /**
      * Post-increment operator.
@@ -68,24 +67,24 @@ class HashTable<K, V>::iterator
      * @param rhs The iterator to compare with.
      * @return Whether the current iterator is equal to the rhs.
      */
-    bool operator==(const iterator& rhs) const;
+    bool operator==(const iterator &rhs) const;
 
     /**
      * Compares whether two iterators are unequal.
      * @param rhs The iterator to compare with.
      * @return Whether the two iterators are unequal.
      */
-    bool operator!=(const iterator& rhs) const;
+    bool operator!=(const iterator &rhs) const;
 
     /**
      * Dereference operator.
      */
-    const std::pair<K, V>& operator*();
+    const std::pair<K, V> &operator*();
 
     /**
      * Dereference-access operator.
      */
-    const std::pair<K, V>* operator->();
+    const std::pair<K, V> *operator->();
 
   private:
     /** @cond STAFF */
@@ -93,15 +92,15 @@ class HashTable<K, V>::iterator
      * Creates an iterator from an implementation pointer.
      * @param nimpl A pointer to a new implementation on the heap.
      */
-    iterator(HTIteratorImpl* nimpl);
+    iterator(HTIteratorImpl *nimpl);
 
-    HTIteratorImpl* impl; /**< implementation for the iterator */
+    HTIteratorImpl *impl; /**< implementation for the iterator */
 
     /**
      * Helper function to copy a parameter iterator.
      * @param other The iterator to be copied.
      */
-    void copy(const iterator& other);
+    void copy(const iterator &other);
 
     /**
      * Helper function to free dynamic memory associated with the
@@ -123,15 +122,13 @@ class HashTable<K, V>::iterator
  * @date Summer 2012
  */
 template <class K, class V>
-class HashTable<K, V>::HTIteratorImpl
-{
+class HashTable<K, V>::HTIteratorImpl {
   public:
     /**
      * Destructor, provided as virtual in case derived classes use
      * dynamic memory.
      */
-    virtual ~HTIteratorImpl()
-    { /* nothing */
+    virtual ~HTIteratorImpl() { /* nothing */
     }
 
     /**
@@ -141,7 +138,7 @@ class HashTable<K, V>::HTIteratorImpl
      * @return A pointer to a new HTIteratorImpl in the heap (should be
      *  of the derived class type).
      */
-    virtual HTIteratorImpl* clone() const = 0;
+    virtual HTIteratorImpl *clone() const = 0;
 
     /**
      * Moves the iterator forward.
@@ -158,7 +155,7 @@ class HashTable<K, V>::HTIteratorImpl
      *  against.
      * @return Whether the two iterator implementations are the same.
      */
-    virtual bool operator==(const HTIteratorImpl& other) const = 0;
+    virtual bool operator==(const HTIteratorImpl &other) const = 0;
 
     /**
      * Checks if two implementations are not the same. Can be
@@ -169,8 +166,7 @@ class HashTable<K, V>::HTIteratorImpl
      *  against.
      * @return Whether the two iterator implementations are unequal.
      */
-    virtual bool operator!=(const HTIteratorImpl& other) const
-    {
+    virtual bool operator!=(const HTIteratorImpl &other) const {
         return !(operator==(other));
     }
 
@@ -181,7 +177,7 @@ class HashTable<K, V>::HTIteratorImpl
      * @return A const reference to the current key, value pair the
      *  iterator implementation is at.
      */
-    virtual const std::pair<K, V>& operator*() = 0;
+    virtual const std::pair<K, V> &operator*() = 0;
 };
 /** @endcond */
 #include "htiterator.cpp"

@@ -14,8 +14,7 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     const int canvas_width = 128;
     const int canvas_height = 128;
 
@@ -25,7 +24,7 @@ int main()
     Vector2 rectangle_center(canvas_width / 2, canvas_height / 2);
     const int rectangle_width = canvas_width / 4;
     const int rectangle_height = canvas_height / 4;
-    Rectangle* rectangle = new Rectangle(rectangle_center, color::BLUE,
+    Rectangle *rectangle = new Rectangle(rectangle_center, color::BLUE,
                                          rectangle_width, rectangle_height);
 
     rectangle->draw(&canvas);
@@ -36,7 +35,7 @@ int main()
     cout << "Rectangle's Area = " << rectangle_area << endl;
 
     /* But we can treat a Rectangle just like a Shape using a Shape pointer */
-    Shape* shape = rectangle;
+    Shape *shape = rectangle;
     const int shape_perimeter = shape->perimeter();
     cout << "Shape's Perimeter = " << shape_perimeter << endl;
     const int shape_area = shape->area();

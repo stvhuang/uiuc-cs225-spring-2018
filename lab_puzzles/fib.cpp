@@ -19,8 +19,7 @@ using std::map;
  * @param n Which number to generate.
  * @return The nth Fibonacci number.
  */
-unsigned long fib(unsigned long n)
-{
+unsigned long fib(unsigned long n) {
     /* Your code goes here! */
     return 0;
 }
@@ -31,8 +30,7 @@ unsigned long fib(unsigned long n)
  * @param n Which number to generate.
  * @return The nth Fibonacci number.
  */
-unsigned long memoized_fib(unsigned long n)
-{
+unsigned long memoized_fib(unsigned long n) {
     /* Your code goes here! */
     return 0;
 }

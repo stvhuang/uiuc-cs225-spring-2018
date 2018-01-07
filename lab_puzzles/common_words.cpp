@@ -8,37 +8,34 @@
 
 #include "common_words.h"
 
+#include <algorithm>
 #include <fstream>
-#include <string>
-#include <vector>
 #include <iostream>
 #include <iterator>
-#include <algorithm>
+#include <string>
+#include <vector>
 
-using std::string;
-using std::vector;
-using std::ifstream;
 using std::cout;
 using std::endl;
 using std::feof;
+using std::ifstream;
+using std::string;
+using std::vector;
 
-string remove_punct(const string& str)
-{
+string remove_punct(const string &str) {
     string ret;
     std::remove_copy_if(str.begin(), str.end(), std::back_inserter(ret),
                         std::ptr_fun<int, int>(&std::ispunct));
     return ret;
 }
 
-CommonWords::CommonWords(const vector<string>& filenames)
-{
+CommonWords::CommonWords(const vector<string> &filenames) {
     // initialize all member variables
     init_file_word_maps(filenames);
     init_common();
 }
 
-void CommonWords::init_file_word_maps(const vector<string>& filenames)
-{
+void CommonWords::init_file_word_maps(const vector<string> &filenames) {
     // make the length of file_word_maps the same as the length of filenames
     file_word_maps.resize(filenames.size());
 
@@ -51,18 +48,14 @@ void CommonWords::init_file_word_maps(const vector<string>& filenames)
     }
 }
 
-void CommonWords::init_common()
-{
-    /* Your code goes here! */
-}
+void CommonWords::init_common() { /* Your code goes here! */ }
 
 /**
  * @param n The number of times to word has to appear.
  * @return A vector of strings. The vector contains all words that appear
  * in each file >= n times.
  */
-vector<string> CommonWords::get_common_words(unsigned int n) const
-{
+vector<string> CommonWords::get_common_words(unsigned int n) const {
     vector<string> out;
     /* Your code goes here! */
     return out;
@@ -72,8 +65,7 @@ vector<string> CommonWords::get_common_words(unsigned int n) const
  * Takes a filename and transforms it to a vector of all words in that file.
  * @param filename The name of the file that will fill the vector
  */
-vector<string> CommonWords::file_to_vector(const string& filename) const
-{
+vector<string> CommonWords::file_to_vector(const string &filename) const {
     ifstream words(filename);
     vector<string> out;
 

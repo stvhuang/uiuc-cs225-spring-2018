@@ -13,8 +13,7 @@ using namespace std;
  * Represents a group of students with the same first letter of their last
  * name.
  */
-class Letter
-{
+class Letter {
   public:
     /** The character this Letter represents */
     char letter;
@@ -38,7 +37,7 @@ class Letter
      * @param other A Letter to compare against
      * @return Whether the parameter is less than this Letter.
      */
-    bool operator<(const Letter& other) const;
+    bool operator<(const Letter &other) const;
 };
 
 #endif

@@ -8,17 +8,16 @@
  */
 
 #include "anagram_finder.h"
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 
 using std::cout;
 using std::endl;
-using std::vector;
 using std::string;
+using std::vector;
 
 template <template <class K, class V> class Dict>
-void findAnagrams(const string& filename, const string& testword)
-{
+void findAnagrams(const string &filename, const string &testword) {
     AnagramFinder<Dict> fileFinder(filename);
     fileFinder.writeAnagrams(testword, "anagrams.txt");
     vector<string> anagrams = fileFinder.getAnagrams(testword);
@@ -27,8 +26,7 @@ void findAnagrams(const string& filename, const string& testword)
         cout << anagrams[i] << " is an anagram of " << testword << endl;
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char **argv) {
     if (argc < 4) {
         cout << "Testing with a dumb example..." << endl;
         vector<string> strings;

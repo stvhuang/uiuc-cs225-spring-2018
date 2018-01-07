@@ -6,16 +6,16 @@
  *
  * @author Wade Fagen-Ulmschneider
  * @date Fall 2017
- * 
+ *
  * @author Jack Toole
  * @date Fall 2011
  */
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
+#include "cs225/PNG.h"
 #include <string>
 #include <vector>
-#include "cs225/PNG.h"
 
 using namespace std;
 using namespace cs225;
@@ -30,22 +30,21 @@ using namespace cs225;
  * @author Jack Toole
  * @date Fall 2011
  */
-class Animation
-{
+class Animation {
   public:
     /**
      * Adds a frame to the animation.
      *
      * @param img The image to be added.
      */
-    void addFrame(const PNG& img);
+    void addFrame(const PNG &img);
 
     /**
      * Writes the animation to the file name specified.
      *
      * @param filename The name of the file to be written to.
      */
-    void write(const std::string& filename);
+    void write(const std::string &filename);
 
     /**
      * Returns a frame at a specific index.
@@ -59,14 +58,13 @@ class Animation
      */
     unsigned frameCount();
 
-
   private:
     std::vector<PNG> frames;
 
     template <typename T>
-    string to_string(const T& value);
+    string to_string(const T &value);
     string getString(int i, int padToSameLengthAs);
-    bool exists(const string& path);
+    bool exists(const string &path);
 };
 
 #endif

@@ -14,27 +14,26 @@
 #include "rectangle.h"
 #include "vector2.h"
 
-class Truck : public Drawable
-{
+class Truck : public Drawable {
   private:
     Vector2 center_;
-    Circle** wheels;
-    Rectangle* trailer;
-    Rectangle* cabin;
-    Rectangle* window;
-    Rectangle* engine;
+    Circle **wheels;
+    Rectangle *trailer;
+    Rectangle *cabin;
+    Rectangle *window;
+    Rectangle *engine;
 
-    void copy(const Truck& other);
+    void copy(const Truck &other);
     void clear();
 
   public:
-    Truck(const Vector2& center);
-    Truck(const Truck& other);
+    Truck(const Vector2 &center);
+    Truck(const Truck &other);
     ~Truck();
-    Truck& operator=(const Truck& rhs);
+    Truck &operator=(const Truck &rhs);
     Vector2 center() const;
-    void set_center(const Vector2& center);
-    void draw(PNG* canvas) const ;
+    void set_center(const Vector2 &center);
+    void draw(PNG *canvas) const;
 };
 
-#endif // TRUCK_H_
+#endif  // TRUCK_H_

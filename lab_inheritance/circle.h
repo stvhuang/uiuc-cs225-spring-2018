@@ -15,11 +15,10 @@
  * @brief The Circle class is a subclass of Shape and represents a Circle in a
  * 2D space
  */
-class Circle : public Shape
-{
+class Circle : public Shape {
   private:
     int radius_;
-    void drawPoints(PNG* canvas, int x, int y) const;
+    void drawPoints(PNG *canvas, int x, int y) const;
 
   public:
     /**
@@ -29,7 +28,7 @@ class Circle : public Shape
      * @param color of the new Circle
      * @param radius of the new Circle in pixels
      */
-    Circle(const Vector2& center, const HSLAPixel& color, int radius);
+    Circle(const Vector2 &center, const HSLAPixel &color, int radius);
 
     /**
      * @brief Computes and returns the area of the Circle in pixels
@@ -52,14 +51,14 @@ class Circle : public Shape
      *
      * @return true if p is inside the Circle
      */
-    bool contains(const Vector2& p) const;
+    bool contains(const Vector2 &p) const;
 
     /**
      * @brief Draws the Circle to the canvas
      *
      * @param canvas
      */
-    void draw(PNG* canvas) const;
+    void draw(PNG *canvas) const;
 
     /**
      * @brief Gets the radius of the Circle in pixels
@@ -76,4 +75,4 @@ class Circle : public Shape
     void set_radius(int radius);
 };
 
-#endif // CIRCLE_H_
+#endif  // CIRCLE_H_

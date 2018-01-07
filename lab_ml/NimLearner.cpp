@@ -6,7 +6,6 @@
 #include "NimLearner.h"
 #include <ctime>
 
-
 /**
  * Constructor to create a game of Nim with `startingTokens` starting tokens.
  *
@@ -38,9 +37,9 @@ NimLearner::NimLearner(unsigned startingTokens) : g_(true, true) {
  * @returns A random path through the state space graph.
  */
 std::vector<Edge> NimLearner::playRandomGame() const {
-  vector<Edge> path;
- /* Your code goes here! */
-  return path;
+    vector<Edge> path;
+    /* Your code goes here! */
+    return path;
 }
 
 /*
@@ -59,23 +58,26 @@ std::vector<Edge> NimLearner::playRandomGame() const {
  *
  * @param path A path through the a game of Nim to learn.
  */
-void NimLearner::updateEdgeWeights(const std::vector<Edge> & path) {
- /* Your code goes here! */
+void NimLearner::updateEdgeWeights(const std::vector<Edge> &path) {
+    /* Your code goes here! */
 }
 
 /**
  * Label the edges as "WIN" or "LOSE" based on a threshold.
  */
 void NimLearner::labelEdgesFromThreshold(int threshold) {
-  for (const Vertex & v : g_.getVertices()) {
-    for (const Vertex & w : g_.getAdjacent(v)) {
-      int weight = g_.getEdgeWeight(v, w);
+    for (const Vertex &v : g_.getVertices()) {
+        for (const Vertex &w : g_.getAdjacent(v)) {
+            int weight = g_.getEdgeWeight(v, w);
 
-      // Label all edges with positve weights as "WINPATH"
-      if (weight > threshold)           { g_.setEdgeLabel(v, w, "WIN"); }
-      else if (weight < -1 * threshold) { g_.setEdgeLabel(v, w, "LOSE"); }
+            // Label all edges with positve weights as "WINPATH"
+            if (weight > threshold) {
+                g_.setEdgeLabel(v, w, "WIN");
+            } else if (weight < -1 * threshold) {
+                g_.setEdgeLabel(v, w, "LOSE");
+            }
+        }
     }
-  }
 }
 
 /**
@@ -83,6 +85,4 @@ void NimLearner::labelEdgesFromThreshold(int threshold) {
  *
  * @returns A constant reference to the state space graph.
  */
-const Graph & NimLearner::getGraph() const {
-  return g_;
-}
+const Graph &NimLearner::getGraph() const { return g_; }

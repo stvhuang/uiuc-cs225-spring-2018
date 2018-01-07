@@ -1,20 +1,17 @@
 #include "fib.h"
 
-#include <iostream>
 #include <cstring>
+#include <iostream>
 #include <stdexcept>
 
 using namespace std;
 
+const string USAGE = "USAGE: fib [NUM] [OPTIONS]\n"
+                     "Finds the NUMth Fibonacci number.\n"
+                     "\n"
+                     "  -m      Use memoization (defaults to not).\n";
 
-const string USAGE =
-"USAGE: fib [NUM] [OPTIONS]\n"
-"Finds the NUMth Fibonacci number.\n"
-"\n"
-"  -m      Use memoization (defaults to not).\n";
-
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     unsigned long n = 0;
     bool memoization = false;
     if (argc == 1) {
@@ -30,10 +27,10 @@ int main(int argc, char* argv[])
             /* stoi() will except for non-numeric values. */
             try {
                 n = stoul(argv[i]);
-            } catch (invalid_argument& e) {
+            } catch (invalid_argument &e) {
                 cerr << USAGE << endl;
                 return -1;
-            } catch (out_of_range& e) {
+            } catch (out_of_range &e) {
                 cerr << "Number too large to take as input." << endl;
                 return -1;
             }

@@ -1,12 +1,12 @@
 #include <algorithm>
-#include <vector>
 #include <iostream>
 #include <utility>
+#include <vector>
 
+#include "allocator.h"
 #include "fileio.h"
 #include "letter.h"
 #include "room.h"
-#include "allocator.h"
 
 using namespace std;
 
@@ -14,8 +14,7 @@ using namespace std;
  * Main routine.
  * Creates an Allocator object and allocates the students.
  */
-int main()
-{
+int main() {
     cout << endl;
 
     fileio::init();

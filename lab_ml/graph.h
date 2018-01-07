@@ -9,7 +9,7 @@
  *  - Added doxygen comments
  *  - Created better error handling
  *  - More encapsulated and object-oriented
- * 
+ *
  *  Updated Spring 2018 by Jordi
  *  - Added doxygen comments
  *  - Created better error handling
@@ -21,18 +21,18 @@
 #ifndef _GRAPH_H
 #define _GRAPH_H
 
-#include <list>
-#include <unordered_map>
-#include <utility>
 #include <algorithm>
-#include <string>
-#include <cstdlib>
 #include <climits>
+#include <cstdlib>
 #include <fstream>
-#include <iostream>
 #include <iomanip>
+#include <iostream>
+#include <list>
 #include <set>
 #include <sstream>
+#include <string>
+#include <unordered_map>
+#include <utility>
 #include <vector>
 
 #include "edge.h"
@@ -41,23 +41,20 @@
 using std::cerr;
 using std::cout;
 using std::endl;
-using std::vector;
+using std::make_pair;
+using std::pair;
 using std::set;
 using std::string;
 using std::to_string;
-using std::vector;
-using std::pair;
-using std::make_pair;
 using std::unordered_map;
-
+using std::vector;
 
 /**
  * Represents a graph; used by the GraphTools class.
  *
  */
-class Graph
-{
-public:
+class Graph {
+  public:
     /**
      * Constructor to create an empty graph.
      * @param weighted - specifies whether the graph is a weighted graph or
@@ -101,7 +98,6 @@ public:
      * @return a vector of all vertices in the graph
      */
     vector<Vertex> getVertices() const;
-    
 
     /**
      * Gets an edge between two vertices.
@@ -123,20 +119,21 @@ public:
      * @return - if Vertex exists, set new label to the Vertex and return v
      *         - if Vertex doesn't exist, return InvalidVertex
      */
-    Vertex setVertexLabel (Vertex v, string label);
+    Vertex setVertexLabel(Vertex v, string label);
 
     /**
      * Set label to Vertex v.
      * @return - if Vertex exists, return the label of v
      *         - if Vertex doesn't exist, return InvalidLabel
      */
-    string getVertexLabel (Vertex v) const;
+    string getVertexLabel(Vertex v) const;
 
     /**
      * Sets the edge label of the edge between vertices u and v.
      * @param source - one vertex the edge is connected to
      * @param destination - the other vertex the edge is connected to
-     * @return - if edge exists, set the label to the corresponding edge(if not directed, set the reverse one too), return edge with new label
+     * @return - if edge exists, set the label to the corresponding edge(if not
+     * directed, set the reverse one too), return edge with new label
      *         - if edge doesn't exist, return InvalidEdge
      */
     Edge setEdgeLabel(Vertex source, Vertex destination, string label);
@@ -197,7 +194,8 @@ public:
      * @param source - one vertex the edge is connected to
      * @param destination - the other vertex the edge is connected to
      * @param weight - the weight to set to the edge
-     * @return - if edge exists, set edge weight and return  edge with new weight
+     * @return - if edge exists, set edge weight and return  edge with new
+     * weight
      *         - if not, return InvalidEdge
      */
     Edge setEdgeWeight(Vertex source, Vertex destination, int weight);
@@ -238,13 +236,12 @@ public:
 
     void clear();
 
-
     const static Vertex InvalidVertex;
     const static Edge InvalidEdge;
     const static int InvalidWeight;
     const static string InvalidLabel;
 
-private:
+  private:
     mutable unordered_map<Vertex, unordered_map<Vertex, Edge>> adjacency_list;
     mutable unordered_map<Vertex, string> vertex_label_map;
 
@@ -253,7 +250,6 @@ private:
     Random random;
     int picNum;
     string picName;
-
 
     /**
      * Returns whether a given vertex exists in the graph.
@@ -270,8 +266,8 @@ private:
      * @param functionName - the name of the calling function to return
      *  in the event of an error
      */
-    bool assertEdgeExists(Vertex source, Vertex destination, string functionName) const;
-
+    bool assertEdgeExists(Vertex source, Vertex destination,
+                          string functionName) const;
 
     /**
      * Prints a graph error and quits the program.

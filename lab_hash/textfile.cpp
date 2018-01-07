@@ -8,27 +8,21 @@
  */
 #include "textfile.h"
 
-using std::string;
 using std::ifstream;
+using std::string;
 
-TextFile::TextFile(const string& filename) : infile(filename.c_str())
-{
+TextFile::TextFile(const string &filename) : infile(filename.c_str()) {
     /* nothing */
 }
 
-TextFile::~TextFile()
-{
+TextFile::~TextFile() {
     if (infile.is_open())
         infile.close();
 }
 
-bool TextFile::good()
-{
-    return infile.good();
-}
+bool TextFile::good() { return infile.good(); }
 
-string TextFile::getNextWord()
-{
+string TextFile::getNextWord() {
     string nword = "";
     infile >> nword;
 

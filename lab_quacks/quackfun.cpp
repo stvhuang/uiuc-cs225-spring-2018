@@ -24,9 +24,7 @@ namespace QuackFun {
  * @hint Think recursively!
  */
 template <typename T>
-T sum(stack<T>& s)
-{
-
+T sum(stack<T> &s) {
     // Your code here
     if (!s.empty()) {
         T curr = s.top();
@@ -37,29 +35,29 @@ T sum(stack<T>& s)
     } else {
         return T();
     }
-    //return T(); // stub return value (0 for primitive types). Change this!
-                // Note: T() is the default value for objects, and 0 for
-                // primitive types
+    // return T(); // stub return value (0 for primitive types). Change this!
+    // Note: T() is the default value for objects, and 0 for
+    // primitive types
 }
 
 /**
- * Checks whether the given string (stored in a queue) has balanced brackets. 
- * A string will consist of 
- * square bracket characters, [, ], and other characters. This function will return
- * true if and only if the square bracket characters in the given
- * string are balanced. For this to be true,
- * all brackets must be matched up correctly, with no extra, hanging, or unmatched
- * brackets. For example, the string "[hello][]" is balanced, "[[][[]a]]" is balanced,
+ * Checks whether the given string (stored in a queue) has balanced brackets.
+ * A string will consist of
+ * square bracket characters, [, ], and other characters. This function will
+ * return true if and only if the square bracket characters in the given string
+ * are balanced. For this to be true, all brackets must be matched up correctly,
+ * with no extra, hanging, or unmatched brackets. For example, the string
+ * "[hello][]" is balanced, "[[][[]a]]" is balanced,
  * "[]]" is unbalanced, "][" is unbalanced, and "))))[cs225]" is balanced.
  *
- * You are allowed only the use of one stack in this function, and no other local variables.
+ * You are allowed only the use of one stack in this function, and no other
+ * local variables.
  *
- * @param input The queue representation of a string to check for balanced brackets in
+ * @param input The queue representation of a string to check for balanced
+ * brackets in
  * @return Whether the input string had balanced brackets
  */
-bool isBalanced(queue<char> input)
-{
-
+bool isBalanced(queue<char> input) {
     // @TODO: Make less optimistic
     stack<char> s;
     while (!input.empty()) {
@@ -97,8 +95,7 @@ bool isBalanced(queue<char> input)
  * @hint You'll want to make a local stack variable.
  */
 template <typename T>
-void scramble(queue<T>& q)
-{
+void scramble(queue<T> &q) {
     stack<T> s;
     // optional: queue<T> q2;
 
@@ -107,15 +104,15 @@ void scramble(queue<T>& q)
     int numOfComplete = 0;
     int size = int(q.size());
 
-    while(numOfComplete < size) {
+    while (numOfComplete < size) {
         if (numOfBlock % 2 == 1) {
             int currMin = numOfBlock;
 
-            if (currMin > size-numOfComplete) {
-                currMin = size-numOfComplete;
+            if (currMin > size - numOfComplete) {
+                currMin = size - numOfComplete;
             }
 
-            for(int i = 0; i < currMin; ++i) {
+            for (int i = 0; i < currMin; ++i) {
                 q.push(q.front());
                 q.pop();
             }
@@ -125,8 +122,8 @@ void scramble(queue<T>& q)
         } else {
             int currMin = numOfBlock;
 
-            if (currMin > size-numOfComplete) {
-                currMin = size-numOfComplete;
+            if (currMin > size - numOfComplete) {
+                currMin = size - numOfComplete;
             }
 
             for (int i = 0; i < currMin; ++i) {
@@ -161,25 +158,26 @@ void scramble(queue<T>& q)
  *   sure to comment your code VERY well.
  */
 template <typename T>
-bool verifySame(stack<T>& s, queue<T>& q)
-{
-    bool retval = true; // optional
+bool verifySame(stack<T> &s, queue<T> &q) {
+    bool retval = true;  // optional
     T temp;
 
-    if(s.empty()) {  // base case
+    if (s.empty()) {  // base case
         return true;
     } else {
-        temp = s.top(); s.pop();
+        temp = s.top();
+        s.pop();
         retval = verifySame(s, q);
         if (!retval) {
             return false;
         } else {
             retval = (temp == q.front());
-            q.push(q.front()); q.pop();
+            q.push(q.front());
+            q.pop();
             s.push(temp);
             return retval;
         }
     }
 }
 
-}
+}  // namespace QuackFun

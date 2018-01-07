@@ -19,8 +19,7 @@ class HeapNodeDescriptor;
  * @date Fall 2012
  */
 template <class T, class Compare = std::less<T>>
-class heap
-{
+class heap {
   public:
     /**
      * Constructs an empty heap.
@@ -34,7 +33,7 @@ class heap
      *
      * @param elems The elements that should be placed in the heap.
      */
-    heap(const std::vector<T>& elems);
+    heap(const std::vector<T> &elems);
 
     /**
      * Removes the element with highest priority according to the
@@ -57,7 +56,7 @@ class heap
      *
      * @param elem The element to be inserted.
      */
-    void push(const T& elem);
+    void push(const T &elem);
 
     /**
      * Determines if the given heap is empty.
@@ -67,7 +66,7 @@ class heap
     bool empty() const;
 
     /*Gets the vector of elems*/
-    void getElems(std::vector<T> & heaped) const;
+    void getElems(std::vector<T> &heaped) const;
 
     /**
      * Prints the heap to an std::ostream. Given for you. Uses the helper
@@ -77,8 +76,8 @@ class heap
      * @param toPrint The heap to be printed.
      */
     template <class Type, class Comp>
-    friend std::ostream& operator<<(std::ostream& out,
-                                    const heap<Type, Comp>& toPrint);
+    friend std::ostream &operator<<(std::ostream &out,
+                                    const heap<Type, Comp> &toPrint);
 
     // friend descriptor to allow it to access private members
     friend class HeapNodeDescriptor<T, Compare>;

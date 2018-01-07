@@ -10,17 +10,17 @@
 
 #include "line.h"
 
+#include <cmath>
 #include <cstdio>
 #include <cstdlib>
-#include <cmath>
 
 #include <vector>
 
 using std::vector;
 
-vector<double> Line::linearInterpolation(const Vector2& a, const Vector2& b)
-{
-    /* http://gabrielongraphics.blogspot.com/2005/09/drawing-line-segments.html */
+vector<double> Line::linearInterpolation(const Vector2 &a, const Vector2 &b) {
+    /* http://gabrielongraphics.blogspot.com/2005/09/drawing-line-segments.html
+     */
     vector<double> values;
 
     const int num_steps = abs(static_cast<int>(b.x() - a.x()));
@@ -40,36 +40,37 @@ vector<double> Line::linearInterpolation(const Vector2& a, const Vector2& b)
     return values;
 }
 
-Line::Line(const Vector2& pa, const Vector2& pb, const HSLAPixel& pcolor)
-    : a_(pa), b_(pb), color_(pcolor)
-{
+Line::Line(const Vector2 &pa, const Vector2 &pb, const HSLAPixel &pcolor)
+    : a_(pa), b_(pb), color_(pcolor) {
     /* Nothing see initialization list. */
 }
 
-void Line::draw(PNG* canvas) const
-{
-    /* http://gabrielongraphics.blogspot.com/2005/09/drawing-line-segments.html */
+void Line::draw(PNG *canvas) const {
+    /* http://gabrielongraphics.blogspot.com/2005/09/drawing-line-segments.html
+     */
     const double delta_x = abs(static_cast<int>(b_.x() - a_.x()));
     const double delta_y = abs(static_cast<int>(b_.y() - a_.y()));
-    HSLAPixel* pixel;
+    HSLAPixel *pixel;
 
     if (delta_x > delta_y) {
-        const Vector2* left = &a_;
-        const Vector2* right = &b_;
+        const Vector2 *left = &a_;
+        const Vector2 *right = &b_;
         if (a_.isEastOf(b_)) {
             left = &b_;
             right = &a_;
         }
 
         vector<double> y_values = linearInterpolation(*left, *right);
-        for (int x = static_cast<int>(left->x()); x < static_cast<int>(right->x()); x++) {
-            const int y = static_cast<int>(y_values[static_cast<int>(x - left->x())]);
+        for (int x = static_cast<int>(left->x());
+             x < static_cast<int>(right->x()); x++) {
+            const int y =
+                static_cast<int>(y_values[static_cast<int>(x - left->x())]);
             pixel = &(canvas->getPixel(x, y));
             *pixel = this->color();
         }
     } else {
-        const Vector2* small = &a_;
-        const Vector2* large = &b_;
+        const Vector2 *small = &a_;
+        const Vector2 *large = &b_;
         if (a_.y() > b_.y()) {
             small = &b_;
             large = &a_;
@@ -79,40 +80,24 @@ void Line::draw(PNG* canvas) const
         const Vector2 flipped1(large->y(), large->x());
 
         vector<double> x_values = linearInterpolation(flipped0, flipped1);
-        for (int y = static_cast<int>(small->y()); y < static_cast<int>(large->y()); y++) {
-            const int x = static_cast<int>(x_values[static_cast<int>(y - small->y())]);
+        for (int y = static_cast<int>(small->y());
+             y < static_cast<int>(large->y()); y++) {
+            const int x =
+                static_cast<int>(x_values[static_cast<int>(y - small->y())]);
             pixel = &(canvas->getPixel(x, y));
             *pixel = this->color();
         }
     }
 }
 
-Vector2 Line::a() const
-{
-    return this->a_;
-}
+Vector2 Line::a() const { return this->a_; }
 
-void Line::set_a(const Vector2& pa)
-{
-    this->a_ = pa;
-}
+void Line::set_a(const Vector2 &pa) { this->a_ = pa; }
 
-Vector2 Line::b() const
-{
-    return this->b_;
-}
+Vector2 Line::b() const { return this->b_; }
 
-void Line::set_b(const Vector2& pb)
-{
-    this->b_ = pb;
-}
+void Line::set_b(const Vector2 &pb) { this->b_ = pb; }
 
-HSLAPixel Line::color() const
-{
-    return this->color_;
-}
+HSLAPixel Line::color() const { return this->color_; }
 
-void Line::set_color(const HSLAPixel& pcolor)
-{
-    this->color_ = pcolor;
-}
+void Line::set_color(const HSLAPixel &pcolor) { this->color_ = pcolor; }

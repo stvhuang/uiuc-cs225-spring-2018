@@ -8,20 +8,20 @@
 
 #include "pronounce_dict.h"
 
-#include <iterator>
-#include <sstream>
+#include <algorithm>
+#include <cstring>
 #include <fstream>
 #include <iostream>
-#include <cstring>
-#include <algorithm>
+#include <iterator>
+#include <sstream>
 
-using std::string;
-using std::map;
-using std::vector;
 using std::ifstream;
 using std::istream;
 using std::istream_iterator;
+using std::map;
+using std::string;
 using std::stringstream;
+using std::vector;
 
 /**
  * Constructs a PronounceDict from a CMU pronunciation dictionary
@@ -29,8 +29,7 @@ using std::stringstream;
  * @param pronun_dict_filename Filename of the CMU pronunciation
  * dictionary.
  */
-PronounceDict::PronounceDict(const string& pronun_dict_filename)
-{
+PronounceDict::PronounceDict(const string &pronun_dict_filename) {
     ifstream pronun_dict_file(pronun_dict_filename);
     string line;
     if (pronun_dict_file.is_open()) {
@@ -58,9 +57,8 @@ PronounceDict::PronounceDict(const string& pronun_dict_filename)
  * @param pronun_dict Maps a string word to a vector of strings
  * representing its pronunciation.
  */
-PronounceDict::PronounceDict(const map<string, vector<string>>& pronun_dict)
-    : dict(pronun_dict)
-{
+PronounceDict::PronounceDict(const map<string, vector<string>> &pronun_dict)
+    : dict(pronun_dict) {
     /* Nothing to see here. */
 }
 
@@ -72,8 +70,7 @@ PronounceDict::PronounceDict(const map<string, vector<string>>& pronun_dict)
  * one or both words weren't in the dictionary).
  * Note: The word keys in the dictionary are stored in uppercase.
  */
-bool PronounceDict::homophones(const string& word1, const string& word2) const
-{
+bool PronounceDict::homophones(const string &word1, const string &word2) const {
     /* Your code goes here! */
     return true;
 }

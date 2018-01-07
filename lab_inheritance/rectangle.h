@@ -15,8 +15,7 @@
  * @brief The Rectangle class is a subclass of Shape and represents a rectangle
  * in 2D space
  */
-class Rectangle : public Shape
-{
+class Rectangle : public Shape {
   private:
     int width_;
     int height_;
@@ -31,7 +30,7 @@ class Rectangle : public Shape
      * @param width in pixels
      * @param height in pixels
      */
-    Rectangle(const Vector2& center, const HSLAPixel& color, int width,
+    Rectangle(const Vector2 &center, const HSLAPixel &color, int width,
               int height);
 
     /**
@@ -55,14 +54,14 @@ class Rectangle : public Shape
      *
      * @return true if p is inside of the Rectangle
      */
-    bool contains(const Vector2& p) const;
+    bool contains(const Vector2 &p) const;
 
     /**
      * @brief Draws the Rectangle onto the canvas
      *
      * @param canvas to draw onto
      */
-    void draw(PNG* canvas) const;
+    void draw(PNG *canvas) const;
 
     /**
      * @brief Gets the width of the Rectangle in pixels
@@ -93,4 +92,4 @@ class Rectangle : public Shape
     void set_height(int height);
 };
 
-#endif // RECTANGLE_H_
+#endif  // RECTANGLE_H_

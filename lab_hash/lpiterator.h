@@ -18,8 +18,8 @@
  * @date Summer 2012
  */
 template <class K, class V>
-class LPHashTable<K, V>::LPIteratorImpl : public HashTable<K, V>::HTIteratorImpl
-{
+class LPHashTable<K, V>::LPIteratorImpl
+    : public HashTable<K, V>::HTIteratorImpl {
   public:
     /**
      * We friend the LPHashTable class so that it may construct
@@ -32,9 +32,9 @@ class LPHashTable<K, V>::LPIteratorImpl : public HashTable<K, V>::HTIteratorImpl
 
     // inherited functions
     virtual void operator++();
-    virtual bool operator==(const HTIteratorImpl& other) const;
-    virtual const std::pair<K, V>& operator*();
-    virtual HTIteratorImpl* clone() const;
+    virtual bool operator==(const HTIteratorImpl &other) const;
+    virtual const std::pair<K, V> &operator*();
+    virtual HTIteratorImpl *clone() const;
 
     /**
      * Equality operator that compares two LPIteratorImpl. Used by the
@@ -44,7 +44,7 @@ class LPHashTable<K, V>::LPIteratorImpl : public HashTable<K, V>::HTIteratorImpl
      * @param other The LPIteratorImpl to compare against.
      * @return Whether the two implementations are the same.
      */
-    virtual bool operator==(const LPIteratorImpl& other) const;
+    virtual bool operator==(const LPIteratorImpl &other) const;
 
   private:
     /**
@@ -56,7 +56,7 @@ class LPHashTable<K, V>::LPIteratorImpl : public HashTable<K, V>::HTIteratorImpl
     /**
      * Reference to the LPHashTable we are iterating over.
      */
-    const LPHashTable<K, V>& table;
+    const LPHashTable<K, V> &table;
 
     /**
      * Private constructor: takes a LPHashTable to iterate over and a
@@ -65,7 +65,7 @@ class LPHashTable<K, V>::LPIteratorImpl : public HashTable<K, V>::HTIteratorImpl
      * @param ht The LPHashTable this iterator is going to be for.
      * @param i The bucket to start at.
      */
-    LPIteratorImpl(const LPHashTable& ht, size_t i);
+    LPIteratorImpl(const LPHashTable &ht, size_t i);
 };
 /** @endcond */
 #include "lpiterator.cpp"

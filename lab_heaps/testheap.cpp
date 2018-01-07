@@ -9,14 +9,14 @@
  * @date Fall 2012
  */
 
-#include <iostream>
-#include <fstream>
-#include <ctype.h>
-#include <time.h>
-#include <utility>
 #include "coloredout.h"
 #include "heap.h"
 #include "random.h"
+#include <ctype.h>
+#include <fstream>
+#include <iostream>
+#include <time.h>
+#include <utility>
 
 using namespace std;
 using namespace util;
@@ -25,15 +25,13 @@ void testConstructor(int count);
 void testPop(int count);
 void testPush(int count);
 
-void printHeader(const string& headline)
-{
+void printHeader(const string &headline) {
     cout << string(64, colored_out::BORDER_CHAR) << endl;
     colored_out::output_bold(headline);
     cout << endl << string(64, colored_out::BORDER_CHAR) << endl;
 }
 
-void printAfter(int value, std::string operation = "remove")
-{
+void printAfter(int value, std::string operation = "remove") {
     cout << endl;
     colored_out::output_bold("After " + operation + "(");
     colored_out::output_bold(value);
@@ -41,11 +39,10 @@ void printAfter(int value, std::string operation = "remove")
     cout << endl;
 }
 
-int main(int argc, const char** argv)
-{
+int main(int argc, const char **argv) {
     // Set up Colored Output (if 'color' parameter passed)
-    bool is_colored
-        = (argc > 1 && tolower(argv[1][0]) == 'c') && isatty(STDOUT_FILENO);
+    bool is_colored =
+        (argc > 1 && tolower(argv[1][0]) == 'c') && isatty(STDOUT_FILENO);
     colored_out coloroutput;
     if (is_colored) {
         coloroutput.set_expected_file("soln_testheap.out");
@@ -68,8 +65,7 @@ int main(int argc, const char** argv)
     return 0;
 }
 
-vector<int> setUpVector(int seed, int count)
-{
+vector<int> setUpVector(int seed, int count) {
     Random rand_gen(seed);
     vector<int> result;
     result.reserve(seed);
@@ -79,8 +75,7 @@ vector<int> setUpVector(int seed, int count)
     return result;
 }
 
-void testPush(int count)
-{
+void testPush(int count) {
     vector<int> to_insert = setUpVector(67, count);
     printHeader("Testing push:");
     heap<int> myHeap;
@@ -91,8 +86,7 @@ void testPush(int count)
     }
 }
 
-void testPop(int count)
-{
+void testPop(int count) {
     printHeader("Testing pop (requires constructor to be working):");
     vector<int> to_insert = setUpVector(67, count);
     heap<int> myHeap(to_insert);
@@ -134,8 +128,7 @@ void testPop(int count)
     cout << endl;
 }
 
-void testConstructor(int count)
-{
+void testConstructor(int count) {
     Random rand_gen(92);
     vector<int> myArray;
     myArray.reserve(count);
@@ -167,8 +160,7 @@ void testConstructor(int count)
  *   used as an index into an array. If you do, this code will
  *   prevent the heap code from compiling. Neat, huh?
  **/
-void testCompileOnly()
-{
+void testCompileOnly() {
     vector<string> testHeapStringsCompiles;
     heap<string> myHeap(testHeapStringsCompiles);
     myHeap.pop();

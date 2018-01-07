@@ -5,8 +5,8 @@
 #ifndef ROOM_H
 #define ROOM_H
 
-#include <string>
 #include <iostream>
+#include <string>
 
 #include "letter.h"
 
@@ -16,8 +16,7 @@ using namespace std;
  * Represents a testing room, which has a group of letters allocated to it
  * (where letters are first letters of last names).
  */
-class Room
-{
+class Room {
   public:
     /** The room name */
     string name;
@@ -32,7 +31,7 @@ class Room
     int max_letters;
 
     /** An array of Letters currently allocated */
-    Letter* letters;
+    Letter *letters;
 
     /** The number of valid Letters in the Letters array */
     int letterCount;
@@ -47,7 +46,7 @@ class Room
      * Room copy constructor.
      * @param other The Room to copy into this room.
      */
-    Room(const Room& other);
+    Room(const Room &other);
 
     /**
      * Main Room constructor.
@@ -55,14 +54,14 @@ class Room
      * @param init_name The name to create this Room with
      * @param init_capacity The size of this Room
      */
-    Room(const string& init_name, int init_capacity);
+    Room(const string &init_name, int init_capacity);
 
     /**
      * Room assignment operator.
      * @param other The Room to make a copy of
      * @return A reference to the copied Room
      */
-    Room& operator=(const Room& other);
+    Room &operator=(const Room &other);
 
     /**
      * Room destructor.
@@ -73,7 +72,7 @@ class Room
      * Allocates a letter group to this room.
      * @param L The letter group to add
      */
-    void addLetter(const Letter& L);
+    void addLetter(const Letter &L);
 
     /**
      * @return the number of empty seats remaining in the room after
@@ -86,7 +85,7 @@ class Room
      *
      * @param stream The stream to print to
      */
-    void print(std::ostream& stream = std::cout);
+    void print(std::ostream &stream = std::cout);
 
   private:
     /**
@@ -97,7 +96,7 @@ class Room
     /**
      * Cctor/assignment operator copy helper function.
      */
-    void copy(const Room& other);
+    void copy(const Room &other);
 };
 
 #endif

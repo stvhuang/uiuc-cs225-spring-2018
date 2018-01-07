@@ -12,35 +12,34 @@
 #ifndef _KDTREE_H_
 #define _KDTREE_H_
 
-#include <vector>
-#include "util/coloredout.h"
 #include "point.h"
+#include "util/coloredout.h"
+#include <vector>
 
-using std::vector;
-using std::string;
-using std::ostream;
 using std::cout;
 using std::endl;
+using std::ostream;
+using std::string;
+using std::vector;
 
 /**
  * KDTree class: implemented using Points in Dim dimensional space (given
  * by the template parameter).
  */
 template <int Dim>
-class KDTree
-{
+class KDTree {
   private:
     /**
      * Internal structure for a node of KDTree.
      * Contains left, right children pointers and a K-dimensional point
      */
-    struct KDTreeNode
-    {
-      Point<Dim> point;
-      KDTreeNode *left, *right;
+    struct KDTreeNode {
+        Point<Dim> point;
+        KDTreeNode *left, *right;
 
-      KDTreeNode() : point(), left(NULL), right(NULL) {}
-      KDTreeNode(const Point<Dim> &point) : point(point), left(NULL), right(NULL) {}
+        KDTreeNode() : point(), left(NULL), right(NULL) {}
+        KDTreeNode(const Point<Dim> &point)
+            : point(point), left(NULL), right(NULL) {}
     };
 
   public:
@@ -54,7 +53,8 @@ class KDTree
      *     Point<3> b(3, 2, 1);
      *     cout << smallerDimVal(a, b, 0) << endl; // should print true
      *     cout << smallerDimVal(a, b, 2) << endl; // should print false
-     *     cout << smallerDimVal(a, b, 1) << endl; // based on operator<, this should be true
+     *     cout << smallerDimVal(a, b, 1) << endl; // based on operator<, this
+     * should be true
      *
      * @todo This function is required for MP 5.1.
      * @param first Point to compare.
@@ -63,7 +63,7 @@ class KDTree
      * @return A boolean value indicating whether the first Point is smaller
      *  than the second Point in the curDim dimension.
      */
-    bool smallerDimVal(const Point<Dim>& first, const Point<Dim>& second,
+    bool smallerDimVal(const Point<Dim> &first, const Point<Dim> &second,
                        int curDim) const;
 
     /**
@@ -88,9 +88,10 @@ class KDTree
      *     Point<3> possibleBest2(2, 4, 4);
      *     Point<3> currentBest3(0, 2, 4);
      *     Point<3> possibleBest3(2, 4, 6);
-     *     cout << shouldReplace(target, currentBest1, possibleBest1) << endl; // true
-     *     cout << shouldReplace(target, currentBest2, possibleBest2) << endl; // false
-     *     cout << shouldReplace(target, currentBest3, possibleBest3) << endl;
+     *     cout << shouldReplace(target, currentBest1, possibleBest1) << endl;
+     * // true cout << shouldReplace(target, currentBest2, possibleBest2) <<
+     * endl; // false cout << shouldReplace(target, currentBest3, possibleBest3)
+     * << endl;
      *      // based on operator<, this should be false
      *
      * @todo This function is required for MP 5.1.
@@ -104,8 +105,8 @@ class KDTree
      *  to target than currentBest. Ties should be broken with
      *  Point::operator<().
      */
-    bool shouldReplace(const Point<Dim>& target, const Point<Dim>& currentBest,
-                       const Point<Dim>& potential) const;
+    bool shouldReplace(const Point<Dim> &target, const Point<Dim> &currentBest,
+                       const Point<Dim> &potential) const;
 
     /**
      * Constructs a KDTree from a vector of Points, each having dimension Dim.
@@ -129,8 +130,8 @@ class KDTree
      *
      * KD-trees are created recursively; at any stage of the construction,
      * the median value in the current dimension is selected and a node is
-     * created based on it. Then, all the elements in the current subtree are divided
-     * up into elements which are less than the median, or greater than
+     * created based on it. Then, all the elements in the current subtree are
+     * divided up into elements which are less than the median, or greater than
      * the median, and then the subtrees are created recursively.
      * The children pick the median in the next dimension, and repeat
      * until the entire set of inputs has been processed. Successive
@@ -151,15 +152,14 @@ class KDTree
      * @todo This function is required for MP 5.1.
      * @param newPoints The vector of points to build your KDTree off of.
      */
-    KDTree(const vector<Point<Dim>>& newPoints);
-
+    KDTree(const vector<Point<Dim>> &newPoints);
 
     /**
      * Copy constructor for KDTree.
      *
      * @param other The KDTree to copy.
      */
-    KDTree(const KDTree& other);
+    KDTree(const KDTree &other);
 
     /**
      * Assignment operator for KDTree.
@@ -167,7 +167,7 @@ class KDTree
      * @param rhs The right hand side of the assignment statement.
      * @return A reference for performing chained assignments.
      */
-    KDTree const &operator=(const KDTree& rhs);
+    KDTree const &operator=(const KDTree &rhs);
 
     /**
      * Destructor for KDTree.
@@ -224,14 +224,15 @@ class KDTree
      * (https://courses.engr.illinois.edu/cs225/sp2018/private/mps/5/moore-tutorial.pdf).
      *
      * @see There is [an example]
-     * (https://courses.engr.illinois.edu/cs225/sp2018/mps/5/) in the MP5 instruction.
+     * (https://courses.engr.illinois.edu/cs225/sp2018/mps/5/) in the MP5
+     * instruction.
      *
      * @todo This function is required for MP 5.1.
      * @param query The point we wish to find the closest neighbor to in the
      *  tree.
      * @return The closest point to a in the KDTree.
      */
-    Point<Dim> findNearestNeighbor(const Point<Dim>& query) const;
+    Point<Dim> findNearestNeighbor(const Point<Dim> &query) const;
 
     // functions used for grading:
 
@@ -240,21 +241,20 @@ class KDTree
      *  kdtree_extras.cpp.
      * Prints the KDTree to the terminal in a pretty way.
      */
-    void printTree(ostream& out = cout,
+    void printTree(ostream &out = cout,
                    colored_out::enable_t enable_bold = colored_out::COUT,
                    int modWidth = -1) const;
 
   private:
-
     /** Internal representation, root and size **/
     KDTreeNode *root;
     size_t size;
 
     /** Helper function for grading */
-    int getPrintData(KDTreeNode * subroot) const;
+    int getPrintData(KDTreeNode *subroot) const;
 
     /** Helper function for grading */
-    void printTree(KDTreeNode * subroot, std::vector<std::string>& output,
+    void printTree(KDTreeNode *subroot, std::vector<std::string> &output,
                    int left, int top, int width, int currd) const;
 
     /**

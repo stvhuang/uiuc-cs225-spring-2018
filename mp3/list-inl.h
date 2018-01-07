@@ -9,8 +9,8 @@
  */
 template <class T>
 List<T>::~List() {
-  /// @todo Graded in MP3.1
-  clear();
+    /// @todo Graded in MP3.1
+    clear();
 }
 
 /**
@@ -19,24 +19,24 @@ List<T>::~List() {
  */
 template <class T>
 void List<T>::clear() {
-  /// @todo Graded in MP3.1
-  ListNode *curr = head_;
-  ListNode *prev = NULL;
+    /// @todo Graded in MP3.1
+    ListNode *curr = head_;
+    ListNode *prev = NULL;
 
-  while (curr != NULL) {
-    prev = curr;
-    curr = curr->next;
-    delete prev;
-  }
+    while (curr != NULL) {
+        prev = curr;
+        curr = curr->next;
+        delete prev;
+    }
 
-  curr = NULL;
-  prev = NULL;
+    curr = NULL;
+    prev = NULL;
 
-  head_ = NULL;
-  tail_ = NULL;
-  length_ = 0;
+    head_ = NULL;
+    tail_ = NULL;
+    length_ = 0;
 
-  return;
+    return;
 }
 
 /**
@@ -46,26 +46,26 @@ void List<T>::clear() {
  * @param ndata The data to be inserted.
  */
 template <class T>
-void List<T>::insertFront(T const & ndata) {
-  /// @todo Graded in MP3.1
-  ListNode *insert = new ListNode(ndata);
+void List<T>::insertFront(T const &ndata) {
+    /// @todo Graded in MP3.1
+    ListNode *insert = new ListNode(ndata);
 
-  if (head_ != NULL) {
-    insert->next = head_;
-    head_->prev = insert;
-    head_ = insert;
-  } else {  // head == NULL
-    insert->prev = NULL;
-    insert->next = NULL;
-    head_ = insert;
-    tail_ = insert;
-  }
+    if (head_ != NULL) {
+        insert->next = head_;
+        head_->prev = insert;
+        head_ = insert;
+    } else {  // head == NULL
+        insert->prev = NULL;
+        insert->next = NULL;
+        head_ = insert;
+        tail_ = insert;
+    }
 
-  insert = NULL;
+    insert = NULL;
 
-  ++length_;
+    ++length_;
 
-  return;
+    return;
 }
 
 /**
@@ -75,26 +75,26 @@ void List<T>::insertFront(T const & ndata) {
  * @param ndata The data to be inserted.
  */
 template <class T>
-void List<T>::insertBack(const T & ndata) {
-  /// @todo Graded in MP3.1
-  ListNode *insert = new ListNode(ndata);
+void List<T>::insertBack(const T &ndata) {
+    /// @todo Graded in MP3.1
+    ListNode *insert = new ListNode(ndata);
 
-  if (tail_ != NULL) {
-    insert->prev = tail_;
-    tail_->next = insert;
-    tail_ = insert;
-  } else {  // tail_ == NULL
-    insert->prev = NULL;
-    insert->next = NULL;
-    head_ = insert;
-    tail_ = insert;
-  }
+    if (tail_ != NULL) {
+        insert->prev = tail_;
+        tail_->next = insert;
+        tail_ = insert;
+    } else {  // tail_ == NULL
+        insert->prev = NULL;
+        insert->next = NULL;
+        head_ = insert;
+        tail_ = insert;
+    }
 
-  insert = NULL;
+    insert = NULL;
 
-  ++length_;
+    ++length_;
 
-  return;
+    return;
 }
 
 /**
@@ -102,7 +102,7 @@ void List<T>::insertBack(const T & ndata) {
  */
 template <class T>
 void List<T>::reverse() {
-  reverse(head_, tail_);
+    reverse(head_, tail_);
 }
 
 /**
@@ -117,50 +117,51 @@ void List<T>::reverse() {
  *  be reversed.
  */
 template <class T>
-void List<T>::reverse(ListNode *& startPoint, ListNode *& endPoint) {
-  /// @todo Graded in MP3.1
-  if ((startPoint == endPoint) || (startPoint == NULL) || (endPoint == NULL)) {
-    return;
-  }
+void List<T>::reverse(ListNode *&startPoint, ListNode *&endPoint) {
+    /// @todo Graded in MP3.1
+    if ((startPoint == endPoint) || (startPoint == NULL) ||
+        (endPoint == NULL)) {
+        return;
+    }
 
-  ListNode *oriStart = startPoint;
-  ListNode *oriStartPrev = startPoint->prev;
-  ListNode *oriEnd = endPoint;
-  ListNode *oriEndNext = endPoint->next;
-  ListNode *tmp = NULL;
+    ListNode *oriStart = startPoint;
+    ListNode *oriStartPrev = startPoint->prev;
+    ListNode *oriEnd = endPoint;
+    ListNode *oriEndNext = endPoint->next;
+    ListNode *tmp = NULL;
 
-  while (startPoint != endPoint) {
+    while (startPoint != endPoint) {
+        tmp = startPoint->prev;
+        startPoint->prev = startPoint->next;
+        startPoint->next = tmp;
+        startPoint = startPoint->prev;
+    }
+
     tmp = startPoint->prev;
-    startPoint->prev = startPoint->next;
+    startPoint->prev = oriStartPrev;
     startPoint->next = tmp;
-    startPoint = startPoint->prev;
-  }
+    endPoint = oriStart;
+    endPoint->next = oriEndNext;
 
-  tmp = startPoint->prev;
-  startPoint->prev = oriStartPrev;
-  startPoint->next = tmp;
-  endPoint = oriStart;
-  endPoint->next = oriEndNext;
+    if (oriStartPrev == NULL) {
+        head_ = startPoint;
+    } else {
+        oriStartPrev->next = startPoint;
+    }
 
-  if (oriStartPrev == NULL) {
-    head_ = startPoint;
-  } else {
-    oriStartPrev->next = startPoint;
-  }
+    if (oriEndNext == NULL) {
+        tail_ = endPoint;
+    } else {
+        oriEndNext->prev = endPoint;
+    }
 
-  if (oriEndNext == NULL) {
-    tail_ = endPoint;
-  } else {
-    oriEndNext->prev = endPoint;
-  }
+    oriStart = NULL;
+    oriStartPrev = NULL;
+    oriEnd = NULL;
+    oriEndNext = NULL;
+    tmp = NULL;
 
-  oriStart = NULL;
-  oriStartPrev = NULL;
-  oriEnd = NULL;
-  oriEndNext = NULL;
-  tmp = NULL;
-
-  return;
+    return;
 }
 
 /**
@@ -171,30 +172,30 @@ void List<T>::reverse(ListNode *& startPoint, ListNode *& endPoint) {
  */
 template <class T>
 void List<T>::reverseNth(int n) {
-  /// @todo Graded in MP3.1
-  if (head_ == NULL) {
-    return;
-  }
-
-  ListNode *start = head_;
-  ListNode *end = head_;
-
-  while ((end->next != NULL) && (start->next != NULL)) {
-    end = start;
-    for (int i = 0; i < n - 1; ++i) {
-      if (end->next != NULL) {
-        end = end->next;
-      }
+    /// @todo Graded in MP3.1
+    if (head_ == NULL) {
+        return;
     }
 
-    reverse(start, end);
-    start = end->next;
-  }
+    ListNode *start = head_;
+    ListNode *end = head_;
 
-  start = NULL;
-  end = NULL;
+    while ((end->next != NULL) && (start->next != NULL)) {
+        end = start;
+        for (int i = 0; i < n - 1; ++i) {
+            if (end->next != NULL) {
+                end = end->next;
+            }
+        }
 
-  return;
+        reverse(start, end);
+        start = end->next;
+    }
+
+    start = NULL;
+    end = NULL;
+
+    return;
 }
 
 /**
@@ -208,30 +209,30 @@ void List<T>::reverseNth(int n) {
  */
 template <class T>
 void List<T>::waterfall() {
-  /// @todo Graded in MP3.1
-  if ((head_ == NULL) || (head_->next == NULL)) {
+    /// @todo Graded in MP3.1
+    if ((head_ == NULL) || (head_->next == NULL)) {
+        return;
+    }
+
+    ListNode *curr = head_;
+    ListNode *next = NULL;
+
+    while ((curr->next != NULL) && (curr->next->next != NULL)) {
+        curr = curr->next;
+        curr->prev->next = curr->next;
+        curr->next->prev = curr->prev;
+        next = curr->next;
+        tail_->next = curr;
+        curr->prev = tail_;
+        curr->next = NULL;
+        tail_ = curr;
+        curr = next;
+    }
+
+    curr = NULL;
+    next = NULL;
+
     return;
-  }
-
-  ListNode* curr = head_;
-  ListNode* next = NULL;
-
-  while ((curr->next != NULL) && (curr->next->next != NULL)) {
-    curr = curr->next;
-    curr->prev->next = curr->next;
-    curr->next->prev = curr->prev;
-    next = curr->next;
-    tail_->next = curr;
-    curr->prev = tail_;
-    curr->next = NULL;
-    tail_ = curr;
-    curr = next;
-  }
-
-  curr = NULL;
-  next = NULL;
-
-  return;
 }
 
 /**
@@ -248,7 +249,7 @@ List<T> List<T>::split(int splitPoint) {
     if (splitPoint < 0)
         splitPoint = 0;
 
-    ListNode * secondHead = split(head_, splitPoint);
+    ListNode *secondHead = split(head_, splitPoint);
 
     int oldLength = length_;
     if (secondHead == head_) {
@@ -259,7 +260,7 @@ List<T> List<T>::split(int splitPoint) {
     } else {
         // set up current list
         tail_ = head_;
-        while (tail_ -> next != NULL)
+        while (tail_->next != NULL)
             tail_ = tail_->next;
         length_ = splitPoint;
     }
@@ -290,23 +291,23 @@ List<T> List<T>::split(int splitPoint) {
  * @return The starting node of the sequence that was split off.
  */
 template <class T>
-typename List<T>::ListNode * List<T>::split(ListNode * start, int splitPoint) {
-  /// @todo Graded in MP3.2
-  if ((start == NULL) || (splitPoint == 0)) {
-    return start;
-  }
+typename List<T>::ListNode *List<T>::split(ListNode *start, int splitPoint) {
+    /// @todo Graded in MP3.2
+    if ((start == NULL) || (splitPoint == 0)) {
+        return start;
+    }
 
-  ListNode* newHead = head_;
+    ListNode *newHead = head_;
 
-  for (int i = 0; i < splitPoint; ++i) {
-    newHead = newHead->next;
-  }
+    for (int i = 0; i < splitPoint; ++i) {
+        newHead = newHead->next;
+    }
 
-  tail_ = newHead->prev;
-  newHead->prev->next = NULL;
-  newHead->prev = NULL;
+    tail_ = newHead->prev;
+    newHead->prev->next = NULL;
+    newHead->prev = NULL;
 
-  return newHead;
+    return newHead;
 }
 
 /**
@@ -315,7 +316,7 @@ typename List<T>::ListNode * List<T>::split(ListNode * start, int splitPoint) {
  * @param otherList List to be merged into the current list.
  */
 template <class T>
-void List<T>::mergeWith(List<T> & otherList) {
+void List<T>::mergeWith(List<T> &otherList) {
     // set up the current list
     head_ = merge(head_, otherList.head_);
     tail_ = head_;
@@ -345,59 +346,59 @@ void List<T>::mergeWith(List<T> & otherList) {
  * @return The starting node of the resulting, sorted sequence.
  */
 template <class T>
-typename List<T>::ListNode * List<T>::merge(ListNode * first, ListNode* second) {
-  /// @todo Graded in MP3.2
-  if ((first == NULL) || (second == NULL)) {
-    return NULL;
-  }
-
-  if (first == second) {
-    return first;
-  }
-
-  ListNode *newHead = NULL;
-  ListNode *trackFirst = first;
-  ListNode *trackSecond = second;
-  ListNode *newEnd = NULL;
-
-  if (first->data < second->data) {
-    newHead = first;
-    trackFirst = first->next;
-  } else {
-    newHead = second;
-    trackSecond = second->next;
-  }
-
-  newEnd = newHead;
-
-  while ((trackFirst != NULL) && (trackSecond != NULL)) {
-    if ((trackFirst->data < trackSecond->data) || (trackSecond == NULL)) {
-      newEnd->next = trackFirst;
-      trackFirst->prev = newEnd;
-      newEnd = trackFirst;
-      trackFirst = trackFirst->next;
-    } else {
-      newEnd->next = trackSecond;
-      trackSecond->prev = newEnd;
-      newEnd = trackSecond;
-      trackSecond = trackSecond->next;
+typename List<T>::ListNode *List<T>::merge(ListNode *first, ListNode *second) {
+    /// @todo Graded in MP3.2
+    if ((first == NULL) || (second == NULL)) {
+        return NULL;
     }
-  }
 
-  if (trackFirst == NULL) {
-    newEnd->next = trackSecond;
-    trackSecond->prev = newEnd;
-  } else {  // trackSecond == NULL
-    newEnd->next = trackFirst;
-    trackFirst->prev = newEnd;
-  }
+    if (first == second) {
+        return first;
+    }
 
-  second = NULL;
-  trackFirst = NULL;
-  trackSecond = NULL;
-  newEnd = NULL;
+    ListNode *newHead = NULL;
+    ListNode *trackFirst = first;
+    ListNode *trackSecond = second;
+    ListNode *newEnd = NULL;
 
-  return newHead;
+    if (first->data < second->data) {
+        newHead = first;
+        trackFirst = first->next;
+    } else {
+        newHead = second;
+        trackSecond = second->next;
+    }
+
+    newEnd = newHead;
+
+    while ((trackFirst != NULL) && (trackSecond != NULL)) {
+        if ((trackFirst->data < trackSecond->data) || (trackSecond == NULL)) {
+            newEnd->next = trackFirst;
+            trackFirst->prev = newEnd;
+            newEnd = trackFirst;
+            trackFirst = trackFirst->next;
+        } else {
+            newEnd->next = trackSecond;
+            trackSecond->prev = newEnd;
+            newEnd = trackSecond;
+            trackSecond = trackSecond->next;
+        }
+    }
+
+    if (trackFirst == NULL) {
+        newEnd->next = trackSecond;
+        trackSecond->prev = newEnd;
+    } else {  // trackSecond == NULL
+        newEnd->next = trackFirst;
+        trackFirst->prev = newEnd;
+    }
+
+    second = NULL;
+    trackFirst = NULL;
+    trackSecond = NULL;
+    newEnd = NULL;
+
+    return newHead;
 }
 
 /**
@@ -423,30 +424,31 @@ void List<T>::sort() {
  * @return A pointer to the beginning of the now sorted chain.
  */
 template <class T>
-typename List<T>::ListNode* List<T>::mergesort(ListNode * start, int chainLength) {
-  /// @todo Graded in MP3.2
-  ListNode *newHead = start;
+typename List<T>::ListNode *List<T>::mergesort(ListNode *start,
+                                               int chainLength) {
+    /// @todo Graded in MP3.2
+    ListNode *newHead = start;
 
-  if (chainLength == 1) {
-    start->next = NULL;
-    start->prev = NULL;
-    return start;
-  } else {
-    ListNode *newStart = start;
-    for (int i = 0; i < (chainLength / 2); ++i) {
-      newStart = newStart->next;
+    if (chainLength == 1) {
+        start->next = NULL;
+        start->prev = NULL;
+        return start;
+    } else {
+        ListNode *newStart = start;
+        for (int i = 0; i < (chainLength / 2); ++i) {
+            newStart = newStart->next;
+        }
+
+        newStart->prev->next = NULL;
+        newStart->prev = NULL;
+
+        start = mergesort(start, chainLength / 2);
+        newStart = mergesort(newStart, chainLength - (chainLength / 2));
+
+        newHead = merge(start, newStart);
+
+        newStart = NULL;
     }
 
-    newStart->prev->next = NULL;
-    newStart->prev = NULL;
-
-    start = mergesort(start, chainLength / 2);
-    newStart = mergesort(newStart, chainLength - (chainLength / 2));
-
-    newHead = merge(start, newStart);
-
-    newStart = NULL;
-  }
-
-  return newHead;
+    return newHead;
 }

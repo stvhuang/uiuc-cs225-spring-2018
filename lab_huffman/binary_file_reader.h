@@ -18,15 +18,14 @@
  * BinaryFileReader: interface for reading binary files, bit by bit or byte
  * by byte. Wraps an ifstream in binary mode.
  */
-class BinaryFileReader
-{
+class BinaryFileReader {
   public:
     /**
      * Constructs a new BinaryFileReader by opening the given file.
      *
      * @param fileName File to be opened.
      */
-    BinaryFileReader(const std::string& fileName);
+    BinaryFileReader(const std::string &fileName);
 
     /**
      * Destroys a BinaryFileReader, ensuring the file is correctly

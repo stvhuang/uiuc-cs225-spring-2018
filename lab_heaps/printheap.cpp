@@ -5,40 +5,30 @@
 
 template <class T, class Compare>
 class HeapNodeDescriptor
-    : public GenericNodeDescriptor<HeapNodeDescriptor<T, Compare>>
-{
+    : public GenericNodeDescriptor<HeapNodeDescriptor<T, Compare>> {
   public:
-    HeapNodeDescriptor(const heap<T, Compare>& theHeap_, size_t index_)
-        : theHeap(theHeap_), index(index_)
-    {
-    }
-    bool isNull() const
-    {
-        return index >= theHeap._elems.size();
-    }
-    std::string key() const
-    {
+    HeapNodeDescriptor(const heap<T, Compare> &theHeap_, size_t index_)
+        : theHeap(theHeap_), index(index_) {}
+    bool isNull() const { return index >= theHeap._elems.size(); }
+    std::string key() const {
         std::stringstream ss;
         ss << theHeap._elems[index];
         return ss.str();
     }
-    HeapNodeDescriptor left() const
-    {
+    HeapNodeDescriptor left() const {
         return HeapNodeDescriptor(theHeap, theHeap.leftChild(index));
     }
-    HeapNodeDescriptor right() const
-    {
+    HeapNodeDescriptor right() const {
         return HeapNodeDescriptor(theHeap, theHeap.rightChild(index));
     }
 
   private:
-    const heap<T, Compare>& theHeap;
+    const heap<T, Compare> &theHeap;
     const size_t index;
 };
 
 template <class T, class Compare>
-std::ostream& operator<<(std::ostream& out, const heap<T, Compare>& theHeap)
-{
+std::ostream &operator<<(std::ostream &out, const heap<T, Compare> &theHeap) {
     if (theHeap._elems.size() - theHeap.root() < 64)
         printTree(HeapNodeDescriptor<T, Compare>(theHeap, theHeap.root()), out);
 

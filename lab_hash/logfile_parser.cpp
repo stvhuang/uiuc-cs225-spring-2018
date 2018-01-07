@@ -8,13 +8,13 @@
  */
 
 #include "logfile_parser.h"
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
-using std::string;
-using std::vector;
 using std::ifstream;
 using std::istringstream;
+using std::string;
+using std::vector;
 
 /**
  * Constructs a LogLine from a string (actual physical line in the
@@ -22,8 +22,7 @@ using std::istringstream;
  *
  * @param line The line in the file to extract info from.
  */
-LogfileParser::LogLine::LogLine(const string& line)
-{
+LogfileParser::LogLine::LogLine(const string &line) {
     istringstream iss(line);
     iss >> customer;
     customer = customer.substr(1, customer.length() - 3);
@@ -51,8 +50,7 @@ LogfileParser::LogLine::LogLine(const string& line)
  *
  * @param fname The name of the log file to open.
  */
-LogfileParser::LogfileParser(const string& fname) : whenVisitedTable(256)
-{
+LogfileParser::LogfileParser(const string &fname) : whenVisitedTable(256) {
     SCHashTable<string, bool> pageVisitedTable(256);
     ifstream infile(fname.c_str());
     string line;
@@ -79,7 +77,7 @@ LogfileParser::LogfileParser(const string& fname) : whenVisitedTable(256)
         new_key.append(uniqueUrl);
         if (whenVisitedTable.keyExists(new_key)) {
             if (whenVisitedTable[new_key] < ll.date) {
-                whenVisitedTable[new_key]= ll.date;
+                whenVisitedTable[new_key] = ll.date;
             }
         } else {
             whenVisitedTable.insert(new_key, ll.date);
@@ -101,9 +99,8 @@ LogfileParser::LogfileParser(const string& fname) : whenVisitedTable(256)
  * @param url The url.
  * @return A boolean value indicating whether the customer visited the url.
  */
-bool LogfileParser::hasVisited(const string& customer, const string& url) const
-{
-
+bool LogfileParser::hasVisited(const string &customer,
+                               const string &url) const {
     /**
      * @todo Implement this function.
      */
@@ -124,10 +121,8 @@ bool LogfileParser::hasVisited(const string& customer, const string& url) const
  * @return A time_t representing when the customer last visited the given
  *  url.
  */
-time_t LogfileParser::dateVisited(const string& customer,
-                                  const string& url) const
-{
-
+time_t LogfileParser::dateVisited(const string &customer,
+                                  const string &url) const {
     /**
      * @todo Implement this function.
      */
@@ -144,7 +139,4 @@ time_t LogfileParser::dateVisited(const string& customer,
  * @return A vector of urls that were visited in the logfile. Note
  *  that **there should be no duplicates in this vector**.
  */
-vector<string> LogfileParser::uniquePages() const
-{
-    return uniqueURLs;
-}
+vector<string> LogfileParser::uniquePages() const { return uniqueURLs; }

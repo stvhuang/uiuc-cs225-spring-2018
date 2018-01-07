@@ -11,19 +11,18 @@
 
 #include "shape.h"
 
-class Flower : public Drawable
-{
+class Flower : public Drawable {
   private:
     Shape *stem;
-    Shape *pistil; // center piece of flower
+    Shape *pistil;  // center piece of flower
     Shape *leaf;
 
-    void drawPetals(PNG* canvas, const Vector2& center, int x, int y) const;
+    void drawPetals(PNG *canvas, const Vector2 &center, int x, int y) const;
 
   public:
-    Flower(const Vector2& center);
+    Flower(const Vector2 &center);
     ~Flower();
-    void draw(PNG* canvas) const;
+    void draw(PNG *canvas) const;
 };
 
-#endif // FLOWER_H_
+#endif  // FLOWER_H_

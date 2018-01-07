@@ -19,15 +19,14 @@
  * @date Spring 2011
  * @date Summer 2012
  */
-class TextFile
-{
+class TextFile {
   public:
     /**
      * Constructs a new TextFile from the given filename.
      *
      * @param filename The name of the file to read.
      */
-    TextFile(const std::string& filename);
+    TextFile(const std::string &filename);
 
     /**
      * Destructor. Ensures our file is propery closed.

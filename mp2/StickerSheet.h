@@ -9,28 +9,28 @@
 #include <iostream>
 
 namespace cs225 {
-  class StickerSheet {
-   public:
+class StickerSheet {
+  public:
     StickerSheet(const Image &picture, unsigned max);
     StickerSheet(const StickerSheet &other);
     ~StickerSheet();
-    const StickerSheet & operator=(const StickerSheet &other);
+    const StickerSheet &operator=(const StickerSheet &other);
     void changeMaxStickers(unsigned max);
     int addSticker(Image &sticker, unsigned x, unsigned y);
     bool translate(unsigned index, unsigned x, unsigned y);
     void removeSticker(unsigned index);
-    Image * getSticker(unsigned index) const;
+    Image *getSticker(unsigned index) const;
     Image render() const;
     void _clear();
 
-   private:
+  private:
     unsigned max_;  // maximun of stickers(images)
     unsigned num_;  // num of stickers(images)
     Image base;
     Image **stickers;
     unsigned *x_index;
     unsigned *y_index;
-  };
-}
+};
+}  // namespace cs225
 
 #endif

@@ -17,8 +17,7 @@
  * perimeter, color, and can contain Vector2s.  Shapes are also drawable, so
  * they are expected to know how to draw them selves to a PNG.
  */
-class Shape : public Drawable
-{
+class Shape : public Drawable {
   protected:
     Vector2 center_;
 
@@ -37,10 +36,9 @@ class Shape : public Drawable
      * @param center Vector2 of the new Shape
      * @param color of the new Shape
      */
-    Shape(const Vector2& center, const HSLAPixel& color);
+    Shape(const Vector2 &center, const HSLAPixel &color);
 
-    virtual ~Shape()
-    { /* Nothing */
+    virtual ~Shape() { /* Nothing */
     }
 
     /**
@@ -64,7 +62,7 @@ class Shape : public Drawable
      *
      * @return true if Vector2 p is inside of the Shape
      */
-    bool contains(const Vector2& p) const;
+    bool contains(const Vector2 &p) const;
 
     /**
      * @brief Gets the center Vector2 of the Shape
@@ -78,7 +76,7 @@ class Shape : public Drawable
      *
      * @param center the new center Vector2 of the Shape
      */
-    virtual void set_center(const Vector2& center);
+    virtual void set_center(const Vector2 &center);
 
     /**
      * @brief Gets the color of the Shape
@@ -87,7 +85,7 @@ class Shape : public Drawable
      */
     HSLAPixel color() const;
 
-    void draw(PNG* canvas) const;
+    void draw(PNG *canvas) const;
 };
 
-#endif // SHAPE_H_
+#endif  // SHAPE_H_

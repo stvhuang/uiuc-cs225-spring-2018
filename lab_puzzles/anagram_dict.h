@@ -10,8 +10,8 @@
 #ifndef ANAGRAM_DICT_H
 #define ANAGRAM_DICT_H
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
 
 /**
@@ -21,21 +21,20 @@
  * @author Matt Joras
  * @date Winter 2013
  */
-class AnagramDict
-{
+class AnagramDict {
   public:
     /**
      * Constructs an AnagramDict from a filename with newline-separated
      * words.
      * @param filename The name of the word list file.
      */
-    AnagramDict(const std::string& filename);
+    AnagramDict(const std::string &filename);
 
     /**
      * Constructs an AnagramDict from a vector of words.
      * @param words The vector of strings to be used as source words.
      */
-    AnagramDict(const std::vector<std::string>& words);
+    AnagramDict(const std::vector<std::string> &words);
 
     /**
      * @param word The word used to find anagrams.
@@ -44,7 +43,7 @@ class AnagramDict
      * vector returned if no anagrams are found or the word is not in the
      * word list.
      */
-    std::vector<std::string> get_anagrams(const std::string& word) const;
+    std::vector<std::string> get_anagrams(const std::string &word) const;
 
     /**
      * Gets all known anagrams from the dictionary.

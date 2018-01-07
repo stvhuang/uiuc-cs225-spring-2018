@@ -23,9 +23,8 @@
  *
  * @hint Initially label vertices and edges as unvisited.
  */
-int GraphTools::findMinWeight(Graph& graph)
-{
-    //TODO: YOUR CODE HERE
+int GraphTools::findMinWeight(Graph &graph) {
+    // TODO: YOUR CODE HERE
     vector<Vertex> v = graph.getVertices();
     vector<Edge> e = graph.getEdges();
 
@@ -110,9 +109,8 @@ int GraphTools::findMinWeight(Graph& graph)
  * @hint In order to draw (and correctly count) the edges between two
  *  vertices, you'll have to remember each vertex's parent somehow.
  */
-int GraphTools::findShortestPath(Graph& graph, Vertex start, Vertex end)
-{
-    //TODO: YOUR CODE HERE
+int GraphTools::findShortestPath(Graph &graph, Vertex start, Vertex end) {
+    // TODO: YOUR CODE HERE
     vector<Vertex> v = graph.getVertices();
     vector<Edge> e = graph.getEdges();
     unordered_map<Vertex, Vertex> parent;
@@ -125,7 +123,7 @@ int GraphTools::findShortestPath(Graph& graph, Vertex start, Vertex end)
         graph.setEdgeLabel(e[i].source, e[i].dest, "UNEXPLORED");
     }
 
-    queue <Vertex> q;
+    queue<Vertex> q;
     q.push(start);
 
     graph.setVertexLabel(start, "VISITED");
@@ -142,7 +140,7 @@ int GraphTools::findShortestPath(Graph& graph, Vertex start, Vertex end)
             if (graph.getVertexLabel(adjacent[i]) == "UNEXPLORED") {
                 graph.setEdgeLabel(w, adjacent[i], "DISCOVERY");
                 graph.setVertexLabel(adjacent[i], "VISITED");
-                pair<Vertex, Vertex> pairVertex (adjacent[i], w);
+                pair<Vertex, Vertex> pairVertex(adjacent[i], w);
                 parent.insert(pairVertex);
                 q.push(adjacent[i]);
             } else if (graph.getEdgeLabel(w, adjacent[i]) == "UNEXPLORED") {
@@ -175,7 +173,6 @@ int GraphTools::findShortestPath(Graph& graph, Vertex start, Vertex end)
  *  Kruskal's algorithm. Copy the files into the dsets.h and dsets.cpp .
  * @note You may call std::sort instead of creating a priority queue.
  */
-void GraphTools::findMST(Graph& graph)
-{
-    //TODO: YOUR CODE HERE
+void GraphTools::findMST(Graph &graph) {
+    // TODO: YOUR CODE HERE
 }

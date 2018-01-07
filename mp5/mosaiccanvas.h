@@ -13,9 +13,9 @@
 #ifndef MOSAICCANVAS_H
 #define MOSAICCANVAS_H
 
-#include <vector>
 #include "cs225/PNG.h"
 #include "tileimage.h"
+#include <vector>
 
 using namespace std;
 using namespace cs225;
@@ -25,8 +25,7 @@ using namespace cs225;
  * of sub-images to be written.  This is effectively just a 2-D array
  * of TileImage objects which can be accessed via convenience methods.
  */
-class MosaicCanvas
-{
+class MosaicCanvas {
   public:
     static bool enableOutput;
 
@@ -43,7 +42,7 @@ class MosaicCanvas
      *
      * @param source The MosaicCanvas object to copy
      */
-    MosaicCanvas(const MosaicCanvas& source);
+    MosaicCanvas(const MosaicCanvas &source);
 
     /**
      * Retrieve the number of rows of images
@@ -69,7 +68,7 @@ class MosaicCanvas
      *
      * @return 0 on success, or non-zero otherwise
      */
-    void setTile(int row, int column, TileImage* img);
+    void setTile(int row, int column, TileImage *img);
 
     /**
      * Retrieve the current TileImage for a particular
@@ -83,7 +82,7 @@ class MosaicCanvas
      * @return The current TileImage for a particular,
      * or the default TileImage if none is set.
      */
-    const TileImage& getTile(int row, int column);
+    const TileImage &getTile(int row, int column);
 
     /**
      * Save the current MosaicCanvas as a file with
@@ -91,7 +90,7 @@ class MosaicCanvas
      * @param pixelsPerTile pixels per Photomosaic tile
      * @return the Photomosaic as a PNG object
      */
-    PNG drawMosaic(int pixelsPerTile) ;
+    PNG drawMosaic(int pixelsPerTile);
 
   private:
     /**
@@ -107,16 +106,15 @@ class MosaicCanvas
     /**
      * The actual matrix of Image data
      */
-    vector<TileImage*> myImages;
+    vector<TileImage *> myImages;
 
-    TileImage& images(int x, int y);
-    //const TileImage& images(int x, int y) const;
+    TileImage &images(int x, int y);
+    // const TileImage& images(int x, int y) const;
 
     static uint64_t divide(uint64_t a, uint64_t b);
 };
 
-inline TileImage& MosaicCanvas::images(int row, int col)
-{
+inline TileImage &MosaicCanvas::images(int row, int col) {
     return *myImages[row * columns + col];
 }
 /**
@@ -125,9 +123,8 @@ inline const TileImage& MosaicCanvas::images(int row, int col) const
     return myImages[row * columns + col];
 }
 */
-inline uint64_t MosaicCanvas::divide(uint64_t a, uint64_t b)
-{
+inline uint64_t MosaicCanvas::divide(uint64_t a, uint64_t b) {
     return (a + b / 2) / b;
 }
 
-#endif // _MOSAICCANVAS_H
+#endif  // _MOSAICCANVAS_H

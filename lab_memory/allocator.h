@@ -16,8 +16,7 @@
  * An allocator object to wrap the allocation of last-name letter groups
  * to rooms.
  */
-class Allocator
-{
+class Allocator {
   public:
     /**
      * Creates an Allocator object based on a list of students and a
@@ -25,7 +24,7 @@ class Allocator
      * @param studentFile Path to roster file
      * @param roomFile Path to room list file
      */
-    Allocator(const string& studentFile, const string& roomFile);
+    Allocator(const string &studentFile, const string &roomFile);
 
     /**
      * Free all allocated heap memory space.
@@ -43,14 +42,14 @@ class Allocator
      *
      * @param stream Where to print the results to
      */
-    void printStudents(std::ostream & stream = std::cout);
+    void printStudents(std::ostream &stream = std::cout);
 
     /**
      * Prints the room allocation determined by this Allocator.
      *
      * @param stream Where to print the results to
      */
-    void printRooms(std::ostream & stream = std::cout);
+    void printRooms(std::ostream &stream = std::cout);
 
   private:
     /**
@@ -63,14 +62,13 @@ class Allocator
      *  their letter groups.
      * @param file The file to read the student list from
      */
-    void loadStudents(const string& file);
+    void loadStudents(const string &file);
 
     /**
      * Reads rooms from the rooms file and sets their capacities.
      * @param file The file to read the room list from
      */
-    void loadRooms(const string& file);
-
+    void loadRooms(const string &file);
 
     /**
      * Runs the algorithm on the set of rooms and students.
@@ -80,7 +78,7 @@ class Allocator
     /**
      * Return the room with the largest number of open seasts
      */
-    Room* largestOpening();
+    Room *largestOpening();
 
     /**
      * Returns the amount of seats remaining in the room with the
@@ -89,10 +87,10 @@ class Allocator
     int minSpaceRemaining();
 
     /** Array of all letters (size 26) */
-    Letter* alpha;
+    Letter *alpha;
 
     /** Array of all rooms */
-    Room* rooms;
+    Room *rooms;
 
     /** Size of the rooms array */
     int roomCount;

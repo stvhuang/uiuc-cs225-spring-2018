@@ -2,7 +2,7 @@
 
 #include "dsets.h"
 
-void DisjointSets::addelements (int num) {
+void DisjointSets::addelements(int num) {
     for (int i = 0; i < num; ++i) {
         sets.push_back(-1);
     }
@@ -10,7 +10,7 @@ void DisjointSets::addelements (int num) {
     return;
 }
 
-int DisjointSets::find (int elem) {
+int DisjointSets::find(int elem) {
     if (sets[elem] < 0) {
         return elem;
     } else {
@@ -19,7 +19,7 @@ int DisjointSets::find (int elem) {
     }
 }
 
-void DisjointSets::setunion (int a, int b) {
+void DisjointSets::setunion(int a, int b) {
     int root1 = find(a);
     int root2 = find(b);
 
@@ -40,6 +40,4 @@ void DisjointSets::setunion (int a, int b) {
     }
 }
 
-int DisjointSets::size(int elem) {
-    return sets.size();
-}
+int DisjointSets::size(int elem) { return sets.size(); }

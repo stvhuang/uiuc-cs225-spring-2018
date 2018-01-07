@@ -18,15 +18,14 @@
  * BinaryFileWriter: interface for writing to binary files, bit by bit or
  * byte by byte. Wraps an ofstream in binary mode.
  */
-class BinaryFileWriter
-{
+class BinaryFileWriter {
   public:
     /**
      * Constructs a new BinaryFileWriter by opening the given filename.
      *
      * @param fileName File to be opened.
      */
-    BinaryFileWriter(const std::string& fileName);
+    BinaryFileWriter(const std::string &fileName);
 
     /**
      * Destroys an BinaryFileWriter: the destructor here ensures that
@@ -58,7 +57,7 @@ class BinaryFileWriter
     /**
      * std::ofstream used to write to the file.
      */
-    std::ofstream file_; 
+    std::ofstream file_;
 
     /**
      * The current byte to write bits into.

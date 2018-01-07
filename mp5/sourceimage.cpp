@@ -28,9 +28,8 @@ using namespace std;
 constexpr double M_PI = 3.14159265358979323846;
 #endif
 
-SourceImage::SourceImage(const PNG& image, int setResolution)
-    : backingImage(image), resolution(setResolution)
-{
+SourceImage::SourceImage(const PNG &image, int setResolution)
+    : backingImage(image), resolution(setResolution) {
     if (resolution < 1) {
         cerr << "ERROR: resolution set to < 1. Aborting." << endl;
         exit(-1);
@@ -44,18 +43,18 @@ HSLAPixel SourceImage::getRegionColor(int row, int col) const {
     int width = backingImage.width();
     int height = backingImage.height();
 
-    int startX = divide(width * col,        getColumns());
-    int endX   = divide(width * (col + 1),  getColumns());
-    int startY = divide(height * row,       getRows());
-    int endY   = divide(height * (row + 1), getRows());
+    int startX = divide(width * col, getColumns());
+    int endX = divide(width * (col + 1), getColumns());
+    int startY = divide(height * row, getRows());
+    int endY = divide(height * (row + 1), getRows());
 
     double h_sin = 0, h_cos = 0, s = 0, l = 0;
 
     for (int y = startY; y < endY; y++) {
         for (int x = startX; x < endX; x++) {
             double h_rad = (backingImage.getPixel(x, y).h) * M_PI / 180;
-            h_sin += sin( h_rad );
-            h_cos += cos( h_rad );
+            h_sin += sin(h_rad);
+            h_cos += cos(h_rad);
             s += backingImage.getPixel(x, y).s;
             l += backingImage.getPixel(x, y).l;
         }
@@ -86,6 +85,4 @@ int SourceImage::getColumns() const {
         return divide(resolution * backingImage.width(), backingImage.height());
 }
 
-uint64_t SourceImage::divide(uint64_t a, uint64_t b) {
-    return (a + b / 2) / b;
-}
+uint64_t SourceImage::divide(uint64_t a, uint64_t b) { return (a + b / 2) / b; }

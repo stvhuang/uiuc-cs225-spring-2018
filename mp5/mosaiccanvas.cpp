@@ -2,10 +2,10 @@
  * @file mosaiccanvas.h
  */
 
+#include <cstdlib>
+#include <errno.h>
 #include <iostream>
 #include <sys/stat.h>
-#include <errno.h>
-#include <cstdlib>
 
 #include "mosaiccanvas.h"
 #include "util/util.h"
@@ -22,8 +22,7 @@ bool MosaicCanvas::enableOutput = false;
  * @param theColumns Number of columns to divide the canvas into
  */
 MosaicCanvas::MosaicCanvas(int theRows, int theColumns)
-    : rows(theRows), columns(theColumns)
-{
+    : rows(theRows), columns(theColumns) {
     if ((theRows < 1) || (theColumns < 1)) {
         cerr << "Error: Cannot set non-positive rows or columns" << endl;
         exit(-1);
@@ -37,39 +36,29 @@ MosaicCanvas::MosaicCanvas(int theRows, int theColumns)
  *
  * @return The number or rows in the mosaic, or -1 on error
  */
-int MosaicCanvas::getRows() const
-{
-    return rows;
-}
+int MosaicCanvas::getRows() const { return rows; }
 
 /**
  * Retrieve the number of columns of images
  *
  * @return The number of columns in the mosaic, or -1 or error
  */
-int MosaicCanvas::getColumns() const
-{
-    return columns;
-}
+int MosaicCanvas::getColumns() const { return columns; }
 
-void MosaicCanvas::setTile(int row, int column, TileImage* i)
-{
+void MosaicCanvas::setTile(int row, int column, TileImage *i) {
     if (enableOutput) {
-        cerr << "\rPopulating Mosaic: setting tile ("
-             << row << ", " << column
+        cerr << "\rPopulating Mosaic: setting tile (" << row << ", " << column
              << ")" << string(20, ' ') << "\r";
         cerr.flush();
     }
     myImages[row * columns + column] = i;
 }
 
-const TileImage& MosaicCanvas::getTile(int row, int column)
-{
+const TileImage &MosaicCanvas::getTile(int row, int column) {
     return images(row, column);
 }
 
-PNG MosaicCanvas::drawMosaic(int pixelsPerTile)
-{
+PNG MosaicCanvas::drawMosaic(int pixelsPerTile) {
     if (pixelsPerTile <= 0) {
         cerr << "ERROR: pixelsPerTile must be > 0" << endl;
         exit(-1);
@@ -90,10 +79,10 @@ PNG MosaicCanvas::drawMosaic(int pixelsPerTile)
             cerr.flush();
         }
         for (int col = 0; col < columns; col++) {
-            int startX = divide(width  * col,       getColumns());
-            int endX   = divide(width  * (col + 1), getColumns());
-            int startY = divide(height * row,       getRows());
-            int endY   = divide(height * (row + 1), getRows());
+            int startX = divide(width * col, getColumns());
+            int endX = divide(width * (col + 1), getColumns());
+            int startY = divide(height * row, getRows());
+            int endY = divide(height * (row + 1), getRows());
 
             if (endX - startX != endY - startY)
                 cerr << "Error: resolution not constant: x: " << (endX - startX)
@@ -104,8 +93,8 @@ PNG MosaicCanvas::drawMosaic(int pixelsPerTile)
     }
     if (enableOutput) {
         cerr << "\r" << string(60, ' ');
-        cerr << "\rDrawing Mosaic: resizing tiles ("
-             << (rows * columns) << "/" << (rows * columns) << ")" << endl;
+        cerr << "\rDrawing Mosaic: resizing tiles (" << (rows * columns) << "/"
+             << (rows * columns) << ")" << endl;
         cerr.flush();
     }
 

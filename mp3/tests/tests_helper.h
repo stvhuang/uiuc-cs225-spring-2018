@@ -1,14 +1,13 @@
 #ifndef TESTS_HELPER_H
 #define TESTS_HELPER_H
 
-#include "../cs225/PNG.h"
 #include "../cs225/HSLAPixel.h"
+#include "../cs225/PNG.h"
 #include "../list.h"
 
 using namespace cs225;
 
-class BlockPNG : public PNG
-{
+class BlockPNG : public PNG {
   public:
     PNG genImg(vector<int> vect, int d) {
         // error checking: we need to evenly divide the image into d by d blocks
@@ -51,7 +50,7 @@ class BlockPNG : public PNG
 
             for (int j = nx; j < nx + d; j++) {
                 for (int k = ny; k < ny + d; k++) {
-                    ret.getPixel(j, k) = getPixel(x, y); // *operator()(x, y);
+                    ret.getPixel(j, k) = getPixel(x, y);  // *operator()(x, y);
                     y++;
                     if (y == sy) {
                         y = oy;
@@ -65,8 +64,7 @@ class BlockPNG : public PNG
     }
 };
 
-inline vector<int> buildVector(BlockPNG const& b, int d)
-{
+inline vector<int> buildVector(BlockPNG const &b, int d) {
     vector<int> v;
     for (size_t i = 1; i <= (b.width() * b.height()) / (d * d); i++)
         v.push_back(i);
@@ -74,7 +72,8 @@ inline vector<int> buildVector(BlockPNG const& b, int d)
     return v;
 }
 
-inline BlockPNG listToImage(List<HSLAPixel> const& list, unsigned width, unsigned height) {
+inline BlockPNG listToImage(List<HSLAPixel> const &list, unsigned width,
+                            unsigned height) {
     BlockPNG ret;
     ret.resize(width, height);
     vector<HSLAPixel> v(list.begin(), list.end());
@@ -90,7 +89,7 @@ inline BlockPNG listToImage(List<HSLAPixel> const& list, unsigned width, unsigne
     return ret;
 }
 
-inline List<HSLAPixel> imageToList(PNG const& img, bool reverse = false) {
+inline List<HSLAPixel> imageToList(PNG const &img, bool reverse = false) {
     List<HSLAPixel> list;
     for (unsigned i = 0; i < img.width(); i++) {
         for (unsigned j = 0; j < img.height(); j++) {

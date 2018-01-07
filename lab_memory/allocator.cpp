@@ -5,17 +5,16 @@
  */
 
 #include <algorithm>
-#include <vector>
 #include <iostream>
 #include <utility>
+#include <vector>
 
 #include "allocator.h"
 #include "fileio.h"
 
 using namespace std;
 
-Allocator::Allocator(const string& studentFile, const string& roomFile)
-{
+Allocator::Allocator(const string &studentFile, const string &roomFile) {
     createLetterGroups();
     loadStudents(studentFile);
     loadRooms(roomFile);
@@ -33,16 +32,14 @@ Allocator::~Allocator() {
     }
 }
 
-void Allocator::createLetterGroups()
-{
+void Allocator::createLetterGroups() {
     // Make letters (A - Z lettergroups)
     alpha = new Letter[26];
     for (int i = 0; i < 26; i++)
         alpha[i].letter = 'A' + i;
 }
 
-void Allocator::loadStudents(const string& file)
-{
+void Allocator::loadStudents(const string &file) {
     // Read in students
     fileio::loadStudents(file);
     studentCount = fileio::getNumStudents();
@@ -55,8 +52,7 @@ void Allocator::loadStudents(const string& file)
     }
 }
 
-void Allocator::loadRooms(const string& file)
-{
+void Allocator::loadRooms(const string &file) {
     // Read in rooms
     fileio::loadRooms(file);
     roomCount = fileio::getNumRooms();
@@ -71,17 +67,14 @@ void Allocator::loadRooms(const string& file)
     }
 }
 
-
-void Allocator::printStudents(std::ostream & stream /* = std::cout */)
-{
+void Allocator::printStudents(std::ostream &stream /* = std::cout */) {
     // Output number of each last letter name
     stream << "Student counts (" << studentCount << " total)" << endl;
     for (int i = 0; i < 26; i++)
         stream << alpha[i].letter << ": " << alpha[i].count << endl;
 }
 
-void Allocator::allocate()
-{
+void Allocator::allocate() {
     // Perform the allocation
     int border = solve();
 
@@ -92,29 +85,26 @@ void Allocator::allocate()
     }
 }
 
-void Allocator::printRooms(std::ostream & stream /* = std::cout */)
-{
+void Allocator::printRooms(std::ostream &stream /* = std::cout */) {
     // Output the allocation
     stream << "Room Allocation (" << studentCount << "/" << totalCapacity << ")"
-         << endl;
+           << endl;
     for (int i = 0; i < roomCount; i++)
         rooms[i].print(stream);
 }
 
-int Allocator::solve()
-{
+int Allocator::solve() {
     stable_sort(alpha, alpha + 26);
 
     for (int L = 0; L < 26; L++) {
-        Room* r = largestOpening();
+        Room *r = largestOpening();
         r->addLetter(alpha[L]);
     }
 
     return minSpaceRemaining();
 }
 
-int Allocator::minSpaceRemaining()
-{
+int Allocator::minSpaceRemaining() {
     int border = 1000000;
     for (int i = 0; i < roomCount; i++)
         if (rooms[i].spaceRemaining() < border)
@@ -122,8 +112,7 @@ int Allocator::minSpaceRemaining()
     return border;
 }
 
-Room* Allocator::largestOpening()
-{
+Room *Allocator::largestOpening() {
     int index = 0;
     int max_remaining = 0;
     for (int i = 0; i < roomCount; i++) {

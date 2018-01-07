@@ -33,9 +33,8 @@ const HSLAPixel WHEEL_COLOR = color::BLACK;
 
 const int NUM_WHEELS = 5;
 
-Truck::Truck(const Vector2& pcenter)
-    : center_(pcenter),
-      wheels(new Circle*[NUM_WHEELS]),
+Truck::Truck(const Vector2 &pcenter)
+    : center_(pcenter), wheels(new Circle *[NUM_WHEELS]),
       trailer(
           new Rectangle(Vector2(center_.x() - TRAILER_WIDTH / 2, center_.y()),
                         TRAILER_COLOR, TRAILER_WIDTH, TRAILER_HEIGHT)),
@@ -49,17 +48,16 @@ Truck::Truck(const Vector2& pcenter)
       engine(new Rectangle(
           Vector2(cabin->center().x() + CABIN_WIDTH / 2 + ENGINE_WIDTH / 2,
                   (cabin->center().y() + CABIN_HEIGHT / 2) - ENGINE_HEIGHT / 2),
-          ENGINE_COLOR, ENGINE_WIDTH, ENGINE_HEIGHT))
-{
-    const int left
-        = (static_cast<int>(trailer->center().x()) - trailer->width() / 2)
-          + WHEEL_RADIUS;
-    const int right
-        = (static_cast<int>(trailer->center().x()) + trailer->width() / 2)
-          - WHEEL_RADIUS;
-    const int y
-        = (WHEEL_RADIUS * 1 / 2 + static_cast<int>(trailer->center().y())
-           + trailer->height() / 2);
+          ENGINE_COLOR, ENGINE_WIDTH, ENGINE_HEIGHT)) {
+    const int left =
+        (static_cast<int>(trailer->center().x()) - trailer->width() / 2) +
+        WHEEL_RADIUS;
+    const int right =
+        (static_cast<int>(trailer->center().x()) + trailer->width() / 2) -
+        WHEEL_RADIUS;
+    const int y =
+        (WHEEL_RADIUS * 1 / 2 + static_cast<int>(trailer->center().y()) +
+         trailer->height() / 2);
     wheels[0] = new Circle(Vector2(left, y), WHEEL_COLOR, WHEEL_RADIUS);
     wheels[1] = new Circle(Vector2(left + WHEEL_RADIUS * 2, y), WHEEL_COLOR,
                            WHEEL_RADIUS);
@@ -70,26 +68,20 @@ Truck::Truck(const Vector2& pcenter)
                            WHEEL_COLOR, WHEEL_RADIUS);
 }
 
-Truck::Truck(const Truck& other)
-    : center_(other.center_),
-      wheels(new Circle*[NUM_WHEELS]),
+Truck::Truck(const Truck &other)
+    : center_(other.center_), wheels(new Circle *[NUM_WHEELS]),
       trailer(new Rectangle(*(other.trailer))),
       cabin(new Rectangle(*(other.cabin))),
       window(new Rectangle(*(other.window))),
-      engine(new Rectangle(*(other.engine)))
-{
+      engine(new Rectangle(*(other.engine))) {
     for (int i = 0; i < NUM_WHEELS; i++) {
         wheels[i] = new Circle(*(other.wheels[i]));
     }
 }
 
-Truck::~Truck()
-{
-    clear();
-}
+Truck::~Truck() { clear(); }
 
-Truck& Truck::operator=(const Truck& rhs)
-{
+Truck &Truck::operator=(const Truck &rhs) {
     if (this == &rhs) {
         return *this;
     }
@@ -98,13 +90,9 @@ Truck& Truck::operator=(const Truck& rhs)
     return *this;
 }
 
-Vector2 Truck::center() const
-{
-    return this->center_;
-}
+Vector2 Truck::center() const { return this->center_; }
 
-void Truck::set_center(const Vector2& pcenter)
-{
+void Truck::set_center(const Vector2 &pcenter) {
     const Vector2 delta(this->center_ - pcenter);
     this->center_ = this->center_ + delta;
     for (int i = 0; i < NUM_WHEELS; i++) {
@@ -116,10 +104,9 @@ void Truck::set_center(const Vector2& pcenter)
     engine->set_center(engine->center() + delta);
 }
 
-void Truck::copy(const Truck& other)
-{
+void Truck::copy(const Truck &other) {
     center_ = other.center_;
-    wheels = new Circle*[NUM_WHEELS];
+    wheels = new Circle *[NUM_WHEELS];
     for (int i = 0; i < NUM_WHEELS; i++) {
         wheels[i] = new Circle(*(other.wheels[i]));
     }
@@ -129,8 +116,7 @@ void Truck::copy(const Truck& other)
     engine = new Rectangle(*(other.engine));
 }
 
-void Truck::clear()
-{
+void Truck::clear() {
     for (int i = 0; i < NUM_WHEELS; i++) {
         delete wheels[i];
         wheels[i] = NULL;
@@ -142,7 +128,7 @@ void Truck::clear()
     delete engine;
 }
 
-void Truck::draw(PNG* canvas) const {
+void Truck::draw(PNG *canvas) const {
     trailer->draw(canvas);
     cabin->draw(canvas);
     window->draw(canvas);

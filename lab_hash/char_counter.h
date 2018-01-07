@@ -9,12 +9,12 @@
 #ifndef _LETTER_COUNTER_H_
 #define _LETTER_COUNTER_H_
 
-#include "schashtable.h"
 #include "lphashtable.h"
+#include "schashtable.h"
 #include "textfile.h"
 
-#include <vector>
 #include <string>
+#include <vector>
 
 /**
  * CharFreq class: a class that allows for counting the frequency with
@@ -25,15 +25,14 @@
  * @date Summer 2012
  */
 template <template <class K, class V> class Dict>
-class CharFreq
-{
+class CharFreq {
   public:
     /**
      * Constructs a CharFreq object based on the name of a file.
      *
      * @param ifilename Input file to read characters from.
      */
-    CharFreq(const std::string& ifilename);
+    CharFreq(const std::string &ifilename);
 
     /**
      * Returns a vector of pairs, where the first element is the

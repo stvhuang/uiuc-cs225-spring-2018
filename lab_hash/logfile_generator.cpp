@@ -7,26 +7,25 @@
  * @date Summer 2012
  */
 
-#include <iostream>
-#include <string>
-#include <vector>
 #include <fstream>
+#include <iostream>
 #include <sstream>
-#include <time.h>
 #include <stdlib.h>
+#include <string>
+#include <time.h>
+#include <vector>
 
-using std::string;
-using std::vector;
 using std::cout;
 using std::endl;
-using std::ofstream;
-using std::stringstream;
 using std::istringstream;
+using std::ofstream;
+using std::string;
+using std::stringstream;
+using std::vector;
 
 #define ONE_DAY 60 * 60 * 24
 
-int main(int argc, char** argv)
-{
+int main(int argc, char **argv) {
     vector<string> args(argv, argv + argc);
     if (argc < 4) {
         cout << "Usage: " << args[0] << " filename products lines" << endl;
@@ -82,9 +81,9 @@ int main(int argc, char** argv)
             line << "/product/" << pidx << "/\t";
 
             time_t ndate = date - (rand() % 5) * ONE_DAY - rand() % 10000;
-            char buff[100]; // totally arbitrary...
-            tm* time = localtime(&ndate);
-            time->tm_isdst = 1; // UGLY!
+            char buff[100];  // totally arbitrary...
+            tm *time = localtime(&ndate);
+            time->tm_isdst = 1;  // UGLY!
             strftime(buff, 100, "%c", time);
             line << buff;
             out << line.str() << endl;

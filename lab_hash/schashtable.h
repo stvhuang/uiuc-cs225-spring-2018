@@ -21,8 +21,7 @@
  * @date Summer 2012
  */
 template <class K, class V>
-class SCHashTable : public HashTable<K, V>
-{
+class SCHashTable : public HashTable<K, V> {
   private:
     // so we can refer to hash, elems, and size directly, and use the
     // makeIterator fuction without having to scope it.
@@ -61,30 +60,28 @@ class SCHashTable : public HashTable<K, V>
      *    one.
      * @return A const reference to the current SCHashTable.
      */
-    const SCHashTable<K, V>& operator=(const SCHashTable<K, V>& rhs);
+    const SCHashTable<K, V> &operator=(const SCHashTable<K, V> &rhs);
 
     /**
      * Copy constructor.
      *
      * @param other The SCHashTable to be copied.
      */
-    SCHashTable(const SCHashTable<K, V>& other);
+    SCHashTable(const SCHashTable<K, V> &other);
 
     // functions inherited from HashTable
-    virtual void insert(const K& key, const V& value);
-    virtual void remove(const K& key);
-    virtual V find(const K& key) const;
-    virtual bool keyExists(const K& key) const;
+    virtual void insert(const K &key, const V &value);
+    virtual void remove(const K &key);
+    virtual V find(const K &key) const;
+    virtual bool keyExists(const K &key) const;
     virtual void clear();
-    virtual V& operator[](const K& key);
+    virtual V &operator[](const K &key);
 
-    iterator begin() const
-    {
+    iterator begin() const {
         return makeIterator(new SCIteratorImpl(*this, 0, false));
     }
 
-    iterator end() const
-    {
+    iterator end() const {
         return makeIterator(new SCIteratorImpl(*this, size, true));
     }
 
@@ -96,11 +93,11 @@ class SCHashTable : public HashTable<K, V>
      * lists for the separate chaining strategy. The element inside
      * each list is a standard pair of K (key) and V (value).
      */
-    std::list<std::pair<K, V>>* table;
+    std::list<std::pair<K, V>> *table;
 
     // inherited from HashTable
     virtual void resizeTable();
 };
-#include "sciterator.h"
 #include "schashtable.cpp"
+#include "sciterator.h"
 #endif

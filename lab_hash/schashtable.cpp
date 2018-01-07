@@ -14,8 +14,7 @@ using std::list;
 using std::pair;
 
 template <class K, class V>
-SCHashTable<K, V>::SCHashTable(size_t tsize)
-{
+SCHashTable<K, V>::SCHashTable(size_t tsize) {
     if (tsize <= 0)
         tsize = 17;
     size = findPrime(tsize);
@@ -24,15 +23,13 @@ SCHashTable<K, V>::SCHashTable(size_t tsize)
 }
 
 template <class K, class V>
-SCHashTable<K, V>::~SCHashTable()
-{
+SCHashTable<K, V>::~SCHashTable() {
     delete[] table;
 }
 
 template <class K, class V>
-SCHashTable<K, V> const& SCHashTable<K, V>::
-operator=(SCHashTable<K, V> const& rhs)
-{
+SCHashTable<K, V> const &SCHashTable<K, V>::
+operator=(SCHashTable<K, V> const &rhs) {
     if (this != &rhs) {
         delete[] table;
         table = new list<pair<K, V>>[rhs.size];
@@ -45,8 +42,7 @@ operator=(SCHashTable<K, V> const& rhs)
 }
 
 template <class K, class V>
-SCHashTable<K, V>::SCHashTable(SCHashTable<K, V> const& other)
-{
+SCHashTable<K, V>::SCHashTable(SCHashTable<K, V> const &other) {
     table = new list<pair<K, V>>[other.size];
     for (size_t i = 0; i < other.size; i++)
         table[i] = other.table[i];
@@ -55,8 +51,7 @@ SCHashTable<K, V>::SCHashTable(SCHashTable<K, V> const& other)
 }
 
 template <class K, class V>
-void SCHashTable<K, V>::insert(K const& key, V const& value)
-{
+void SCHashTable<K, V>::insert(K const &key, V const &value) {
     ++elems;
     if (shouldResize())
         resizeTable();
@@ -66,8 +61,7 @@ void SCHashTable<K, V>::insert(K const& key, V const& value)
 }
 
 template <class K, class V>
-void SCHashTable<K, V>::remove(K const& key)
-{
+void SCHashTable<K, V>::remove(K const &key) {
     typename list<pair<K, V>>::iterator it;
     /**
      * @todo Implement this function.
@@ -89,8 +83,7 @@ void SCHashTable<K, V>::remove(K const& key)
 }
 
 template <class K, class V>
-V SCHashTable<K, V>::find(K const& key) const
-{
+V SCHashTable<K, V>::find(K const &key) const {
     size_t idx = hash(key, size);
     typename list<pair<K, V>>::iterator it;
     for (it = table[idx].begin(); it != table[idx].end(); it++) {
@@ -101,8 +94,7 @@ V SCHashTable<K, V>::find(K const& key) const
 }
 
 template <class K, class V>
-V& SCHashTable<K, V>::operator[](K const& key)
-{
+V &SCHashTable<K, V>::operator[](K const &key) {
     size_t idx = hash(key, size);
     typename list<pair<K, V>>::iterator it;
     for (it = table[idx].begin(); it != table[idx].end(); it++) {
@@ -121,8 +113,7 @@ V& SCHashTable<K, V>::operator[](K const& key)
 }
 
 template <class K, class V>
-bool SCHashTable<K, V>::keyExists(K const& key) const
-{
+bool SCHashTable<K, V>::keyExists(K const &key) const {
     size_t idx = hash(key, size);
     typename list<pair<K, V>>::iterator it;
     for (it = table[idx].begin(); it != table[idx].end(); it++) {
@@ -133,8 +124,7 @@ bool SCHashTable<K, V>::keyExists(K const& key) const
 }
 
 template <class K, class V>
-void SCHashTable<K, V>::clear()
-{
+void SCHashTable<K, V>::clear() {
     delete[] table;
     table = new list<pair<K, V>>[17];
     size = 17;
@@ -142,8 +132,7 @@ void SCHashTable<K, V>::clear()
 }
 
 template <class K, class V>
-void SCHashTable<K, V>::resizeTable()
-{
+void SCHashTable<K, V>::resizeTable() {
     typename list<pair<K, V>>::iterator it;
     /**
      * @todo Implement this function.
@@ -154,17 +143,17 @@ void SCHashTable<K, V>::resizeTable()
      * @hint Use findPrime()!
      */
     size_t new_size = findPrime(2 * size);
-    list< pair<K, V> > * new_table = new list< pair<K,V> >[new_size];
+    list<pair<K, V>> *new_table = new list<pair<K, V>>[new_size];
 
     for (size_t i = 0; i < size; ++i) {
         for (it = table[i].begin(); it != table[i].end(); ++it) {
             size_t idx = hash(it->first, new_size);
-            pair<K, V> temp (it->first, it->second);
+            pair<K, V> temp(it->first, it->second);
             new_table[idx].push_front(temp);
         }
     }
 
-    delete [] table;
+    delete[] table;
     table = new_table;
     size = new_size;
 

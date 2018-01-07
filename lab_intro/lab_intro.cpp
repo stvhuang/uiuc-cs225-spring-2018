@@ -1,9 +1,9 @@
-#include <iostream>
 #include <cmath>
 #include <cstdlib>
+#include <iostream>
 
-#include "cs225/PNG.h"
 #include "cs225/HSLAPixel.h"
+#include "cs225/PNG.h"
 #include "lab_intro.h"
 
 using namespace cs225;
@@ -16,30 +16,29 @@ using namespace cs225;
  * @return The grayscale image.
  */
 PNG grayscale(PNG image) {
-  /// This function is already written for you so you can see how to
-  /// interact with our PNG class.
-  for (unsigned x = 0; x < image.width(); x++) {
-    for (unsigned y = 0; y < image.height(); y++) {
-      HSLAPixel & pixel = image.getPixel(x, y);
+    /// This function is already written for you so you can see how to
+    /// interact with our PNG class.
+    for (unsigned x = 0; x < image.width(); x++) {
+        for (unsigned y = 0; y < image.height(); y++) {
+            HSLAPixel &pixel = image.getPixel(x, y);
 
-      // `pixel` is a pointer to the memory stored inside of the PNG `image`,
-      // which means you're changing the image directly.  No need to `set`
-      // the pixel since you're directly changing the memory of the image.
-      pixel.s = 0;
+            // `pixel` is a pointer to the memory stored inside of the PNG
+            // `image`, which means you're changing the image directly.  No need
+            // to `set` the pixel since you're directly changing the memory of
+            // the image.
+            pixel.s = 0;
+        }
     }
-  }
 
-  return image;
+    return image;
 }
-
-
 
 /**
  * Returns an image with a spotlight centered at (`centerX`, `centerY`).
  *
  * A spotlight adjusts the luminance of a pixel based on the distance the pixel
- * is away from the center by decreasing the luminance by 0.5% per 1 pixel euclidean
- * distance away from the center.
+ * is away from the center by decreasing the luminance by 0.5% per 1 pixel
+ * euclidean distance away from the center.
  *
  * For example, a pixel 3 pixels above and 4 pixels to the right of the center
  * is a total of `sqrt((3 * 3) + (4 * 4)) = sqrt(25) = 5` pixels away and
@@ -55,30 +54,31 @@ PNG grayscale(PNG image) {
  * @return The image with a spotlight.
  */
 PNG createSpotlight(PNG image, int centerX, int centerY) {
-  double distance = 0.0;
-  double l_decrease = 0.0;
+    double distance = 0.0;
+    double l_decrease = 0.0;
 
-  for (unsigned x = 0; x < image.width(); x++) {
-    for (unsigned y = 0; y < image.height(); y++) {
-      HSLAPixel & pixel = image.getPixel(x, y);
+    for (unsigned x = 0; x < image.width(); x++) {
+        for (unsigned y = 0; y < image.height(); y++) {
+            HSLAPixel &pixel = image.getPixel(x, y);
 
-      // distace between (x, y) and (centerX, centerY)
-      distance = std::sqrt((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY));
+            // distace between (x, y) and (centerX, centerY)
+            distance = std::sqrt((x - centerX) * (x - centerX) +
+                                 (y - centerY) * (y - centerY));
 
-      // if distance larger than 160, decrease the luminance by 80%
-      if (distance > 160.0) {
-        l_decrease = 0.8;
-      } else {  // distance <= 160.0, decrease the luminance by distance * 5%
-        l_decrease = distance * 0.005;
-      }
+            // if distance larger than 160, decrease the luminance by 80%
+            if (distance > 160.0) {
+                l_decrease = 0.8;
+            } else {  // distance <= 160.0, decrease the luminance by distance *
+                      // 5%
+                l_decrease = distance * 0.005;
+            }
 
-      pixel.l *= (1 - l_decrease);
+            pixel.l *= (1 - l_decrease);
+        }
     }
-  }
 
-  return image;
+    return image;
 }
-
 
 /**
  * Returns a image transformed to Illini colors.
@@ -89,52 +89,50 @@ PNG createSpotlight(PNG image, int centerX, int centerY) {
  * @param image A PNG object which holds the image data to be modified.
  *
  * @return The illinify'd image.
-**/
+ **/
 PNG illinify(PNG image) {
-  for (unsigned x = 0; x < image.width(); x++) {
-    for (unsigned y = 0; y < image.height(); y++) {
+    for (unsigned x = 0; x < image.width(); x++) {
+        for (unsigned y = 0; y < image.height(); y++) {
+            HSLAPixel &pixel = image.getPixel(x, y);
 
-      HSLAPixel & pixel = image.getPixel(x, y);
-
-      // set the color to blue (216) if the Hue value is in [114, 318]
-      if (pixel.h >= 114 && pixel.h <= 318) {
-        pixel.h = 216;
-      } else {  // otherwise, set to orange (11)
-        pixel.h = 11;
-      }
+            // set the color to blue (216) if the Hue value is in [114, 318]
+            if (pixel.h >= 114 && pixel.h <= 318) {
+                pixel.h = 216;
+            } else {  // otherwise, set to orange (11)
+                pixel.h = 11;
+            }
+        }
     }
-  }
 
-  return image;
+    return image;
 }
 
-
 /**
-* Returns an immge that has been watermarked by another image.
-*
-* The luminance of every pixel of the second image is checked, if that
-* pixel's luminance is 1 (100%), then the pixel at the same location on
-* the first image has its luminance increased by 0.2.
-*
-* @param firstImage  The first of the two PNGs to be averaged together.
-* @param secondImage The second of the two PNGs to be averaged together.
-*
-* @return The watermarked image.
-*/
+ * Returns an immge that has been watermarked by another image.
+ *
+ * The luminance of every pixel of the second image is checked, if that
+ * pixel's luminance is 1 (100%), then the pixel at the same location on
+ * the first image has its luminance increased by 0.2.
+ *
+ * @param firstImage  The first of the two PNGs to be averaged together.
+ * @param secondImage The second of the two PNGs to be averaged together.
+ *
+ * @return The watermarked image.
+ */
 PNG watermark(PNG firstImage, PNG secondImage) {
-  for (unsigned x = 0; x < firstImage.width(); x++) {
-    for (unsigned y = 0; y < firstImage.height(); y++) {
-      HSLAPixel & firstImagePixel = firstImage.getPixel(x, y);
-      HSLAPixel secondImagePixel = secondImage.getPixel(x, y);
+    for (unsigned x = 0; x < firstImage.width(); x++) {
+        for (unsigned y = 0; y < firstImage.height(); y++) {
+            HSLAPixel &firstImagePixel = firstImage.getPixel(x, y);
+            HSLAPixel secondImagePixel = secondImage.getPixel(x, y);
 
-      if (secondImagePixel.l == 1.0) {  // white, the text region
-        firstImagePixel.l += 0.2;
-        if (firstImagePixel.l > 1.0) {  // limit the value under 1.0
-          firstImagePixel.l = 1.0;
+            if (secondImagePixel.l == 1.0) {  // white, the text region
+                firstImagePixel.l += 0.2;
+                if (firstImagePixel.l > 1.0) {  // limit the value under 1.0
+                    firstImagePixel.l = 1.0;
+                }
+            }
         }
-      }
     }
-  }
 
-  return firstImage;
+    return firstImage;
 }

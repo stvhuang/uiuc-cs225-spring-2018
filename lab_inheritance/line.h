@@ -18,8 +18,7 @@
  * @brief The Line class is a subclass of Drawable and represents a line in 2D
  * space
  */
-class Line : public Drawable
-{
+class Line : public Drawable {
   private:
     Vector2 a_;
     Vector2 b_;
@@ -33,14 +32,14 @@ class Line : public Drawable
      * @param b
      * @param color of the new Line
      */
-    Line(const Vector2& a, const Vector2& b, const HSLAPixel& color);
+    Line(const Vector2 &a, const Vector2 &b, const HSLAPixel &color);
 
     /**
      * @brief Draws the Line onto the canvas
      *
      * @param canvas
      */
-    void draw(PNG* canvas) const;
+    void draw(PNG *canvas) const;
 
     /**
      * @brief Gets starting point of the Line
@@ -54,7 +53,7 @@ class Line : public Drawable
      *
      * @param a the new starting point of the Line
      */
-    void set_a(const Vector2& a);
+    void set_a(const Vector2 &a);
 
     /**
      * @brief Gets the ending point of the Line
@@ -68,7 +67,7 @@ class Line : public Drawable
      *
      * @param b the new ending point of the Line
      */
-    void set_b(const Vector2& b);
+    void set_b(const Vector2 &b);
 
     /**
      * @brief Gets the color of the Line
@@ -82,10 +81,10 @@ class Line : public Drawable
      *
      * @param color the new color of the Line
      */
-    void set_color(const HSLAPixel& color);
+    void set_color(const HSLAPixel &color);
 
-    static std::vector<double> linearInterpolation(const Vector2& a,
-                                                   const Vector2& b);
+    static std::vector<double> linearInterpolation(const Vector2 &a,
+                                                   const Vector2 &b);
 };
 
-#endif // LINE_H_
+#endif  // LINE_H_

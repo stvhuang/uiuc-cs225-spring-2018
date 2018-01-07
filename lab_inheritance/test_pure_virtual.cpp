@@ -12,8 +12,7 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     PNG canvas;
     canvas.resize(128, 128);
 
@@ -23,7 +22,7 @@ int main()
      * Could it be missing something that would prevent it from being
      * constructed?
      */
-    Drawable* truck = new Truck(truck_center);
+    Drawable *truck = new Truck(truck_center);
 
     truck->draw(&canvas);
 

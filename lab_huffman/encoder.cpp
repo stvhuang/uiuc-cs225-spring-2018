@@ -6,13 +6,13 @@
  * @date Summer 2012
  */
 
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <vector>
-#include <unordered_map>
-#include <cstdlib>
 #include <sys/stat.h>
+#include <unordered_map>
+#include <vector>
 
 #include "binary_file_writer.h"
 #include "encoder.h"
@@ -20,8 +20,7 @@
 
 using namespace std;
 
-int encoder::main(const vector<string>& args)
-{
+int encoder::main(const vector<string> &args) {
     if (args.size() < 4) {
         printUsage(args[0]);
         return -1;
@@ -30,8 +29,7 @@ int encoder::main(const vector<string>& args)
     return 0;
 }
 
-void encoder::printUsage(const string& programName)
-{
+void encoder::printUsage(const string &programName) {
     cout << "Usage: " << endl;
     cout << "\t" << programName << " input output treefile" << endl;
     cout << "\t\tinput: file to be encoded" << endl;
@@ -39,9 +37,8 @@ void encoder::printUsage(const string& programName)
     cout << "\t\ttreefile: compressed huffman tree for decoding" << endl;
 }
 
-void encoder::encodeFile(const string& inputName, const string& outputName,
-                         const string& treeName)
-{
+void encoder::encodeFile(const string &inputName, const string &outputName,
+                         const string &treeName) {
     struct stat buf;
     if (0 != stat(inputName.c_str(), &buf)) {
         cerr << "error: input file \"" << inputName << "\" does not exist."
@@ -64,8 +61,7 @@ void encoder::encodeFile(const string& inputName, const string& outputName,
     tree.writeTree(treeFile);
 }
 
-vector<Frequency> encoder::getFrequencies(const string& str)
-{
+vector<Frequency> encoder::getFrequencies(const string &str) {
     unordered_map<char, int> freqs;
     for (auto it = str.begin(); it != str.end(); ++it)
         freqs[*it]++;

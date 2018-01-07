@@ -6,9 +6,9 @@
  * @date Summer 2012
  */
 
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
-#include <cstdlib>
 #include <sys/stat.h>
 
 #include "binary_file_reader.h"
@@ -17,8 +17,7 @@
 
 using namespace std;
 
-int decoder::main(const vector<string>& args)
-{
+int decoder::main(const vector<string> &args) {
     if (args.size() < 4) {
         printUsage(args[0]);
         return -1;
@@ -27,8 +26,7 @@ int decoder::main(const vector<string>& args)
     return 0;
 }
 
-void decoder::printUsage(const string& programName)
-{
+void decoder::printUsage(const string &programName) {
     cout << "Usage: " << endl;
     cout << "\t" << programName << " input treefile output" << endl;
     cout << "\t\tinput: file to be decoded" << endl;
@@ -36,9 +34,8 @@ void decoder::printUsage(const string& programName)
     cout << "\t\toutput: decompressed file" << endl;
 }
 
-void decoder::decodeFile(const string& inputName, const string& treeName,
-                         const string& outputName)
-{
+void decoder::decodeFile(const string &inputName, const string &treeName,
+                         const string &outputName) {
     struct stat buf;
     if (0 != stat(inputName.c_str(), &buf)) {
         cerr << "error: input file \"" << inputName << "\" does not exist."

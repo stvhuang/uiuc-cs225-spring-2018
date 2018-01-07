@@ -6,26 +6,25 @@
  * @date March 2009
  */
 
-#include <algorithm>
-#include <iostream>
+#include "TreeTraversals/InorderTraversal.h"
+#include "TreeTraversals/PreorderTraversal.h"
 #include "binarytree.h"
 #include "coloredout.h"
 #include "random.h"
-#include "TreeTraversals/PreorderTraversal.h"
-#include "TreeTraversals/InorderTraversal.h"
+#include <algorithm>
+#include <iostream>
 
 using namespace std;
 using namespace util;
 
 template <typename T>
-void printTreeInfo(const BinaryTree<T>& tree, const string& name,
-                   const string& description);
+void printTreeInfo(const BinaryTree<T> &tree, const string &name,
+                   const string &description);
 
-int main(int argc, char** argv)
-{
+int main(int argc, char **argv) {
     // Color the output
-    bool is_colored
-        = (argc > 1 && tolower(argv[1][0]) == 'c') && isatty(STDOUT_FILENO);
+    bool is_colored =
+        (argc > 1 && tolower(argv[1][0]) == 'c') && isatty(STDOUT_FILENO);
     colored_out coloroutput;
     if (is_colored) {
         coloroutput.set_expected_file("soln_treefun.out");
@@ -89,12 +88,10 @@ int main(int argc, char** argv)
     printTreeInfo(myBST, "Almost BST",
                   "a tree that has one element out of place");
 
-	
     return 0;
 }
 
-void output_header(string name, string desc)
-{
+void output_header(string name, string desc) {
     const string bar(79, '~');
     cout << bar << endl;
     colored_out::output_bold(name);
@@ -103,43 +100,43 @@ void output_header(string name, string desc)
 }
 
 template <typename T>
-void printTreeInfo(const BinaryTree<T>& tree, const string& name,
-                   const string& description)
-{
-      output_header(name, description);
+void printTreeInfo(const BinaryTree<T> &tree, const string &name,
+                   const string &description) {
+    output_header(name, description);
     cout << "height: " << tree.height() << endl;
-    cout << "ordered iteratively: " << boolalpha << tree.isOrderedIterative() << endl;
-    cout << "ordered recursively: " << boolalpha << tree.isOrderedRecursive() << endl;
+    cout << "ordered iteratively: " << boolalpha << tree.isOrderedIterative()
+         << endl;
+    cout << "ordered recursively: " << boolalpha << tree.isOrderedRecursive()
+         << endl;
     cout << "sumDistances: " << tree.sumDistances() << endl;
     tree.print();
     cout << endl;
     cout << "printLeftRight: ";
     tree.printLeftToRight();
-    vector<vector<T> > v;
+    vector<vector<T>> v;
     tree.printPaths(v);
-    for(size_t i=0; i<v.size(); i++){
-      cout<<"path: ";
-      for(size_t j=0; j<v[i].size(); j++){
-        cout<<v[i][j]<<" ";
-      }
-      cout<<endl;
+    for (size_t i = 0; i < v.size(); i++) {
+        cout << "path: ";
+        for (size_t j = 0; j < v[i].size(); j++) {
+            cout << v[i][j] << " ";
+        }
+        cout << endl;
     }
 
-	cout<<endl;
-	
-	cout << "preorder: ";
-	PreorderTraversal<int> pot(tree.getRoot());
-	for (TreeTraversal<int>::Iterator it = pot.begin(); it != pot.end(); ++it) {
-		cout<<(*it)->elem<<" ";
-	}
-	cout<<endl;
+    cout << endl;
 
-	cout << "inorder: ";
-	InorderTraversal<int> iot(tree.getRoot());
-	for (TreeTraversal<int>::Iterator it = iot.begin(); it != iot.end(); ++it) {
-		cout<<(*it)->elem<<" ";
-	}
+    cout << "preorder: ";
+    PreorderTraversal<int> pot(tree.getRoot());
+    for (TreeTraversal<int>::Iterator it = pot.begin(); it != pot.end(); ++it) {
+        cout << (*it)->elem << " ";
+    }
+    cout << endl;
 
+    cout << "inorder: ";
+    InorderTraversal<int> iot(tree.getRoot());
+    for (TreeTraversal<int>::Iterator it = iot.begin(); it != iot.end(); ++it) {
+        cout << (*it)->elem << " ";
+    }
 
-    cout << endl<< endl;
+    cout << endl << endl;
 }

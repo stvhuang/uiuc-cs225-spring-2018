@@ -14,8 +14,8 @@
 #ifndef _SOURCEIMAGE_H
 #define _SOURCEIMAGE_H
 
-#include <stdint.h>
 #include "cs225/PNG.h"
+#include <stdint.h>
 
 using namespace std;
 using namespace cs225;
@@ -38,7 +38,7 @@ class SourceImage {
      *  If the given resolution is greater than the largest dimension of the
      *  image, it will be automatically set to the pixel dimensions
      */
-    SourceImage(const PNG& image, int resolution);
+    SourceImage(const PNG &image, int resolution);
 
     /**
      * Get the average color of a particular region.  Note, the

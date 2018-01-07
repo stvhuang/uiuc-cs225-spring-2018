@@ -7,20 +7,19 @@
  */
 
 #include "anagram_dict.h"
-#include <iostream>
 #include <cstring>
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
-const string USAGE =
-"USAGE: anagram_finder -w [WORD_LIST] -o [FILE]\n"
-"Finds anagrams using a given word list file (where each word is newline-separated).\n"
-"\n"
-"  -a       Finds all anagrams in the word list.";
+const string USAGE = "USAGE: anagram_finder -w [WORD_LIST] -o [FILE]\n"
+                     "Finds anagrams using a given word list file (where each "
+                     "word is newline-separated).\n"
+                     "\n"
+                     "  -a       Finds all anagrams in the word list.";
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     string word_list_filename = "data/words.txt";
     vector<string> args;
     bool find_all = false;
@@ -54,17 +53,17 @@ int main(int argc, char* argv[])
             cout.rdbuf(out.rdbuf());
         }
         if (!find_all) {
-            for (string& arg : args) {
+            for (string &arg : args) {
                 cout << "Anagrams for " << arg << ":" << endl;
                 vector<string> anagrams = dict.get_anagrams(arg);
-                for (string& anagram : anagrams) {
+                for (string &anagram : anagrams) {
                     cout << anagram << endl;
                 }
             }
         } else {
             vector<vector<string>> anagram_groups = dict.get_all_anagrams();
-            for (vector<string>& anagram_group : anagram_groups) {
-                for (string& anagram : anagram_group) {
+            for (vector<string> &anagram_group : anagram_groups) {
+                for (string &anagram : anagram_group) {
                     cout << anagram << endl;
                 }
                 cout << endl;

@@ -10,11 +10,11 @@
 #ifndef _LOGFILE_PARSE_H_
 #define _LOGFILE_PARSE_H_
 
-#include <string>
-#include <vector>
 #include <fstream>
 #include <sstream>
+#include <string>
 #include <time.h>
+#include <vector>
 
 #include "lphashtable.h"
 #include "schashtable.h"
@@ -27,15 +27,14 @@
  * @date Spring 2011
  * @date Summer 2012
  */
-class LogfileParser
-{
+class LogfileParser {
   public:
     /**
      * Constructs a new LogfileParser from the name of a log file.
      *
      * @param fname The name of the log file to open.
      */
-    LogfileParser(const std::string& fname);
+    LogfileParser(const std::string &fname);
 
     /**
      * Determines if a given customer has ever visited the given url.
@@ -45,7 +44,7 @@ class LogfileParser
      * @return A boolean value indicating whether the customer visited
      *  the url.
      */
-    bool hasVisited(const std::string& customer, const std::string& url) const;
+    bool hasVisited(const std::string &customer, const std::string &url) const;
 
     /**
      * Determines *when* a customer last visited a given url. If the
@@ -57,8 +56,8 @@ class LogfileParser
      * @return A time_t representing when the customer last visited the
      *  given url.
      */
-    time_t dateVisited(const std::string& customer,
-                       const std::string& url) const;
+    time_t dateVisited(const std::string &customer,
+                       const std::string &url) const;
 
     /**
      * Gets all of the unique urls that have been visited.
@@ -77,8 +76,7 @@ class LogfileParser
      * @date Spring 2011
      * @date Summer 2012
      */
-    class LogLine
-    {
+    class LogLine {
       public:
         /**
          * Constructs a LogLine from a string (actual physical line
@@ -86,7 +84,7 @@ class LogfileParser
          *
          * @param line The line in the file to extract info from.
          */
-        LogLine(const std::string& line);
+        LogLine(const std::string &line);
 
         std::string customer; /**< The customer for this line, */
         std::string url;      /**< The url for this line. */

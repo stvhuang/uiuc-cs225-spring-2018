@@ -8,26 +8,25 @@
  */
 #include "word_counter.h"
 
-#include <string>
-#include <vector>
+#include <algorithm>
 #include <iostream>
 #include <sstream>
-#include <algorithm>
+#include <string>
+#include <vector>
 
 using std::cout;
 using std::endl;
-using std::string;
 using std::istringstream;
-using std::vector;
 using std::sort;
+using std::string;
+using std::vector;
 
 template <template <class K, class V> class Dict>
-void countWords(const string& file, int frequency)
-{
+void countWords(const string &file, int frequency) {
     WordFreq<Dict> wf(file);
     vector<pair<string, int>> ret = wf.getWords(frequency);
     sort(ret.begin(), ret.end(),
-         [](const pair<string, int>& a, const pair<string, int>& b) -> bool {
+         [](const pair<string, int> &a, const pair<string, int> &b) -> bool {
              return (a.second == b.second) ? (a.first < b.first)
                                            : (a.second > b.second);
          });
@@ -35,8 +34,7 @@ void countWords(const string& file, int frequency)
         cout << ret[i].second << "\t" << ret[i].first << endl;
 }
 
-void printUsage(const string& progname)
-{
+void printUsage(const string &progname) {
     cout << progname << " filename frequency tabletype" << endl;
     cout << "\tfilename: path to the file to count characters in" << endl;
     cout << "\tfrequency: threshold at which a character's frequency must "
@@ -47,8 +45,7 @@ void printUsage(const string& progname)
         << endl;
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char **argv) {
     vector<string> args(argv, argv + argc);
     if (argc < 4) {
         printUsage(args[0]);

@@ -11,13 +11,13 @@
 #ifndef _ANAGRAM_FINDER_H_
 #define _ANAGRAM_FINDER_H_
 
+#include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
-#include <iostream>
-#include <fstream>
 
-#include "schashtable.h"
 #include "lphashtable.h"
+#include "schashtable.h"
 #include "textfile.h"
 
 /**
@@ -29,8 +29,7 @@
  * @date Summer 2012
  */
 template <template <class K, class V> class Dict>
-class AnagramFinder
-{
+class AnagramFinder {
   public:
     /**
      * Constructs an AnagramFinder based on a filename to read
@@ -38,7 +37,7 @@ class AnagramFinder
      *
      * @param ifilename The name of the file to read in.
      */
-    AnagramFinder(const std::string& ifilename);
+    AnagramFinder(const std::string &ifilename);
 
     /**
      * Constructs an AnagramFinder based on a set of strings instead of
@@ -46,7 +45,7 @@ class AnagramFinder
      *
      * @param istrings The set of strings to use for this finder.
      */
-    AnagramFinder(const std::vector<std::string>& istrings);
+    AnagramFinder(const std::vector<std::string> &istrings);
 
     /**
      * Retrieves a set of words that are anagrams of a given word.
@@ -54,7 +53,7 @@ class AnagramFinder
      * @param word The word we wish to find anagrams of inside the
      *    finder.
      */
-    std::vector<std::string> getAnagrams(const std::string& word);
+    std::vector<std::string> getAnagrams(const std::string &word);
 
     /**
      * Retrieves a set of anagrams in the finder of a given words, but
@@ -64,7 +63,7 @@ class AnagramFinder
      *    finder.
      * @param output_file The name of the file we want to write to.
      */
-    void writeAnagrams(const std::string& word, const std::string& output_file);
+    void writeAnagrams(const std::string &word, const std::string &output_file);
 
   private:
     // indicates where to read data from
@@ -86,7 +85,7 @@ class AnagramFinder
      * @return A boolean value indicating whether word is an anagram of
      *    test.
      */
-    bool checkWord(const std::string& word, const std::string& test);
+    bool checkWord(const std::string &word, const std::string &test);
 };
 #include "anagram_finder.cpp"
 #endif

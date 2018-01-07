@@ -16,8 +16,7 @@
  * frequency. Used by the HuffmanTree as the data element of the TreeNodes.
  * If a node is an internal node, the character is the null character ('\0').
  */
-class Frequency
-{
+class Frequency {
   public:
     /**
      * Constructs a new Frequency object from a given character and its
@@ -61,7 +60,7 @@ class Frequency
      * @return Whether the current frequency is less than the given
      *	frequency (other).
      */
-    bool operator<(const Frequency& other) const;
+    bool operator<(const Frequency &other) const;
 
   private:
     char character_;

@@ -7,9 +7,9 @@
  * @date Summer 2012
  */
 
-using std::vector;
-using std::string;
 using std::pair;
+using std::string;
+using std::vector;
 
 /**
  * Constructs a CharFreq object based on the name of a file.
@@ -17,9 +17,7 @@ using std::pair;
  * @param ifilename Input file to read characters from.
  */
 template <template <class K, class V> class Dict>
-CharFreq<Dict>::CharFreq(const string& ifilename)
-    : filename(ifilename)
-{
+CharFreq<Dict>::CharFreq(const string &ifilename) : filename(ifilename) {
     /* nothing */
 }
 
@@ -34,8 +32,7 @@ CharFreq<Dict>::CharFreq(const string& ifilename)
  * @return A vector of pairs of characters and frequencies.
  */
 template <template <class K, class V> class Dict>
-vector<pair<char, int>> CharFreq<Dict>::getChars(int threshold)
-{
+vector<pair<char, int>> CharFreq<Dict>::getChars(int threshold) {
     TextFile infile(filename);
     Dict<char, int> hashTable(256);
     while (infile.good()) {

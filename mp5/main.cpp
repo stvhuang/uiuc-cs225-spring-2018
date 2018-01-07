@@ -12,18 +12,16 @@ using namespace std;
 using namespace util;
 using namespace cs225;
 
-void makePhotoMosaic(const string& inFile, const string& tileDir, int numTiles,
-                     int pixelsPerTile, const string& outFile);
+void makePhotoMosaic(const string &inFile, const string &tileDir, int numTiles,
+                     int pixelsPerTile, const string &outFile);
 vector<TileImage> getTiles(string tileDir);
-bool hasImageExtension(const string& fileName);
+bool hasImageExtension(const string &fileName);
 
-namespace opts
-{
-    bool help = false;
+namespace opts {
+bool help = false;
 }
 
-int main(int argc, const char** argv)
-{
+int main(int argc, const char **argv) {
     string inFile = "";
     string tileDir = "/class/cs225/mp6_pngs/";
     string numTilesStr = "100";
@@ -62,9 +60,8 @@ int main(int argc, const char** argv)
     return 0;
 }
 
-void makePhotoMosaic(const string& inFile, const string& tileDir, int numTiles,
-                     int pixelsPerTile, const string& outFile)
-{
+void makePhotoMosaic(const string &inFile, const string &tileDir, int numTiles,
+                     int pixelsPerTile, const string &outFile) {
     PNG inImage;
     inImage.readFromFile(inFile);
     SourceImage source(inImage, numTiles);
@@ -76,7 +73,7 @@ void makePhotoMosaic(const string& inFile, const string& tileDir, int numTiles,
     }
 
     MosaicCanvas::enableOutput = true;
-    MosaicCanvas* mosaic = mapTiles(source, tiles);
+    MosaicCanvas *mosaic = mapTiles(source, tiles);
     cerr << endl;
 
     if (mosaic == NULL) {
@@ -91,8 +88,7 @@ void makePhotoMosaic(const string& inFile, const string& tileDir, int numTiles,
     delete mosaic;
 }
 
-vector<TileImage> getTiles(string tileDir)
-{
+vector<TileImage> getTiles(string tileDir) {
 #if 1
     if (tileDir[tileDir.length() - 1] != '/')
         tileDir += '/';
@@ -109,9 +105,8 @@ vector<TileImage> getTiles(string tileDir)
     vector<TileImage> images;
     set<HSLAPixel> avgColors;
     for (size_t i = 0; i < imageFiles.size(); i++) {
-        cerr << "\rLoading Tile Images... ("
-             << (i + 1) << "/" << imageFiles.size()
-             << ")" << string(20, ' ') << "\r";
+        cerr << "\rLoading Tile Images... (" << (i + 1) << "/"
+             << imageFiles.size() << ")" << string(20, ' ') << "\r";
         cerr.flush();
         PNG png;
         png.readFromFile(imageFiles.at(i));
@@ -121,9 +116,8 @@ vector<TileImage> getTiles(string tileDir)
             images.push_back(next);
         }
     }
-    cerr << "\rLoading Tile Images... ("
-         << imageFiles.size() << "/" << imageFiles.size()
-         << ")";
+    cerr << "\rLoading Tile Images... (" << imageFiles.size() << "/"
+         << imageFiles.size() << ")";
     cerr << "... " << images.size() << " unique images loaded" << endl;
     cerr.flush();
 
@@ -131,29 +125,41 @@ vector<TileImage> getTiles(string tileDir)
 #else
     PNG temp;
     vector<TileImage> tiles;
-    *temp(0, 0) = RGBAPixel(0,   0,   0);   tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(0,   0,   127); tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(0,   0,   255); tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(0,   127, 0);   tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(0,   255, 0);   tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(127, 0,   0);   tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(255, 0,   0);   tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(0,   127, 127); tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(0,   255, 255); tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(127, 0,   127); tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(255, 0,   255); tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(127, 127, 0);   tiles.push_back(TileImage(temp));
-    *temp(0, 0) = RGBAPixel(255, 255, 0);   tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(0, 0, 0);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(0, 0, 127);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(0, 0, 255);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(0, 127, 0);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(0, 255, 0);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(127, 0, 0);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(255, 0, 0);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(0, 127, 127);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(0, 255, 255);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(127, 0, 127);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(255, 0, 255);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(127, 127, 0);
+    tiles.push_back(TileImage(temp));
+    *temp(0, 0) = RGBAPixel(255, 255, 0);
+    tiles.push_back(TileImage(temp));
     return tiles;
 #endif
 }
 
-bool hasImageExtension(const string& fileName)
-{
+bool hasImageExtension(const string &fileName) {
     size_t dotpos = fileName.find_last_of(".");
     if (dotpos == string::npos)
         return false;
     string ext = toLower(fileName.substr(dotpos + 1));
-    return (ext == "bmp" || ext == "png" || ext == "jpg" || ext == "gif"
-            || ext == "tiff");
+    return (ext == "bmp" || ext == "png" || ext == "jpg" || ext == "gif" ||
+            ext == "tiff");
 }

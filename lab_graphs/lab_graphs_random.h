@@ -19,8 +19,7 @@ using std::vector;
  * Provides random functionality per a given seed.
  * This is useful when you want predictably random things, like for grading.
  */
-class Random
-{
+class Random {
   public:
     /**
      * Constructor.
@@ -38,7 +37,7 @@ class Random
      * @param array - the vector to shuffle
      */
     template <class T>
-    void shuffle(vector<T>& array);
+    void shuffle(vector<T> &array);
 
   private:
     unsigned long shiftRegister;

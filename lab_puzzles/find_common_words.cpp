@@ -1,13 +1,12 @@
 #include "common_words.h"
 
-#include <iostream>
-#include <fstream>
 #include <cstring>
+#include <fstream>
+#include <iostream>
 #include <stdexcept>
 using namespace std;
 
-bool file_exists(const string& name)
-{
+bool file_exists(const string &name) {
     ifstream f(name.c_str());
     if (f.good()) {
         f.close();
@@ -19,11 +18,10 @@ bool file_exists(const string& name)
 }
 
 const string USAGE =
-"USAGE: find_common_words [TEXT FILE ..] -n [NUM] -o [FILE]\n"
-"Finds all words who appear >= n times in ALL the parameter text files.";
+    "USAGE: find_common_words [TEXT FILE ..] -n [NUM] -o [FILE]\n"
+    "Finds all words who appear >= n times in ALL the parameter text files.";
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     vector<string> in_files;
     string out_filename = "";
     unsigned int n = 0;
@@ -39,10 +37,10 @@ int main(int argc, char* argv[])
                 /* stoi() will except for non-numeric values. */
                 try {
                     n = stoi(argv[i]);
-                } catch (invalid_argument& e) {
+                } catch (invalid_argument &e) {
                     cerr << USAGE << endl;
                     return -1;
-                } catch (out_of_range& e) {
+                } catch (out_of_range &e) {
                     cerr << "Number too large to take as input." << endl;
                     return -1;
                 }
@@ -60,7 +58,7 @@ int main(int argc, char* argv[])
     if (out.good()) {
         cout.rdbuf(out.rdbuf());
     }
-    for (string& str : words) {
+    for (string &str : words) {
         cout << str << endl;
     }
     if (in_files.empty()) {

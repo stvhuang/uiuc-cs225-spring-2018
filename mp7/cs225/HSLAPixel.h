@@ -11,7 +11,7 @@
 #include <sstream>
 
 namespace cs225 {
-  class HSLAPixel {
+class HSLAPixel {
   public:
     double h; /**< Double for the hue of the pixel, in degrees [0, 360]. */
     double s; /**< Double for the saturation of the pixel, [0, 1]. */
@@ -44,25 +44,22 @@ namespace cs225 {
      * @param luminance Luminance value for the new pixel, [0, 1].
      * @param alpha Alpha value for the new pixel, [0, 1].
      */
-     HSLAPixel(double hue, double saturation, double luminance, double alpha);
+    HSLAPixel(double hue, double saturation, double luminance, double alpha);
 
+    bool operator==(HSLAPixel const &other) const;
+    bool operator!=(HSLAPixel const &other) const;
+    bool operator<(HSLAPixel const &other) const;
+};
 
-
-
-    bool operator== (HSLAPixel const & other) const ;
-    bool operator!= (HSLAPixel const & other) const ;
-    bool operator<  (HSLAPixel const & other) const ;
-  };
-
-  /**
-   * Stream operator that allows pixels to be written to standard streams
-   * (like cout).
-   *
-   * @param out Stream to write to.
-   * @param pixel Pixel to write to the stream.
-   */
-  std::ostream & operator<<(std::ostream & out, HSLAPixel const & pixel);
-  std::stringstream & operator<<(std::stringstream & out, HSLAPixel const & pixel);
-}
+/**
+ * Stream operator that allows pixels to be written to standard streams
+ * (like cout).
+ *
+ * @param out Stream to write to.
+ * @param pixel Pixel to write to the stream.
+ */
+std::ostream &operator<<(std::ostream &out, HSLAPixel const &pixel);
+std::stringstream &operator<<(std::stringstream &out, HSLAPixel const &pixel);
+}  // namespace cs225
 
 #endif

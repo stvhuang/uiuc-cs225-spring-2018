@@ -12,8 +12,7 @@
 /**
  * @brief Vector2 is a class that represents a 2 dimensional vector
  */
-class Vector2
-{
+class Vector2 {
   private:
     double x_;
     double y_;
@@ -39,7 +38,7 @@ class Vector2
      *
      * @return a new Vector2 that equals *this - other
      */
-    Vector2 operator-(const Vector2& other) const;
+    Vector2 operator-(const Vector2 &other) const;
 
     /**
      * @brief Adds two Vector2s together and returns the value
@@ -48,7 +47,7 @@ class Vector2
      *
      * @return a new Vector2 that equals *this + other
      */
-    Vector2 operator+(const Vector2& other) const;
+    Vector2 operator+(const Vector2 &other) const;
 
     /**
      * @brief Multiples the current Vector2 by a scalar and returns a new
@@ -77,7 +76,7 @@ class Vector2
      *
      * @return true if the current Vector2 equals the other Vector2
      */
-    bool operator==(const Vector2& other) const;
+    bool operator==(const Vector2 &other) const;
 
     /**
      * @brief Gets the x coordinate of the Vector2
@@ -115,7 +114,7 @@ class Vector2
      *
      * @return sqrt((this->x - other.x)^2 + (this-y - other.y)^2)
      */
-    double distanceTo(const Vector2& other) const;
+    double distanceTo(const Vector2 &other) const;
 
     /**
      * @brief Checks if the current Vector2 is north of the other Vector2
@@ -124,7 +123,7 @@ class Vector2
      *
      * @return true if the current Vector2 is north of the other Vector2
      */
-    bool isNorthOf(const Vector2& other) const;
+    bool isNorthOf(const Vector2 &other) const;
 
     /**
      * @brief Checks if the current Vector2 is north west of the other Vector2
@@ -133,7 +132,7 @@ class Vector2
      *
      * @return true if the current Vector2 is north west of the other Vector2
      */
-    bool isNorthWestOf(const Vector2& other) const;
+    bool isNorthWestOf(const Vector2 &other) const;
 
     /**
      * @brief Checks if the current Vector2 is north east of the other Vector2
@@ -142,7 +141,7 @@ class Vector2
      *
      * @return true if the current Vector2 is north east of the other Vector2
      */
-    bool isNorthEastOf(const Vector2& other) const;
+    bool isNorthEastOf(const Vector2 &other) const;
 
     /**
      * @brief Checks if the current Vector2 is south of the other Vector2
@@ -151,7 +150,7 @@ class Vector2
      *
      * @return true if the current Vector2 is south of the other Vector2
      */
-    bool isSouthOf(const Vector2& other) const;
+    bool isSouthOf(const Vector2 &other) const;
 
     /**
      * @brief Checks if the current Vector2 is south west of the other Vector2
@@ -160,7 +159,7 @@ class Vector2
      *
      * @return true if the current Vector2 is south west of the other Vector2
      */
-    bool isSouthWestOf(const Vector2& other) const;
+    bool isSouthWestOf(const Vector2 &other) const;
 
     /**
      * @brief Checks if the current Vector2 is south east of the other Vector2
@@ -169,7 +168,7 @@ class Vector2
      *
      * @return true if the current Vector2 is south east of the other Vector2
      */
-    bool isSouthEastOf(const Vector2& other) const;
+    bool isSouthEastOf(const Vector2 &other) const;
 
     /**
      * @brief Checks if the current Vector2 is west of the other Vector2
@@ -178,7 +177,7 @@ class Vector2
      *
      * @return true if the current Vector2 is west of the other Vector2
      */
-    bool isWestOf(const Vector2& other) const;
+    bool isWestOf(const Vector2 &other) const;
 
     /**
      * @brief Checks if the current Vector2 is east of the other Vector2
@@ -187,7 +186,7 @@ class Vector2
      *
      * @return true if the current Vector2 is east of the other Vector2
      */
-    bool isEastOf(const Vector2& other) const;
+    bool isEastOf(const Vector2 &other) const;
 
     /**
      * @brief Computes and returns the dot product of the current Vector2 and
@@ -197,7 +196,7 @@ class Vector2
      *
      * @return the dot product of the current Vector2 and the other Vector2
      */
-    double dotProduct(const Vector2& other) const;
+    double dotProduct(const Vector2 &other) const;
 
     /**
      * @brief Computes and returns the cross product of the current Vector2 and
@@ -207,7 +206,7 @@ class Vector2
      *
      * @return the cross product of the current Vector2 and the other Vector2
      */
-    double crossProduct(const Vector2& other) const;
+    double crossProduct(const Vector2 &other) const;
 
     /**
      * @brief Computes and returns the projection of the current Vector2 onto b
@@ -217,7 +216,7 @@ class Vector2
      * @return the Vector2 representing the projection of the current Vector2
      * onto b
      */
-    Vector2 projectionOn(const Vector2& b) const;
+    Vector2 projectionOn(const Vector2 &b) const;
 
     /**
      * @brief Computes and returns the length of the Vector2 from the origin
@@ -263,4 +262,4 @@ class Vector2
     Vector2 rightHandNormal() const;
 };
 
-#endif // VECTOR2_H_
+#endif  // VECTOR2_H_

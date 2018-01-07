@@ -1,44 +1,44 @@
-#include "btree.h"
 #include "benchmark.h"
+#include "btree.h"
 
-#include <iostream>
-#include <map>
-#include <vector>
-#include <utility>
 #include <algorithm>
 #include <ctime>
-#include <stdexcept>
+#include <iostream>
+#include <map>
 #include <sstream>
+#include <stdexcept>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 void run_benchmark(unsigned int n, unsigned int step, unsigned int order,
                    bool inserts, bool finds, bool rand);
 
-bool stob(const string& s)
-{
+bool stob(const string &s) {
     string temp = s;
     transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
     return temp == "1" || temp == "TRUE";
 }
 
 const string USAGE =
-"USAGE: dict_racer ORDER N STEP RANDOM INSERTS FINDS\n"
-"Runs a race between a BTree< int, int > of order ORDER against an \n"
-"std::map< int, int > for N inserts / finds. Outputs CSVs into \"results\".\n"
-"ORDER specifies the order of the BTree\n"
-"N specifies the max number of insert / finds to do\n"
-"STEP specifies the intervals to split N into. E.g. N = 10, STEP = 2 will make\n"
-"points for 2 operations, 4 operations ... &c.\n"
-"RANDOM specifies whether the data should be random or sequential.\n"
-"INSERT specifies whether to benchmark the inserts.\n"
-"FINDS specifies whether to benchmark the finds.\n\n"
-"Results can be plotted with the simple python script generate_plot.py, e.g.\n"
-"./generate_plot.py results/*.csv\n";
+    "USAGE: dict_racer ORDER N STEP RANDOM INSERTS FINDS\n"
+    "Runs a race between a BTree< int, int > of order ORDER against an \n"
+    "std::map< int, int > for N inserts / finds. Outputs CSVs into "
+    "\"results\".\n"
+    "ORDER specifies the order of the BTree\n"
+    "N specifies the max number of insert / finds to do\n"
+    "STEP specifies the intervals to split N into. E.g. N = 10, STEP = 2 will "
+    "make\n"
+    "points for 2 operations, 4 operations ... &c.\n"
+    "RANDOM specifies whether the data should be random or sequential.\n"
+    "INSERT specifies whether to benchmark the inserts.\n"
+    "FINDS specifies whether to benchmark the finds.\n\n"
+    "Results can be plotted with the simple python script generate_plot.py, "
+    "e.g.\n"
+    "./generate_plot.py results/*.csv\n";
 
-
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     if (argc != 7) {
         cout << USAGE << endl;
         return -1;
@@ -55,10 +55,10 @@ int main(int argc, char* argv[])
             } else {
                 run_benchmark(n, step, order, inserts, finds, random);
             }
-        } catch (invalid_argument& e) {
+        } catch (invalid_argument &e) {
             cout << USAGE << endl;
             return -1;
-        } catch (out_of_range& e) {
+        } catch (out_of_range &e) {
             cout << "Number too large to take as input." << endl;
             return -1;
         }
@@ -68,8 +68,7 @@ int main(int argc, char* argv[])
 /* TODO Make this generic so that the awful code repetition doesn't have to
  * happen. */
 void run_benchmark(unsigned int n, unsigned int step, unsigned int order,
-                   bool inserts, bool finds, bool random)
-{
+                   bool inserts, bool finds, bool random) {
     if (!inserts && !finds)
         return;
 

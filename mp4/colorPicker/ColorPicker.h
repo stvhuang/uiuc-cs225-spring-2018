@@ -10,16 +10,16 @@ using namespace cs225;
  * All color picking classes inherit from this class
  */
 class ColorPicker {
-public:
-  /**
-   * Class destructor
-   */
-  virtual ~ColorPicker() { }
-  /**
-   * Select a color for the given point (x, y)
-   * All derived classes needs to implement this
-   */
-  virtual HSLAPixel getColor(unsigned x, unsigned y) = 0;
+  public:
+    /**
+     * Class destructor
+     */
+    virtual ~ColorPicker() {}
+    /**
+     * Select a color for the given point (x, y)
+     * All derived classes needs to implement this
+     */
+    virtual HSLAPixel getColor(unsigned x, unsigned y) = 0;
 };
 
 #endif

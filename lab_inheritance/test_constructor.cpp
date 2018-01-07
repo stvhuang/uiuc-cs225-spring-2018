@@ -8,17 +8,16 @@
 
 #include <iostream>
 
-#include "cs225/PNG.h"
-#include "color.h"
-#include "shape.h"
 #include "circle.h"
+#include "color.h"
+#include "cs225/PNG.h"
+#include "shape.h"
 #include "vector2.h"
 
 using namespace std;
 using namespace cs225;
 
-int main()
-{
+int main() {
     const int canvas_width = 128;
     const int canvas_height = 128;
 
@@ -28,7 +27,7 @@ int main()
     const HSLAPixel circle_color = color::ORANGE;
     const Vector2 circle_center(32, 32);
     const int circle_radius = 16;
-    Circle* circle = new Circle(circle_center, circle_color, circle_radius);
+    Circle *circle = new Circle(circle_center, circle_color, circle_radius);
 
     circle->draw(&canvas);
 

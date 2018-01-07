@@ -6,20 +6,19 @@
  * @date Winter 2013
  */
 
-#include <string>
-#include <cstring>
-#include <iostream>
-#include <iomanip>
-#include <fstream>
 #include <algorithm>
+#include <cstring>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <string>
 
-#include "pronounce_dict.h"
 #include "cartalk_puzzle.h"
+#include "pronounce_dict.h"
 
 using namespace std;
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     /* Default names. */
     string word_list_filename = "data/words.txt";
     string pronounce_dict_filename = "data/cmudict.0.7a";
@@ -41,15 +40,16 @@ int main(int argc, char* argv[])
 
     PronounceDict d(pronounce_dict_filename);
 
-    vector<std::tuple<std::string, std::string, std::string>> result1 = cartalk_puzzle(d, word_list_filename);
+    vector<std::tuple<std::string, std::string, std::string>> result1 =
+        cartalk_puzzle(d, word_list_filename);
 
     /* Here comes some awful string formatting. */
     size_t max_str_padding = 0;
-    for (std::tuple<std::string, std::string, std::string> & t : result1) {
+    for (std::tuple<std::string, std::string, std::string> &t : result1) {
         max_str_padding = max(max_str_padding, get<0>(t).size());
     }
     max_str_padding++;
-    for (std::tuple<std::string, std::string, std::string> & t : result1) {
+    for (std::tuple<std::string, std::string, std::string> &t : result1) {
         cout << left << setw(15) << "Original word: " << setw(max_str_padding)
              << get<0>(t) << setw(12) << "homophones: " << setw(max_str_padding)
              << get<1>(t) << setw(max_str_padding) << get<2>(t) << endl;

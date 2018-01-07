@@ -9,30 +9,27 @@
  *  - doxygen
  */
 
+#include "avltree.h"
+#include "coloredout.h"
 #include <iostream>
 #include <sstream>
 #include <string>
-#include "avltree.h"
-#include "coloredout.h"
 
 using namespace std;
 
-void printHeader(const string& headline)
-{
+void printHeader(const string &headline) {
     cout << string(64, colored_out::BORDER_CHAR) << endl;
     colored_out::output_bold(headline);
     cout << endl << string(64, colored_out::BORDER_CHAR) << endl;
 }
 
-void printBefore()
-{
+void printBefore() {
     cout << "~";
     colored_out::output_bold("Before");
     cout << "~" << endl;
 }
 
-void printAfter(int inserted)
-{
+void printAfter(int inserted) {
     cout << endl << "~";
     colored_out::output_bold("After insert(");
     colored_out::output_bold(inserted);
@@ -40,13 +37,9 @@ void printAfter(int inserted)
     cout << "~" << endl;
 }
 
-void printEnd()
-{
-    cout << endl << endl;
-}
+void printEnd() { cout << endl << endl; }
 
-void testFind()
-{
+void testFind() {
     AVLTree<string, string> tree;
     printHeader("Testing Find");
     tree.insert("C", "C++");
@@ -61,8 +54,7 @@ void testFind()
     printEnd();
 }
 
-void testRotateLeft()
-{
+void testRotateLeft() {
     AVLTree<int, int> tree;
     printHeader("Left Rotation");
     tree.insert(4, 4);
@@ -78,8 +70,7 @@ void testRotateLeft()
     printEnd();
 }
 
-void testRotateRight()
-{
+void testRotateRight() {
     AVLTree<int, int> tree;
     printHeader("Right Rotation");
     tree.insert(3, 3);
@@ -94,8 +85,7 @@ void testRotateRight()
     printEnd();
 }
 
-void testRotateRightLeft()
-{
+void testRotateRightLeft() {
     AVLTree<int, int> tree;
     printHeader("Right-Left Rotation");
     tree.insert(3, 3);
@@ -108,8 +98,7 @@ void testRotateRightLeft()
     printEnd();
 }
 
-void testRotateLeftRight()
-{
+void testRotateLeftRight() {
     AVLTree<int, int> tree;
     printHeader("Left-Right Rotation");
     tree.insert(5, 5);
@@ -125,8 +114,7 @@ void testRotateLeftRight()
     printEnd();
 }
 
-void testManyInsertions()
-{
+void testManyInsertions() {
     AVLTree<int, string> tree;
     printHeader("Testing Many Insertions");
     tree.insert(94, "data for 94");
@@ -146,21 +134,20 @@ void testManyInsertions()
     tree.insert(23, "data for 23");
     tree.insert(93, "data for 93");
     tree.insert(31, "data for 31");
-    tree.insert( 3, "data for 3");
+    tree.insert(3, "data for 3");
     tree.insert(45, "data for 45");
     tree.insert(18, "data for 18");
     tree.insert(73, "data for 73");
     tree.insert(24, "data for 24");
     tree.insert(74, "data for 74");
-    tree.insert( 1, "data for 1");
+    tree.insert(1, "data for 1");
     tree.insert(71, "data for 71");
     tree.insert(82, "data for 82");
     tree.print();
     printEnd();
 }
 
-void testManyRemovals()
-{
+void testManyRemovals() {
     AVLTree<int, string> tree;
     printHeader("Testing Many Removals");
     tree.insert(94, "data for 94");
@@ -180,17 +167,18 @@ void testManyRemovals()
     tree.insert(23, "data for 23");
     tree.insert(93, "data for 93");
     tree.insert(31, "data for 31");
-    tree.insert( 3, "data for 3");
+    tree.insert(3, "data for 3");
     tree.insert(45, "data for 45");
     tree.insert(18, "data for 18");
     tree.insert(73, "data for 73");
     tree.insert(24, "data for 24");
     tree.insert(74, "data for 74");
-    tree.insert( 1, "data for 1");
+    tree.insert(1, "data for 1");
     tree.insert(71, "data for 71");
     tree.insert(82, "data for 82");
     tree.remove(95);
-    tree.remove(94);;
+    tree.remove(94);
+    ;
     tree.remove(61);
     tree.remove(76);
     tree.remove(73);
@@ -199,11 +187,10 @@ void testManyRemovals()
     printEnd();
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char **argv) {
     // Set up Colored Output (if 'color' parameter passed)
-    bool is_colored
-        = (argc > 1 && tolower(argv[1][0]) == 'c') && isatty(STDOUT_FILENO);
+    bool is_colored =
+        (argc > 1 && tolower(argv[1][0]) == 'c') && isatty(STDOUT_FILENO);
     colored_out coloroutput;
     if (is_colored) {
         coloroutput.set_expected_file("soln_testavl.out");

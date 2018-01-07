@@ -3,25 +3,25 @@
  *      By: Jordi Paris Ferrer
  *
  * Modified:
- *      By: 
+ *      By:
  */
 #define CATCH_CONFIG_RUNNER
 #include "catch.hpp"
 
 #include <unistd.h>
 
-#include "../cs225/PNG.h"
 #include "../cs225/HSLAPixel.h"
+#include "../cs225/PNG.h"
 
-#include "../drawable.h"
-#include "../color.h"
-#include "../vector2.h"
-#include "../shape.h"
 #include "../circle.h"
-#include "../triangle.h"
-#include "../rectangle.h"
-#include "../truck.h"
+#include "../color.h"
+#include "../drawable.h"
 #include "../flower.h"
+#include "../rectangle.h"
+#include "../shape.h"
+#include "../triangle.h"
+#include "../truck.h"
+#include "../vector2.h"
 
 // include at bottom to avoid copying includes
 #include "catchlib.h"
@@ -35,13 +35,11 @@ int maxLevel = 50;
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
-TEST_CASE("test_virtual_perim", "[weight=10]")
-{
-    Vector2 rectangle_center(4,5);
-    Rectangle * rectangle = new Rectangle(rectangle_center, color::BLUE,
-            32, 32);
+TEST_CASE("test_virtual_perim", "[weight=10]") {
+    Vector2 rectangle_center(4, 5);
+    Rectangle *rectangle = new Rectangle(rectangle_center, color::BLUE, 32, 32);
 
-    Shape * shape = rectangle;
+    Shape *shape = rectangle;
 
     int rect_perim = rectangle->perimeter();
     int shape_perim = shape->perimeter();
@@ -51,13 +49,12 @@ TEST_CASE("test_virtual_perim", "[weight=10]")
     REQUIRE(rect_perim == shape_perim);
 }
 
-TEST_CASE("test_virtual_area", "[weight=10]")
-{
-    Vector2 rectangle_center(4,5);
-    Rectangle * rectangle = new Rectangle(rectangle_center, color::GREEN,
-            47, 47);
+TEST_CASE("test_virtual_area", "[weight=10]") {
+    Vector2 rectangle_center(4, 5);
+    Rectangle *rectangle =
+        new Rectangle(rectangle_center, color::GREEN, 47, 47);
 
-    Shape * shape = rectangle;
+    Shape *shape = rectangle;
 
     int rect_area = rectangle->area();
     int shape_area = shape->area();
@@ -78,9 +75,8 @@ VALGRIND_TEST(test_destructor, 20, 20, 10000)
 }
 */
 
-TEST_CASE("test_constructor", "[weight=20]")
-{
-    Circle circle(Vector2(26,26), color::ORANGE, 3);
+TEST_CASE("test_constructor", "[weight=20]") {
+    Circle circle(Vector2(26, 26), color::ORANGE, 3);
 
     REQUIRE(circle.color().h == color::ORANGE.h);
 
@@ -99,42 +95,39 @@ VALGRIND_TEST(test_drawable_destructor, 10, 10, 10000)
 }
 */
 
-TEST_CASE("test_truck_draw", "[weight=10]")
-{
+TEST_CASE("test_truck_draw", "[weight=10]") {
     PNG canvas;
     canvas.resize(128, 128);
 
     PNG soln;
 
-    Drawable * truck = new Truck(Vector2(64, 64));
+    Drawable *truck = new Truck(Vector2(64, 64));
     truck->draw(&canvas);
 
     soln.readFromFile("soln_truck.png");
 
     delete truck;
 
-    //REQUIRE(canvas == soln);
+    // REQUIRE(canvas == soln);
     compare_and_report(canvas, soln);
 }
 
-TEST_CASE("test_slicing", "[weight=20]")
-{
+TEST_CASE("test_slicing", "[weight=20]") {
     PNG canvas;
-    canvas.resize(128,128);
+    canvas.resize(128, 128);
 
     PNG soln;
     PNG soln_old;
     soln.readFromFile("soln_flower.png");
-    //soln_old.readFromFile("soln_flower_old.png");
+    // soln_old.readFromFile("soln_flower_old.png");
 
-    Drawable * flower = new Flower(Vector2(64,64));
+    Drawable *flower = new Flower(Vector2(64, 64));
 
     flower->draw(&canvas);
 
     delete flower;
 
     compare_and_report(canvas, soln);
-
 }
 
 /*
@@ -143,7 +136,7 @@ VALGRIND_TEST(test_flower_destructor, 10, 10, 10000)
     Drawable * flower = new Flower(Vector2(64,64));
     delete flower;
 
-    PASS; 
+    PASS;
 }
 */
 
@@ -152,12 +145,10 @@ VALGRIND_TEST(test_flower_destructor, 10, 10, 10000)
 ///////////////////////// End of Tests /////////////////////////
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     srand(time(NULL));
 
-    if (argc == 1)
-    {
+    if (argc == 1) {
         // put our beloved quotes
         print_quote("tests/quotes.txt");
     }

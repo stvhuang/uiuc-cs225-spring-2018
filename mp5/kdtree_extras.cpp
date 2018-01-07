@@ -4,28 +4,27 @@
  * Code here is only used for grading.
  */
 
-#include <unistd.h>
-#include <sstream>
-#include <iostream>
-#include <vector>
-#include <string>
+#include "kdtree.h"
+#include "point.h"
+#include "util/coloredout.h"
+#include "util/no_sort.h"
 #include <algorithm>
 #include <iomanip>
+#include <iostream>
+#include <sstream>
 #include <stdexcept>
-#include "util/no_sort.h"
-#include "util/coloredout.h"
-#include "point.h"
-#include "kdtree.h"
+#include <string>
+#include <unistd.h>
+#include <vector>
 
 using namespace std;
 
 const int32_t _KDTree_maxPrintLen = 150;
 
 template <int Dim>
-void KDTree<Dim>::printTree(ostream& out /*cout*/ ,
+void KDTree<Dim>::printTree(ostream &out /*cout*/,
                             colored_out::enable_t enable_bold /* = COUT */,
-                            int modWidth /* =  -1*/) const
-{
+                            int modWidth /* =  -1*/) const {
     // Base case
     if (root == NULL) {
         out << "(empty)" << endl;
@@ -49,17 +48,19 @@ void KDTree<Dim>::printTree(ostream& out /*cout*/ ,
     // Initialize this matrix to be filled with spaces
     vector<string> output(height);
     for (size_t i = 0; i < output.size(); i++)
-        output[i] = string(width + 6, ' '); // extra room for long things
+        output[i] = string(width + 6, ' ');  // extra room for long things
 
     // Recursively print each node
     printTree(root, output, 0, 0, width, 0);
-    //nodeOut << std::unsetf(
+    // nodeOut << std::unsetf(
     // Output the matrix
     int currd = 0;
     for (int row = 0; row < height;) {
         for (int d = 0; d < Dim + 1 && row < height; d++, row++) {
             if (d == currd)
-                colored_out::output_bold_digits(output[row], out, enable_bold);//TODO: check what this does
+                colored_out::output_bold_digits(
+                    output[row], out,
+                    enable_bold);  // TODO: check what this does
             else
                 out << output[row];
             out << endl;
@@ -70,22 +71,19 @@ void KDTree<Dim>::printTree(ostream& out /*cout*/ ,
 
 // Finds height of each node to determine the size of the output matrix
 template <int Dim>
-int KDTree<Dim>::getPrintData(KDTreeNode * subroot) const
-{
+int KDTree<Dim>::getPrintData(KDTreeNode *subroot) const {
     using std::max;
     if (subroot == NULL)
         return -1;
-    return 1 + max(getPrintData(subroot->left),
-                   getPrintData(subroot->right));
+    return 1 + max(getPrintData(subroot->left), getPrintData(subroot->right));
 }
 
 // Recursively prints tree to output matrix
 template <int Dim>
-void KDTree<Dim>::printTree(KDTreeNode * subroot, vector<string>& output,
-                            int left, int top, int width, int currd) const
-{
+void KDTree<Dim>::printTree(KDTreeNode *subroot, vector<string> &output,
+                            int left, int top, int width, int currd) const {
     // Convert data to string
-    //int med = (low + high) / 2;
+    // int med = (low + high) / 2;
 
     vector<string> nodeStr;
     nodeStr.reserve(Dim);
@@ -93,7 +91,7 @@ void KDTree<Dim>::printTree(KDTreeNode * subroot, vector<string>& output,
         std::ostringstream nodeOut;
         nodeOut << std::fixed << std::setprecision(0);
 
-        Point<Dim> p = subroot -> point;
+        Point<Dim> p = subroot->point;
         if (dim == 0)
             nodeOut << (p.isMine() ? '{' : '(');
         else
@@ -110,20 +108,19 @@ void KDTree<Dim>::printTree(KDTreeNode * subroot, vector<string>& output,
 
     // Output data
     for (int dim = 0; dim < Dim; dim++)
-        for (size_t i = 0;
-             i < nodeStr[dim].length()
-                 && (left + width / 2 + i < output[top + dim].length());
-             i++)//TODO
+        for (size_t i = 0; i < nodeStr[dim].length() &&
+                           (left + width / 2 + i < output[top + dim].length());
+             i++)  // TODO
             output[top + dim][left + width / 2 + i] = nodeStr[dim][i];
 
     // Calculate / \ offset = 2 ^ height
-    int branchOffset = (width + 3) >> 3; //(1 << (node->printData - 1));
+    int branchOffset = (width + 3) >> 3;  //(1 << (node->printData - 1));
 
     // Print left child
     int center = left + width / 2;
     int leftcenter = left + (width / 2 - 1) / 2;
     int rightcenter = left + width / 2 + 2 + (width / 2 - 1) / 2;
-    if (subroot->left != NULL) { //node->left  != NULL
+    if (subroot->left != NULL) {  // node->left  != NULL
         int branch_pos = center - branchOffset + 1;
         // draw left upper branch
         for (int pos = center - 1; pos > branch_pos; pos--)
@@ -138,10 +135,11 @@ void KDTree<Dim>::printTree(KDTreeNode * subroot, vector<string>& output,
                   (currd + 1) % Dim);
     }
     // Print right child
-    if (subroot->right) { //node->right != NULL
+    if (subroot->right) {  // node->right != NULL
         int branch_pos = center + branchOffset + 1;
         // draw right upper branch
-        for (int pos = center + nodeStr[Dim - 1].length(); pos < branch_pos; pos++)
+        for (int pos = center + nodeStr[Dim - 1].length(); pos < branch_pos;
+             pos++)
             output[top + Dim - 1][pos] = '_';
         // draw right '\'
         output[top + Dim][branch_pos] = '\\';

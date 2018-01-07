@@ -3,8 +3,7 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     Benchmark test("test");
     map<int, int> m;
 

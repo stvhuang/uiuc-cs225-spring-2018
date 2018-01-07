@@ -10,8 +10,7 @@
 
 #include "binary_file_reader.h"
 
-void print_usage(const std::string& name)
-{
+void print_usage(const std::string &name) {
     std::cout
         << "Usage: " << name << " filename"
         << "\n\tPrints filename (a binary file) to standard out as a sequence"
@@ -19,16 +18,14 @@ void print_usage(const std::string& name)
         << std::endl;
 }
 
-void print_as_ascii(const std::string& filename)
-{
+void print_as_ascii(const std::string &filename) {
     BinaryFileReader file(filename);
     while (file.hasBits())
         std::cout << file.getNextBit();
     std::cout << std::endl;
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char **argv) {
     std::vector<std::string> args(argv, argv + argc);
     if (args.size() < 2) {
         print_usage(args[0]);

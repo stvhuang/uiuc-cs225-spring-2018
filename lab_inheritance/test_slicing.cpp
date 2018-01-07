@@ -13,8 +13,7 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     const int canvas_width = 128;
     const int canvas_height = 128;
 
@@ -23,7 +22,7 @@ int main()
 
     const Vector2 flower_center(canvas_width / 2, canvas_height / 2);
 
-    Drawable* flower = new Flower(flower_center);
+    Drawable *flower = new Flower(flower_center);
 
     /* TODO: For some reason this flower is not drawing correctly?  The stem,
      * pistil, and leaf are all being drawn as big giant X's. */

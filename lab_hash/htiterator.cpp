@@ -8,29 +8,23 @@
 using std::pair;
 
 template <class K, class V>
-HashTable<K, V>::iterator::iterator()
-    : impl(NULL)
-{
+HashTable<K, V>::iterator::iterator() : impl(NULL) {
     /* nothing */
 }
 
 template <class K, class V>
-HashTable<K, V>::iterator::iterator(HTIteratorImpl* nimpl)
-    : impl(nimpl)
-{
+HashTable<K, V>::iterator::iterator(HTIteratorImpl *nimpl) : impl(nimpl) {
     /* nothing */
 }
 
 template <class K, class V>
-HashTable<K, V>::iterator::iterator(const iterator& other)
-{
+HashTable<K, V>::iterator::iterator(const iterator &other) {
     copy(other);
 }
 
 template <class K, class V>
-const typename HashTable<K, V>::iterator& HashTable<K, V>::iterator::
-operator=(const iterator& other)
-{
+const typename HashTable<K, V>::iterator &HashTable<K, V>::iterator::
+operator=(const iterator &other) {
     if (this != &other) {
         clear();
         if (other.impl == NULL)
@@ -42,14 +36,12 @@ operator=(const iterator& other)
 }
 
 template <class K, class V>
-HashTable<K, V>::iterator::~iterator()
-{
+HashTable<K, V>::iterator::~iterator() {
     clear();
 }
 
 template <class K, class V>
-void HashTable<K, V>::iterator::copy(const iterator& other)
-{
+void HashTable<K, V>::iterator::copy(const iterator &other) {
     if (other.impl == NULL)
         impl = NULL;
     else
@@ -57,30 +49,26 @@ void HashTable<K, V>::iterator::copy(const iterator& other)
 }
 
 template <class K, class V>
-void HashTable<K, V>::iterator::clear()
-{
+void HashTable<K, V>::iterator::clear() {
     delete impl;
     impl = NULL;
 }
 
 template <class K, class V>
-typename HashTable<K, V>::iterator& HashTable<K, V>::iterator::operator++()
-{
+typename HashTable<K, V>::iterator &HashTable<K, V>::iterator::operator++() {
     ++(*impl);
     return *this;
 }
 
 template <class K, class V>
-typename HashTable<K, V>::iterator HashTable<K, V>::iterator::operator++(int)
-{
+typename HashTable<K, V>::iterator HashTable<K, V>::iterator::operator++(int) {
     iterator tmp(*this);
     ++(*impl);
     return tmp;
 }
 
 template <class K, class V>
-bool HashTable<K, V>::iterator::operator==(const iterator& rhs) const
-{
+bool HashTable<K, V>::iterator::operator==(const iterator &rhs) const {
     if (impl == NULL)
         return rhs.impl == NULL;
     if (rhs.impl == NULL)
@@ -89,19 +77,16 @@ bool HashTable<K, V>::iterator::operator==(const iterator& rhs) const
 }
 
 template <class K, class V>
-bool HashTable<K, V>::iterator::operator!=(const iterator& rhs) const
-{
+bool HashTable<K, V>::iterator::operator!=(const iterator &rhs) const {
     return !(*this == rhs);
 }
 
 template <class K, class V>
-const pair<K, V>& HashTable<K, V>::iterator::operator*()
-{
+const pair<K, V> &HashTable<K, V>::iterator::operator*() {
     return *(*impl);
 }
 
 template <class K, class V>
-const pair<K, V>* HashTable<K, V>::iterator::operator->()
-{
+const pair<K, V> *HashTable<K, V>::iterator::operator->() {
     return &(*(*impl));
 }

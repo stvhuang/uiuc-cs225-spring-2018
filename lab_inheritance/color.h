@@ -12,22 +12,21 @@
 #include "cs225/PNG.h"
 using namespace cs225;
 
-namespace color
-{
+namespace color {
 
-    /* Format in initialization is hue, saturation, luminance, alpha */
-    const HSLAPixel WHITE(0, 0, 1);
-    const HSLAPixel BLACK(0, 0, 0);
-    const HSLAPixel GRAY(33, 4.1/100.0, 56.7/100.0);
-    const HSLAPixel RED(0, 1, 0.5);
-    const HSLAPixel ORANGE(30, 1, 0.5);
-    const HSLAPixel YELLOW(60, 1, 0.5);
-    const HSLAPixel GREEN(120, 1, 0.5);
-    const HSLAPixel TURQUOISE(120, 1, 0.5);
-    const HSLAPixel BLUE(240, 1, 0.5);
-    const HSLAPixel PURPLE(270, 1, 0.5);
-    const HSLAPixel PINK(299, 96.9/100.0, 74.3/100.0);
+/* Format in initialization is hue, saturation, luminance, alpha */
+const HSLAPixel WHITE(0, 0, 1);
+const HSLAPixel BLACK(0, 0, 0);
+const HSLAPixel GRAY(33, 4.1 / 100.0, 56.7 / 100.0);
+const HSLAPixel RED(0, 1, 0.5);
+const HSLAPixel ORANGE(30, 1, 0.5);
+const HSLAPixel YELLOW(60, 1, 0.5);
+const HSLAPixel GREEN(120, 1, 0.5);
+const HSLAPixel TURQUOISE(120, 1, 0.5);
+const HSLAPixel BLUE(240, 1, 0.5);
+const HSLAPixel PURPLE(270, 1, 0.5);
+const HSLAPixel PINK(299, 96.9 / 100.0, 74.3 / 100.0);
 
-} // namespace color
+}  // namespace color
 
-#endif // COLOR_H_
+#endif  // COLOR_H_

@@ -14,8 +14,7 @@ using std::vector;
  * Constructs a default, order 64 BTree.
  */
 template <class K, class V>
-BTree<K, V>::BTree()
-{
+BTree<K, V>::BTree() {
     root = nullptr;
     order = 64;
 }
@@ -26,8 +25,7 @@ BTree<K, V>::BTree()
  * @param order The order of the constructed BTree.
  */
 template <class K, class V>
-BTree<K, V>::BTree(unsigned int order)
-{
+BTree<K, V>::BTree(unsigned int order) {
     root = nullptr;
     this->order = order < 3 ? 3 : order;
 }
@@ -37,8 +35,7 @@ BTree<K, V>::BTree(unsigned int order)
  * @param other The BTree to copy.
  */
 template <class K, class V>
-BTree<K, V>::BTree(const BTree& other)
-{
+BTree<K, V>::BTree(const BTree &other) {
     clear(root);
     root = copy(other.root);
 }
@@ -48,14 +45,13 @@ BTree<K, V>::BTree(const BTree& other)
  * @param subroot A pointer to the current node being copied.
  */
 template <class K, class V>
-typename BTree<K, V>::BTreeNode* BTree<K, V>::copy(const BTreeNode* subroot)
-{
+typename BTree<K, V>::BTreeNode *BTree<K, V>::copy(const BTreeNode *subroot) {
     if (subroot == nullptr) {
         return nullptr;
     }
 
-    BTreeNode* new_node = new BTreeNode(subroot);
-    for (auto& child : subroot->children) {
+    BTreeNode *new_node = new BTreeNode(subroot);
+    for (auto &child : subroot->children) {
         new_node->children.push_back(copy(child));
     }
     return new_node;
@@ -69,13 +65,12 @@ typename BTree<K, V>::BTreeNode* BTree<K, V>::copy(const BTreeNode* subroot)
  * @return true if it satisfies the conditions, false otherwise.
  */
 template <class K, class V>
-bool BTree<K, V>::is_valid(unsigned int order /* = 64 */) const
-{
+bool BTree<K, V>::is_valid(unsigned int order /* = 64 */) const {
     if (root == nullptr)
         return true;
     vector<DataPair> data;
-    return is_valid(root, data, order)
-           && std::is_sorted(data.begin(), data.end());
+    return is_valid(root, data, order) &&
+           std::is_sorted(data.begin(), data.end());
 }
 
 /**
@@ -85,9 +80,8 @@ bool BTree<K, V>::is_valid(unsigned int order /* = 64 */) const
  * @return true if the node is a valid BTreeNode, false otherwise.
  */
 template <class K, class V>
-bool BTree<K, V>::is_valid(const BTreeNode* subroot, vector<DataPair>& data,
-                           unsigned int order) const
-{
+bool BTree<K, V>::is_valid(const BTreeNode *subroot, vector<DataPair> &data,
+                           unsigned int order) const {
     if (subroot->elements.size() >= order) {
         return false;
     }
@@ -116,8 +110,7 @@ bool BTree<K, V>::is_valid(const BTreeNode* subroot, vector<DataPair>& data,
  * @param subroot A pointer to the current node being cleared.
  */
 template <class K, class V>
-void BTree<K, V>::clear(BTreeNode* subroot)
-{
+void BTree<K, V>::clear(BTreeNode *subroot) {
     if (!subroot->is_leaf) {
         for (auto child : subroot->children) {
             clear(child);
@@ -130,8 +123,7 @@ void BTree<K, V>::clear(BTreeNode* subroot)
  * Destroys a BTree.
  */
 template <class K, class V>
-BTree<K, V>::~BTree()
-{
+BTree<K, V>::~BTree() {
     clear();
 }
 
@@ -141,8 +133,7 @@ BTree<K, V>::~BTree()
  * @return The copied BTree.
  */
 template <class K, class V>
-const BTree<K, V>& BTree<K, V>::operator=(const BTree& rhs)
-{
+const BTree<K, V> &BTree<K, V>::operator=(const BTree &rhs) {
     if (this != &rhs) {
         clear(root);
         root = copy(rhs.root);
@@ -154,8 +145,7 @@ const BTree<K, V>& BTree<K, V>::operator=(const BTree& rhs)
  * Clears the BTree of all data.
  */
 template <class K, class V>
-void BTree<K, V>::clear()
-{
+void BTree<K, V>::clear() {
     if (root != nullptr) {
         clear(root);
         root = nullptr;

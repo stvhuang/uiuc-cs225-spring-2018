@@ -13,12 +13,11 @@
 
 using std::cout;
 using std::endl;
-using std::vector;
 using std::string;
 using std::stringstream;
+using std::vector;
 
-int main(int argc, char** argv)
-{
+int main(int argc, char **argv) {
     vector<string> args(argv, argv + argc);
     if (argc < 2) {
         cout << "Usage: " << args[0] << " filename" << endl;

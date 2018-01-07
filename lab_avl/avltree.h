@@ -17,9 +17,9 @@
 #define AVLTREE_H
 
 #include <iostream>
-#include <vector>
 #include <sstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -29,8 +29,7 @@ using namespace std;
  * @tparam V the type of value stored in the tree
  */
 template <class K, class V>
-class AVLTree
-{
+class AVLTree {
   private:
     /**
      * Node represents a tree node; that is, an element in a AVLTree.
@@ -39,8 +38,8 @@ class AVLTree
     struct Node {
         K key;
         V value;
-        Node* left;
-        Node* right;
+        Node *left;
+        Node *right;
         int height;
 
         /**
@@ -49,9 +48,8 @@ class AVLTree
          * @param newValue The templated data element that the constructed
          *  node will hold.
          */
-        Node(const K& newKey, const V& newValue)
-            : key(newKey), value(newValue), left(NULL), right(NULL), height(0)
-        {
+        Node(const K &newKey, const V &newValue)
+            : key(newKey), value(newValue), left(NULL), right(NULL), height(0) {
         }
     };
 
@@ -65,7 +63,7 @@ class AVLTree
      * Copy constructor.
      * @param other The tree to copy
      */
-    AVLTree(const AVLTree& other);
+    AVLTree(const AVLTree &other);
 
     /**
      * Destructor; frees all nodes associated with this tree.
@@ -77,7 +75,7 @@ class AVLTree
      * @param rhs The tree to copy
      * @return A reference to the current tree
      */
-    const AVLTree& operator=(const AVLTree& rhs);
+    const AVLTree &operator=(const AVLTree &rhs);
 
     /**
      * Frees all nodes associated with this tree and sets it to be empty.
@@ -89,38 +87,38 @@ class AVLTree
      * @param key The key to insert
      * @param value The value associated with the key
      */
-    void insert(const K& key, const V& value);
+    void insert(const K &key, const V &value);
 
     /**
      * Removes a key from the AVLTree. The key is assumed to exist in the tree.
      * @param key The key to remove
      */
-    void remove(const K& key);
+    void remove(const K &key);
 
     /**
      * Finds an element in the AVL tree.
      * @param key The element to search for
      * @return The value stored for that key
      */
-    V find(const K& key) const;
+    V find(const K &key) const;
 
     /**
      * Prints the function calls to a stream.
      * @param out The stream to print to (default is stdout)
      */
-    void printFunctionOrder(ostream& out = cout) const;
+    void printFunctionOrder(ostream &out = cout) const;
 
     /**
      * Prints the AVLTree to a stream.
      * @param out The stream to print to (default is stdout)
      */
-    void print(ostream& out = cout, bool order=true) const;
+    void print(ostream &out = cout, bool order = true) const;
 
     /**
      * This function is used for grading.
      * @param newOut The stream to print to
      */
-    void setOutput(ostream& newOut);
+    void setOutput(ostream &newOut);
 
     /**
      * Gets the inorder traversal of an AVL tree's keys.
@@ -129,15 +127,15 @@ class AVLTree
     vector<K> getInorderTraversal();
 
     /*
-    * Gets vector of function calls.
-    */
+     * Gets vector of function calls.
+     */
     vector<string> getFunctionOrder();
 
   private:
     /**
      * The root of the tree.
      */
-    Node* root;
+    Node *root;
 
     /**
      * Private helper function for the public #insert function.
@@ -145,14 +143,14 @@ class AVLTree
      * @param key The key to insert
      * @param value The value associated with the key
      */
-    void insert(Node*& node, const K& key, const V& value);
+    void insert(Node *&node, const K &key, const V &value);
 
     /**
      * Private helper function for the public #remove function.
      * @param node The current node in the recursion
      * @param key The key to remove
      */
-    void remove(Node*& node, const K& key);
+    void remove(Node *&node, const K &key);
 
     /**
      * Finds a value (by key) in the AVL tree.
@@ -160,33 +158,33 @@ class AVLTree
      * @param key The key to search for
      * @return The value stored for that key
      */
-    V find(Node* node, const K& key) const;
+    V find(Node *node, const K &key) const;
 
     /**
      * Rotate the tree right (there is an imbalance on the left side).
      * @param node The node to rotate
      */
-    void rotateRight(Node*& node);
+    void rotateRight(Node *&node);
 
     /**
      * Rotates the tree left (there is an imbalance on the right side).
      * @param node The node to rotate
      */
-    void rotateLeft(Node*& node);
+    void rotateLeft(Node *&node);
 
     /**
      * A right-left rotation.
      * This function should simply call rotateRight and rotateLeft.
      * @param node The node to rotate
      */
-    void rotateRightLeft(Node*& node);
+    void rotateRightLeft(Node *&node);
 
     /**
      * A left-right rotation.
      * This function should simply call rotateLeft and rotateRight.
      * @param node The node to rotate
      */
-    void rotateLeftRight(Node*& node);
+    void rotateLeftRight(Node *&node);
 
     /**
      * Rebalance a node by performing rotations. You can assume that node->left
@@ -194,41 +192,41 @@ class AVLTree
      * you should update the node's height.
      * @param node The node to balance.
      */
-    void rebalance(Node*& node);
+    void rebalance(Node *&node);
 
     /**
      * @param node The node's height to check
      * @return The height of the node if it's non-`NULL` or -1 if it is `NULL`
      */
-    int heightOrNeg1(const Node* node) const;
+    int heightOrNeg1(const Node *node) const;
 
     /**
      * Swap the keys and values of two nodes.
      * @param first The first node to swap
      * @param second The node to swap with
      */
-    void swap(Node*& first, Node*& second);
+    void swap(Node *&first, Node *&second);
 
     /**
      * Helper function for #operator= and AVLTree(const AVLTree &).
      * @param subRoot The current node in the recursion
      */
-    Node* copy(const Node* subRoot);
+    Node *copy(const Node *subRoot);
 
     /**
      * Private helper function for clear that clears beneath the parameter node.
      * @param subRoot The current node in the recursion
      */
-    void clear(Node* subRoot);
+    void clear(Node *subRoot);
 
     /**
      * Gets the inorder traversal of an AVL tree's keys.
      * @param subRoot The current node in the recursion
      */
-    void getInorderTraversal(const Node* subRoot);
+    void getInorderTraversal(const Node *subRoot);
 
     /** This variable is used for grading. */
-    ostream* _out;
+    ostream *_out;
 
     /** This variable tests the order of function calls **/
     vector<string> functionCalls;
@@ -236,6 +234,6 @@ class AVLTree
     vector<K> inorder;
 };
 
-#include "avltree_given.cpp"
 #include "avltree.cpp"
+#include "avltree_given.cpp"
 #endif

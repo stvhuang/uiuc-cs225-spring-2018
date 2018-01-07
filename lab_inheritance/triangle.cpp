@@ -18,26 +18,23 @@
 
 using std::vector;
 
-Triangle::Triangle(const HSLAPixel& pcolor, const Vector2& vertex1,
-                   const Vector2& vertex2, const Vector2& vertex3)
-    : Shape(Vector2(0, 0), pcolor), vertices_(new Vector2*[3])
-{
+Triangle::Triangle(const HSLAPixel &pcolor, const Vector2 &vertex1,
+                   const Vector2 &vertex2, const Vector2 &vertex3)
+    : Shape(Vector2(0, 0), pcolor), vertices_(new Vector2 *[3]) {
     this->vertices_[0] = new Vector2(vertex1);
     this->vertices_[1] = new Vector2(vertex2);
     this->vertices_[2] = new Vector2(vertex3);
     this->center_ = (vertex1 + vertex2 + vertex3) / 3;
 }
 
-Triangle::Triangle(const Triangle& other)
-    : Shape(Vector2(0, 0), other.color()), vertices_(new Vector2*[3])
-{
+Triangle::Triangle(const Triangle &other)
+    : Shape(Vector2(0, 0), other.color()), vertices_(new Vector2 *[3]) {
     this->vertices_[0] = new Vector2(other.vertex(0));
     this->vertices_[1] = new Vector2(other.vertex(1));
     this->vertices_[2] = new Vector2(other.vertex(2));
 }
 
-Triangle::~Triangle()
-{
+Triangle::~Triangle() {
     for (int i = 0; i < 3; i++) {
         delete this->vertices_[i];
         this->vertices_[i] = NULL;
@@ -47,8 +44,7 @@ Triangle::~Triangle()
     this->vertices_ = NULL;
 }
 
-Triangle& Triangle::operator=(const Triangle& rhs)
-{
+Triangle &Triangle::operator=(const Triangle &rhs) {
     if (this == &rhs) {
         return *this;
     }
@@ -60,40 +56,36 @@ Triangle& Triangle::operator=(const Triangle& rhs)
     return *this;
 }
 
-Vector2 Triangle::vertex(int i) const
-{
+Vector2 Triangle::vertex(int i) const {
     assert(i >= 0 && i <= 2);
     return *(this->vertices_[i]);
 }
 
-void Triangle::set_vertex(int i, const Vector2& value)
-{
+void Triangle::set_vertex(int i, const Vector2 &value) {
     assert(i >= 0 && i <= 2);
     *(this->vertices_[i]) = value;
 }
 
-int Triangle::area() const
-{
+int Triangle::area() const {
     const Vector2 ab(this->vertex(0) - this->vertex(1));
     const Vector2 ac(this->vertex(0) - this->vertex(2));
     const int tarea = static_cast<int>(0.5 * ab.crossProduct(ab));
     return tarea;
 }
 
-int Triangle::perimeter() const
-{
-    const double distance = (this->vertex(0).distanceTo(this->vertex(1))
-                             + this->vertex(1).distanceTo(this->vertex(2))
-                             + this->vertex(2).distanceTo(this->vertex(0)));
+int Triangle::perimeter() const {
+    const double distance = (this->vertex(0).distanceTo(this->vertex(1)) +
+                             this->vertex(1).distanceTo(this->vertex(2)) +
+                             this->vertex(2).distanceTo(this->vertex(0)));
     return static_cast<int>(distance);
 }
 
-bool Triangle::contains(const Vector2& p) const
-{
-    /* Code taken from http://www.blackpawn.com/texts/pointinpoly/default.html */
-    const Vector2& a = this->vertex(0);
-    const Vector2& b = this->vertex(1);
-    const Vector2& c = this->vertex(2);
+bool Triangle::contains(const Vector2 &p) const {
+    /* Code taken from http://www.blackpawn.com/texts/pointinpoly/default.html
+     */
+    const Vector2 &a = this->vertex(0);
+    const Vector2 &b = this->vertex(1);
+    const Vector2 &c = this->vertex(2);
     const Vector2 v0 = c - a;
     const Vector2 v1 = b - a;
     const Vector2 v2 = p - a;
@@ -111,17 +103,16 @@ bool Triangle::contains(const Vector2& p) const
     return (u > 0) && (v > 0) && (u + v < 1);
 }
 
-void Triangle::draw(PNG* canvas) const
-{
+void Triangle::draw(PNG *canvas) const {
     /* Code taken from
      * http://gabrielongraphics.blogspot.com/2005/09/drawing-triangles.html */
     const Vector2 a = this->vertex(0);
     const Vector2 b = this->vertex(1);
     const Vector2 c = this->vertex(2);
-    const Vector2* small = &a;
-    const Vector2* medium = &b;
-    const Vector2* large = &c;
-    const Vector2* temp;
+    const Vector2 *small = &a;
+    const Vector2 *medium = &b;
+    const Vector2 *large = &c;
+    const Vector2 *temp;
 
     if (small->isSouthOf(*medium)) {
         temp = small;
@@ -148,7 +139,8 @@ void Triangle::draw(PNG* canvas) const
     vector<double> x_small_large = Line::linearInterpolation(
         Vector2(small->y(), small->x()), Vector2(large->y(), large->x()));
 
-    for (int y = static_cast<int>(small->y()); y < static_cast<int>(medium->y()); y++) {
+    for (int y = static_cast<int>(small->y());
+         y < static_cast<int>(medium->y()); y++) {
         const Vector2 p(x_small_medium[static_cast<int>(y - small->y())],
                         static_cast<double>(y));
         const Vector2 q(x_small_large[static_cast<int>(y - small->y())],
@@ -157,7 +149,8 @@ void Triangle::draw(PNG* canvas) const
         pq.draw(canvas);
     }
 
-    for (int y = static_cast<int>(medium->y()); y < static_cast<int>(large->y()); y++) {
+    for (int y = static_cast<int>(medium->y());
+         y < static_cast<int>(large->y()); y++) {
         const Vector2 p(x_medium_large[static_cast<int>(y - medium->y())],
                         static_cast<double>(y));
         const Vector2 q(x_small_large[static_cast<int>(y - small->y())],
@@ -167,8 +160,7 @@ void Triangle::draw(PNG* canvas) const
     }
 }
 
-void Triangle::set_center(const Vector2& pcenter)
-{
+void Triangle::set_center(const Vector2 &pcenter) {
     const Vector2 delta(pcenter - this->center());
     /* Move the three vertices by the delta from
        the new center to the old center. */

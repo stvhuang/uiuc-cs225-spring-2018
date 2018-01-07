@@ -18,8 +18,8 @@
  * @date Summer 2012
  */
 template <class K, class V>
-class SCHashTable<K, V>::SCIteratorImpl : public HashTable<K, V>::HTIteratorImpl
-{
+class SCHashTable<K, V>::SCIteratorImpl
+    : public HashTable<K, V>::HTIteratorImpl {
   public:
     /**
      * We friend the SCHashTable class so that it may construct
@@ -32,9 +32,9 @@ class SCHashTable<K, V>::SCIteratorImpl : public HashTable<K, V>::HTIteratorImpl
 
     // inherited functions
     virtual void operator++();
-    virtual bool operator==(const HTIteratorImpl& other) const;
-    virtual const std::pair<K, V>& operator*();
-    virtual HTIteratorImpl* clone() const;
+    virtual bool operator==(const HTIteratorImpl &other) const;
+    virtual const std::pair<K, V> &operator*();
+    virtual HTIteratorImpl *clone() const;
 
     /**
      * Equality operator that compares two SCIteratorImpl. Used by the
@@ -44,13 +44,13 @@ class SCHashTable<K, V>::SCIteratorImpl : public HashTable<K, V>::HTIteratorImpl
      * @param other The SCIteratorImpl to compare against.
      * @return Whether the two implementations are the same.
      */
-    virtual bool operator==(const SCIteratorImpl& other) const;
+    virtual bool operator==(const SCIteratorImpl &other) const;
 
   private:
     /**
      * Reference to the table we are iterating over.
      */
-    const SCHashTable& table;
+    const SCHashTable &table;
 
     /**
      * Current bucket we are visiting.
@@ -76,7 +76,7 @@ class SCHashTable<K, V>::SCIteratorImpl : public HashTable<K, V>::HTIteratorImpl
      * @param i The bucket to start at.
      * @param ed Whether we are at the end of the SCHashTabe or not.
      */
-    SCIteratorImpl(const SCHashTable& ht, size_t i, bool ed);
+    SCIteratorImpl(const SCHashTable &ht, size_t i, bool ed);
 };
 /** @endcond */
 #include "sciterator.cpp"

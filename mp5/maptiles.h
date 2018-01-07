@@ -11,13 +11,13 @@
 #ifndef MAPTILES_H
 #define MAPTILES_H
 
-#include <map>
-#include <vector>
 #include "cs225/PNG.h"
 #include "kdtree.h"
 #include "mosaiccanvas.h"
 #include "sourceimage.h"
 #include "tileimage.h"
+#include <map>
+#include <vector>
 
 using namespace std;
 using namespace cs225;
@@ -30,8 +30,8 @@ using namespace cs225;
  * @param theSource The input image to construct a photomosaic of
  * @param theTiles The tiles image to use in the mosaic
  */
-MosaicCanvas* mapTiles(SourceImage const& theSource,
-                       vector<TileImage> & theTiles);
+MosaicCanvas *mapTiles(SourceImage const &theSource,
+                       vector<TileImage> &theTiles);
 
 /**
  * Find the closest TileImage for a particular row and column.
@@ -47,9 +47,8 @@ MosaicCanvas* mapTiles(SourceImage const& theSource,
  *
  * @returns the "nearest neighbor" tile
  */
-TileImage* get_match_at_idx(const KDTree<3>& tree,
-                                  map<Point<3>, int> tile_avg_map,
-                                  vector<TileImage>& theTiles,
-                                  const SourceImage& theSource, int row,
-                                  int col);
-#endif // MAPTILES_H
+TileImage *get_match_at_idx(const KDTree<3> &tree,
+                            map<Point<3>, int> tile_avg_map,
+                            vector<TileImage> &theTiles,
+                            const SourceImage &theSource, int row, int col);
+#endif  // MAPTILES_H

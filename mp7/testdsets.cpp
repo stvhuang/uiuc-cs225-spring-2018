@@ -5,14 +5,13 @@
  * @author Jonathan Ray
  */
 
-#include <iostream>
 #include "dsets.h"
+#include <iostream>
 
 using std::cout;
 using std::endl;
 
-int main()
-{
+int main() {
     DisjointSets s;
 
     s.addelements(50);

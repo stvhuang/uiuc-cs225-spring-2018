@@ -10,8 +10,8 @@
 #ifndef PRONOUNCE_DICT_H
 #define PRONOUNCE_DICT_H
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
 
 /**
@@ -23,8 +23,7 @@
  * @author Matt Joras
  * @date Winter 2013
  */
-class PronounceDict
-{
+class PronounceDict {
   public:
     /**
      * Constructs a PronounceDict from a CMU pronunciation dictionary
@@ -32,7 +31,7 @@ class PronounceDict
      * @param pronun_dict_filename Filename of the CMU pronunciation
      * dictionary.
      */
-    PronounceDict(const std::string& pronun_dict_filename);
+    PronounceDict(const std::string &pronun_dict_filename);
 
     /**
      * Constructs a PronounceDict from a CMU std::map mapping the word
@@ -41,7 +40,7 @@ class PronounceDict
      * representing its pronunciation.
      */
     PronounceDict(
-        const std::map<std::string, std::vector<std::string>>& pronun_dict);
+        const std::map<std::string, std::vector<std::string>> &pronun_dict);
 
     /**
      * Uses the dictionary to determine if the two words are homophones.
@@ -51,7 +50,7 @@ class PronounceDict
      * one or both words weren't in the dictionary).
      * Note: The word keys in the dictionary are stored in uppercase.
      */
-    bool homophones(const std::string& word1, const std::string& word2) const;
+    bool homophones(const std::string &word1, const std::string &word2) const;
 
   private:
     std::map<std::string, std::vector<std::string>> dict;

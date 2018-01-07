@@ -17,10 +17,9 @@
  * @brief The Triangle class is a subclass of a Shape and represents a triangle
  * in 2D space
  */
-class Triangle : public Shape
-{
+class Triangle : public Shape {
   private:
-    Vector2** vertices_;
+    Vector2 **vertices_;
 
   public:
     /**
@@ -31,14 +30,14 @@ class Triangle : public Shape
      * @param vertex2 second Vector2 of the Triangle
      * @param vertex3 third Vector2 of the Triangle
      */
-    Triangle(const HSLAPixel& color, const Vector2& vertex1,
-             const Vector2& vertex2, const Vector2& vertex3);
+    Triangle(const HSLAPixel &color, const Vector2 &vertex1,
+             const Vector2 &vertex2, const Vector2 &vertex3);
 
-    Triangle(const Triangle& other);
+    Triangle(const Triangle &other);
 
     ~Triangle();
 
-    Triangle& operator=(const Triangle& rhs);
+    Triangle &operator=(const Triangle &rhs);
 
     /**
      * @brief Computes and returns the area of the Triangle
@@ -61,14 +60,14 @@ class Triangle : public Shape
      *
      * @return true if the Vector2 p is inside of the Triangle
      */
-    bool contains(const Vector2& p) const;
+    bool contains(const Vector2 &p) const;
 
     /**
      * @brief Draws the Triangle to the canvas
      *
      * @param canvas PNG to draw onto
      */
-    void draw(PNG* canvas) const;
+    void draw(PNG *canvas) const;
 
     /**
      * @brief Overridden set_center method that sets the center Vector2 of the
@@ -76,7 +75,7 @@ class Triangle : public Shape
      *
      * @param center the new center Vector2
      */
-    void set_center(const Vector2& center);
+    void set_center(const Vector2 &center);
 
     /**
      * @brief Gets one of the Triangle's vertices.  Crashes if an invalid vertex
@@ -95,7 +94,7 @@ class Triangle : public Shape
      * @param i the vertex to change
      * @param value the new vertex
      */
-    void set_vertex(int i, const Vector2& value);
+    void set_vertex(int i, const Vector2 &value);
 };
 
-#endif // TRIANGLE_H_
+#endif  // TRIANGLE_H_

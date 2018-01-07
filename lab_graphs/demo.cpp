@@ -10,21 +10,20 @@
  * Updated by Sean Massung for Spring 2012
  */
 
-#include <iostream>
-#include <string>
 #include "graph.h"
 #include "premade_graphs.cpp"
+#include <iostream>
+#include <string>
 
-using std::string;
 using std::cout;
 using std::endl;
+using std::string;
 
 /**
  * Draws the three example graphs with weights.
  * All graphs saved as PNGs are in lab12/images/.
  */
-void createPremadeGraphs()
-{
+void createPremadeGraphs() {
     Graph us = PremadeGraphs::createUSMap(true);
     Graph europe = PremadeGraphs::createEuropeMap(true);
     Graph japan = PremadeGraphs::createJapanMap(true);
@@ -42,8 +41,7 @@ void createPremadeGraphs()
 /**
  * Create the US map without weights.
  */
-void createUnweightedUS()
-{
+void createUnweightedUS() {
     Graph us_uw = PremadeGraphs::createUSMap(false);
     us_uw.savePNG("us-unweighted");
 }
@@ -52,8 +50,7 @@ void createUnweightedUS()
  * Create and print a random weighted graph with
  *  9 vertices and random seed 777.
  */
-void createRandomGraph()
-{
+void createRandomGraph() {
     cout << "\nDisplaying a random graph...\n\n";
     Graph graph(true, 9, 777);
     graph.print();
@@ -63,8 +60,7 @@ void createRandomGraph()
 /**
  * Build a graph by manually inserting vertices.
  */
-void buildGraph()
-{
+void buildGraph() {
     cout << "Displaying a manually created graph...\n\n";
     Graph graph(true);
     graph.insertVertex("A");
@@ -82,8 +78,7 @@ void buildGraph()
 /**
  * Run all the different examples.
  */
-int main()
-{
+int main() {
     createPremadeGraphs();
     createUnweightedUS();
     createRandomGraph();

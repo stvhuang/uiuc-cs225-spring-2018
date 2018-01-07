@@ -1,12 +1,11 @@
-#include <iostream>
+#include "cs225/PNG.h"
 #include "dsets.h"
 #include "maze.h"
-#include "cs225/PNG.h"
+#include <iostream>
 
 using namespace std;
 
-int main()
-{
+int main() {
     // Write your own main here
     return 0;
 }
