@@ -63,7 +63,7 @@ PNG createSpotlight(PNG image, int centerX, int centerY) {
       HSLAPixel & pixel = image.getPixel(x, y);
 
       // distace between (x, y) and (centerX, centerY)
-      distance = std::sqrt(std::pow((x - centerX), 2) + std::pow((y - centerY), 2));
+      distance = std::sqrt((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY));
 
       // if distance larger than 160, decrease the luminance by 80%
       if (distance > 160.0) {
