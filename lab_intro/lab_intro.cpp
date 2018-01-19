@@ -55,9 +55,28 @@ PNG grayscale(PNG image) {
  * @return The image with a spotlight.
  */
 PNG createSpotlight(PNG image, int centerX, int centerY) {
+  double distance = 0.0;
+  double l_decrease = 0.0;
+
+  for (unsigned x = 0; x < image.width(); x++) {
+    for (unsigned y = 0; y < image.height(); y++) {
+      HSLAPixel & pixel = image.getPixel(x, y);
+
+      // distace between (x, y) and (centerX, centerY)
+      distance = std::sqrt(std::pow((x - centerX), 2) + std::pow((y - centerY), 2));
+
+      // if distance larger than 160, decrease the luminance by 80%
+      if (distance > 160.0) {
+        l_decrease = 0.8;
+      } else {  // distance <= 160.0, decrease the luminance by distance * 5%
+        l_decrease = distance * 0.005;
+      }
+
+      pixel.l *= (1 - l_decrease);
+    }
+  }
 
   return image;
-
 }
 
 
