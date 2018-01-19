@@ -122,6 +122,19 @@ PNG illinify(PNG image) {
 * @return The watermarked image.
 */
 PNG watermark(PNG firstImage, PNG secondImage) {
+  for (unsigned x = 0; x < firstImage.width(); x++) {
+    for (unsigned y = 0; y < firstImage.height(); y++) {
+      HSLAPixel & firstImagePixel = firstImage.getPixel(x, y);
+      HSLAPixel secondImagePixel = secondImage.getPixel(x, y);
+
+      if (secondImagePixel.l == 1.0) {  // white, the text region
+        firstImagePixel.l += 0.2;
+        if (firstImagePixel.l > 1.0) {  // limit the value under 1.0
+          firstImagePixel.l = 1.0;
+        }
+      }
+    }
+  }
 
   return firstImage;
 }
