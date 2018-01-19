@@ -12,6 +12,19 @@
 #include <sstream>
 
 namespace cs225 {
+  class HSLAPixel {
+    public:
+    HSLAPixel ();
+    HSLAPixel (double hue, double saturation, double luminance);
+    HSLAPixel (double hue, double saturation, double luminance, double alpha);
+
+    int h;  // Hue
+    double s;  // Saturation
+    double l;  // Luminance
+    double a;  // Alpha
+
+    private:
+  };
 }
 
 #endif
