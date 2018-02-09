@@ -13,7 +13,7 @@ namespace cs225 {
    public:
     StickerSheet(const Image &picture, unsigned max);
     StickerSheet(const StickerSheet &other);
-    //~StickerSheet();
+    ~StickerSheet();
     const StickerSheet & operator=(const StickerSheet &other);
     void changeMaxStickers(unsigned max);
     int addSticker(Image &sticker, unsigned x, unsigned y);
@@ -21,6 +21,7 @@ namespace cs225 {
     void removeSticker(unsigned index);
     Image * getSticker(unsigned index) const;
     Image render() const;
+    void _clear();
 
    private:
     unsigned max_;  // maximun of stickers(images)
