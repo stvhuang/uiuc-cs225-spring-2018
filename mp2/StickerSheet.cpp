@@ -88,7 +88,7 @@ namespace cs225 {
       delete[] stickers;
       stickers = new_stickers;
     }
-    
+
     if (x_index != NULL) {
       delete[] x_index;
       x_index = new_x_index;
@@ -172,7 +172,7 @@ namespace cs225 {
       delete[] stickers;
       stickers = NULL;
     }
-    
+
     if (x_index != NULL) {
       delete[] x_index;
       x_index = NULL;
