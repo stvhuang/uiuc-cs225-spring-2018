@@ -3,7 +3,8 @@
  * This is where you will implement the required functions for the
  *  stacks and queues portion of the lab.
  */
-
+#include <iostream>
+using namespace std;
 namespace QuackFun {
 
 /**
@@ -27,7 +28,16 @@ T sum(stack<T>& s)
 {
 
     // Your code here
-    return T(); // stub return value (0 for primitive types). Change this!
+    if (!s.empty()) {
+        T curr = s.top();
+        s.pop();
+        T subTotal = sum(s);
+        s.push(curr);
+        return curr + subTotal;
+    } else {
+        return T();
+    }
+    //return T(); // stub return value (0 for primitive types). Change this!
                 // Note: T() is the default value for objects, and 0 for
                 // primitive types
 }
@@ -51,7 +61,27 @@ bool isBalanced(queue<char> input)
 {
 
     // @TODO: Make less optimistic
-    return true;
+    stack<char> s;
+    while (!input.empty()) {
+        if (input.front() == '[') {
+            s.push('[');
+            input.pop();
+        } else if (input.front() == ']') {
+            if (!s.empty()) {
+                s.pop();
+                input.pop();
+            } else {
+                return false;
+            }
+        } else {
+            input.pop();
+        }
+    }
+
+    if (s.empty())
+        return true;
+    else
+        return false;
 }
 
 /**
@@ -94,12 +124,22 @@ template <typename T>
 bool verifySame(stack<T>& s, queue<T>& q)
 {
     bool retval = true; // optional
-    // T temp1; // rename me
-    // T temp2; // rename :)
+    T temp;
 
-    // Your code here
-
-    return retval;
+    if(s.empty()) {  // base case
+        return true;
+    } else {
+        temp = s.top(); s.pop();
+        retval = verifySame(s, q);
+        if (!retval) {
+            return false;
+        } else {
+            retval = (temp == q.front());
+            q.push(q.front()); q.pop();
+            s.push(temp);
+            return retval;
+        }
+    }
 }
 
 }
