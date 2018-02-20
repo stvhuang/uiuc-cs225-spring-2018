@@ -103,6 +103,46 @@ void scramble(queue<T>& q)
     // optional: queue<T> q2;
 
     // Your code here
+    int numOfBlock = 1;
+    int numOfComplete = 0;
+    int size = int(q.size());
+
+    while(numOfComplete < size) {
+        if (numOfBlock % 2 == 1) {
+            int currMin = numOfBlock;
+
+            if (currMin > size-numOfComplete) {
+                currMin = size-numOfComplete;
+            }
+
+            for(int i = 0; i < currMin; ++i) {
+                q.push(q.front());
+                q.pop();
+            }
+
+            numOfComplete += currMin;
+            numOfBlock++;
+        } else {
+            int currMin = numOfBlock;
+
+            if (currMin > size-numOfComplete) {
+                currMin = size-numOfComplete;
+            }
+
+            for (int i = 0; i < currMin; ++i) {
+                s.push(q.front());
+                q.pop();
+            }
+
+            for (int i = 0; i < currMin; i++) {
+                q.push(s.top());
+                s.pop();
+            }
+
+            numOfComplete += currMin;
+            ++numOfBlock;
+        }
+    }
 }
 
 /**
