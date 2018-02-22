@@ -210,6 +210,11 @@ class BinaryTree
     void inOrder(Node *subRoot, vector<T>& treeVector);
 
     Node* root;
+
+    /**
+     * My helper functions
+     */
+    void mirrorRecursive(Node *&subRoot);
 };
 
 #include "binarytree_given.cpp"
