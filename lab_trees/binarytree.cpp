@@ -105,6 +105,7 @@ bool BinaryTree<T>::isOrderedRecursive() const
 {
 
     // your code here
+    return isOrderedRecursive(root);
     return false;
 }
 
@@ -149,5 +150,21 @@ void BinaryTree<T>::mirrorRecursive(Node* &subRoot) {
         subRoot->right = tmp;
         tmp = NULL;
         return;
+    }
+}
+
+template <typename T>
+bool BinaryTree<T>::isOrderedRecursive(Node *subRoot) const
+{
+    if (subRoot == NULL) {
+        return true;
+    } else if (subRoot->left != NULL && subRoot->right != NULL) {
+        return isOrderedRecursive(subRoot->left) && isOrderedRecursive(subRoot->right) && (subRoot->elem >= subRoot->left->elem) && (subRoot->elem <= subRoot->right->elem);
+    } else if (subRoot->left != NULL) {
+        return isOrderedRecursive(subRoot->left) && (subRoot->elem >= subRoot->left->elem);
+    } else if (subRoot->right != NULL) {
+        return isOrderedRecursive(subRoot->right) && (subRoot->elem <= subRoot->right->elem);
+    } else {
+        return true;
     }
 }
