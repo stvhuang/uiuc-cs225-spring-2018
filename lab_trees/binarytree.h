@@ -214,7 +214,7 @@ class BinaryTree
     /**
      * My helper functions
      */
-    void mirrorRecursive(Node *&subRoot);
+    void mirror(Node *&subRoot);
 
     bool isOrderedRecursive(Node *subRoot) const;
 

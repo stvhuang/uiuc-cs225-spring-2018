@@ -78,7 +78,7 @@ template <typename T>
 void BinaryTree<T>::mirror()
 {
     //your code here
-    mirrorRecursive(root);
+    mirror(root);
 }
 
 /**
@@ -140,12 +140,12 @@ int BinaryTree<T>::sumDistances() const
 }
 
 template <typename T>
-void BinaryTree<T>::mirrorRecursive(Node* &subRoot) {
+void BinaryTree<T>::mirror(Node* &subRoot) {
     if (subRoot == NULL) {
         return;
     } else {
-        mirrorRecursive(subRoot->left);
-        mirrorRecursive(subRoot->right);
+        mirror(subRoot->left);
+        mirror(subRoot->right);
         Node *tmp = subRoot->left;
         subRoot->left = subRoot->right;
         subRoot->right = tmp;
