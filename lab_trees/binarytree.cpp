@@ -135,7 +135,8 @@ template <typename T>
 int BinaryTree<T>::sumDistances() const
 {
     // your code here
-    return -1;
+    int distSum = 0;
+    return sumDistances(root, -1, distSum);
 }
 
 template <typename T>
@@ -167,4 +168,21 @@ bool BinaryTree<T>::isOrderedRecursive(Node *subRoot) const
     } else {
         return true;
     }
+}
+
+template <typename T>
+int & BinaryTree<T>::sumDistances(const Node *subRoot, int currDist, int &distSum) const
+{
+    ++currDist;
+    distSum += currDist;
+
+    if (subRoot->left != NULL) {
+        distSum = sumDistances(subRoot->left, currDist, distSum);
+    }
+
+    if (subRoot->right != NULL) {
+        distSum = sumDistances(subRoot->right, currDist, distSum);
+    }
+
+    return distSum;
 }

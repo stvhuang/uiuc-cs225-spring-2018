@@ -217,6 +217,9 @@ class BinaryTree
     void mirrorRecursive(Node *&subRoot);
 
     bool isOrderedRecursive(Node *subRoot) const;
+
+    int & sumDistances(const Node *subRoot, int currDist, int &distSum) const;
+
 };
 
 #include "binarytree_given.cpp"
