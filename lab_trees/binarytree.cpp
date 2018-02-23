@@ -91,7 +91,15 @@ template <typename T>
 bool BinaryTree<T>::isOrderedIterative() const
 {
     // your code here
-    return false;
+    InorderTraversal<int> iot(root);
+    int prev = (*iot.begin())->elem;
+    for (TreeTraversal<int>::Iterator it = iot.begin(); it != iot.end(); ++it) {
+        if (prev > (*it)->elem) {
+            return false;
+        }
+        prev = (*it)->elem;
+    }
+    return true;
 }
 
 /**
@@ -106,7 +114,6 @@ bool BinaryTree<T>::isOrderedRecursive() const
 
     // your code here
     return isOrderedRecursive(root);
-    return false;
 }
 
 /**
