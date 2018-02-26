@@ -128,6 +128,11 @@ template <typename T>
 void BinaryTree<T>::printPaths(vector<vector<T> > &paths) const
 {
     // your code here
+    stack<Node *> s;
+    printPaths(paths, root, s);
+    printVector(paths);
+
+    return;
 }
 
 /**
@@ -175,6 +180,59 @@ bool BinaryTree<T>::isOrderedRecursive(Node *subRoot) const
     } else {
         return true;
     }
+}
+
+template <typename T>
+void BinaryTree<T>::printPaths(vector<vector<T>> &paths, Node *subRoot, stack<Node *> &s) const {
+    s.push(subRoot);
+
+    if (subRoot->left == NULL && subRoot->right == NULL) {
+        pushStkToVec(s, paths);
+    }
+
+    if (subRoot->left != NULL) {
+        printPaths(paths, subRoot->left, s);
+    }
+
+    if (subRoot->right != NULL) {
+        printPaths(paths, subRoot->right, s);
+    }
+
+    s.pop();
+
+    return;
+}
+
+template <typename T>
+void BinaryTree<T>::pushStkToVec(stack<Node *> &s, vector<vector<T>> &paths) const {
+    stack<Node *> temp;
+    paths.push_back(vector<T>());
+
+    while (!s.empty()) {
+        temp.push(s.top());
+        s.pop();
+    }
+
+    while (!temp.empty()) {
+        paths[paths.size() - 1].push_back(temp.top()->elem);
+        s.push(temp.top());
+        temp.pop();
+    }
+
+    return;
+}
+
+template <typename T>
+void BinaryTree<T>::printVector(vector<vector<T>> &paths) const {
+    for (int i = 0; i < int(paths.size()); ++i) {
+        cout << "paths[" << i << "]: ";
+        for (int j = 0; j < int(paths[i].size()); ++j) {
+            cout << paths[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return;
 }
 
 template <typename T>

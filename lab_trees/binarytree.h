@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <stack>
 #include "random.h"
 using namespace std;
 
@@ -218,8 +219,13 @@ class BinaryTree
 
     bool isOrderedRecursive(Node *subRoot) const;
 
-    int & sumDistances(const Node *subRoot, int currDist, int &distSum) const;
+    void printPaths(vector<vector<T>> &paths, Node* subRoot, stack<Node *> &s) const;
 
+    void pushStkToVec(stack<Node *> &s, vector<vector<T>> &paths) const;
+
+    void printVector(vector<vector<T>> &paths) const;
+
+    int & sumDistances(const Node *subRoot, int currDist, int &distSum) const;
 };
 
 #include "binarytree_given.cpp"
