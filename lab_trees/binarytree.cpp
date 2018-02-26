@@ -167,8 +167,7 @@ void BinaryTree<T>::mirror(Node* &subRoot) {
 }
 
 template <typename T>
-bool BinaryTree<T>::isOrderedRecursive(Node *subRoot) const
-{
+bool BinaryTree<T>::isOrderedRecursive(Node *subRoot) const {
     if (subRoot == NULL) {
         return true;
     } else if (subRoot->left != NULL && subRoot->right != NULL) {
@@ -236,8 +235,7 @@ void BinaryTree<T>::printVector(vector<vector<T>> &paths) const {
 }
 
 template <typename T>
-int & BinaryTree<T>::sumDistances(const Node *subRoot, int currDist, int &distSum) const
-{
+int & BinaryTree<T>::sumDistances(const Node *subRoot, int currDist, int &distSum) const {
     ++currDist;
     distSum += currDist;
 
