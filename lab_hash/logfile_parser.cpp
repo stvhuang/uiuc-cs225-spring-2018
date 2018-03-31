@@ -35,8 +35,8 @@ LogfileParser::LogLine::LogLine(const string& line)
         dte += dline;
         dte += " ";
     } while (iss);
-		
-    dte = dte.substr(0, dte.length() - 6); 
+
+    dte = dte.substr(0, dte.length() - 6);
     std::tm tm = {};
     std::stringstream ss(dte);
     ss >> std::get_time(&tm, "%a %b %d %H:%M:%S %Y");
@@ -73,6 +73,23 @@ LogfileParser::LogfileParser(const string& fname) : whenVisitedTable(256)
          * this problem. This should also build the uniqueURLs member
          * vector as well.
          */
+        string uniqueUrl = ll.url;
+        string new_key = ll.customer.substr(1, ll.customer.size() - 3);
+
+        new_key.append(uniqueUrl);
+        if (whenVisitedTable.keyExists(new_key)) {
+            if (whenVisitedTable[new_key] < ll.date) {
+                whenVisitedTable[new_key]= ll.date;
+            }
+        } else {
+            whenVisitedTable.insert(new_key, ll.date);
+        }
+
+        if (!pageVisitedTable.keyExists(uniqueUrl)) {
+            uniqueURLs.push_back(uniqueUrl);
+        }
+
+        pageVisitedTable[uniqueUrl] = true;
     }
     infile.close();
 }
@@ -91,10 +108,10 @@ bool LogfileParser::hasVisited(const string& customer, const string& url) const
      * @todo Implement this function.
      */
 
-    (void) customer; // prevent warnings... When you implement this function, remove this line.
-    (void) url;      // prevent warnings... When you implement this function, remove this line.
-
-    return true; // replaceme
+    string uniqueUrl = url;
+    string new_key = customer.substr(1, customer.size() - 3);
+    new_key.append(uniqueUrl);
+    return whenVisitedTable.keyExists(new_key);
 }
 
 /**
@@ -115,10 +132,10 @@ time_t LogfileParser::dateVisited(const string& customer,
      * @todo Implement this function.
      */
 
-    (void) customer; // prevent warnings... When you implement this function, remove this line.
-    (void) url;      // prevent warnings... When you implement this function, remove this line.
-
-    return time_t(); // replaceme
+    string uniqueUrl = url;
+    string new_key = customer.substr(1, customer.size() - 3);
+    new_key.append(uniqueUrl);
+    return whenVisitedTable.find(new_key);
 }
 
 /**

@@ -56,10 +56,30 @@ bool AnagramFinder<Dict>::checkWord(const string& word, const string& test)
      * templated hashtable class Dict.
      */
 
-    (void) word; // prevent warnings... When you implement this function, remove this line.
-    (void) test; // prevent warnings... When you implement this function, remove this line.
+    Dict<char, int> word_hashTable(26);
+    Dict<char, int> test_hashTable(26);
 
-    return true;
+    if (word.length() != test.length()) {
+        return false;
+    }
+
+    for (char i = 'a'; i <= 'z'; ++i) {
+        word_hashTable[i] = test_hashTable[i] = 0;
+    }
+
+    for (size_t i = 0; i < word.length(); ++i) {
+        ++word_hashTable[tolower(word[i])];
+    }
+
+    for (size_t i = 0; i < test.length(); ++i) {
+        ++test_hashTable[tolower(test[i])];
+    }
+
+    for (char i = 'a'; i <= 'z'; ++i) {
+        if (word_hashTable[i] != test_hashTable[i]) {
+            return false;
+        }
+    }
 
     return true;
 }
@@ -85,7 +105,7 @@ vector<string> AnagramFinder<Dict>::getAnagrams(const string& word)
                 ret.push_back(test);
         }
     } else {
-        for (size_t i = 0; i < strings.size(); i++) {
+        for (size_t i = 0; i < strings.size(); ++i) {
             if (checkWord(word, strings[i]))
                 ret.push_back(strings[i]);
         }
@@ -107,7 +127,7 @@ void AnagramFinder<Dict>::writeAnagrams(const string& word,
     vector<string> anagrams = getAnagrams(word);
     ofstream outfile(output_file.c_str());
     if (outfile.is_open()) {
-        for (size_t i = 0; i < anagrams.size(); i++)
+        for (size_t i = 0; i < anagrams.size(); ++i)
             outfile << anagrams[i] << endl;
     }
     outfile.close();
