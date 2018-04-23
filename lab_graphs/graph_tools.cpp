@@ -26,7 +26,67 @@
 int GraphTools::findMinWeight(Graph& graph)
 {
     //TODO: YOUR CODE HERE
-    return -1;
+    vector<Vertex> v = graph.getVertices();
+    vector<Edge> e = graph.getEdges();
+
+    for (size_t i = 0; i < v.size(); ++i) {
+        graph.setVertexLabel(v[i], "UNEXPLORED");
+    }
+
+    for (size_t i = 0; i < e.size(); ++i) {
+        graph.setEdgeLabel(e[i].source, e[i].dest, "UNEXPLORED");
+    }
+
+    queue<Vertex> q;
+    q.push(v[0]);
+
+    graph.setVertexLabel(v[0], "VISITED");
+
+    Vertex min1 = v[0];
+    Vertex min2 = graph.getAdjacent(v[0])[0];
+    Vertex w = Vertex();
+
+    int minWeight = graph.getEdgeWeight(v[0], min2);
+    int currWeight = 0;
+
+    while (!q.empty()) {
+        currWeight = 0;
+        w = q.front();
+        q.pop();
+
+        vector<Vertex> adj = graph.getAdjacent(w);
+
+        for (size_t i = 0; i < adj.size(); ++i) {
+            if (graph.getVertexLabel(adj[i]) == "UNEXPLORED") {
+                graph.setEdgeLabel(w, adj[i], "DISCOVERY");
+                graph.setVertexLabel(adj[i], "VISITED");
+
+                currWeight = graph.getEdgeWeight(adj[i], w);
+
+                if (currWeight < minWeight) {
+                    minWeight = currWeight;
+                    min1 = w;
+                    min2 = adj[i];
+                }
+
+                q.push(adj[i]);
+            } else if (graph.getEdgeLabel(w, adj[i]) == "UNEXPLORED") {
+                graph.setEdgeLabel(w, adj[i], "CORSS");
+
+                currWeight = graph.getEdgeWeight(adj[i], w);
+
+                if (currWeight < minWeight) {
+                    minWeight = currWeight;
+                    min1 = w;
+                    min2 = adj[i];
+                }
+            }
+        }
+    }
+
+    graph.setEdgeLabel(min1, min2, "MIN");
+
+    return minWeight;
 }
 
 /**
@@ -53,8 +113,53 @@ int GraphTools::findMinWeight(Graph& graph)
 int GraphTools::findShortestPath(Graph& graph, Vertex start, Vertex end)
 {
     //TODO: YOUR CODE HERE
+    vector<Vertex> v = graph.getVertices();
+    vector<Edge> e = graph.getEdges();
+    unordered_map<Vertex, Vertex> parent;
 
-    return -1;
+    for (size_t i = 0; i < v.size(); ++i) {
+        graph.setVertexLabel(v[i], "UNEXPLORED");
+    }
+
+    for (size_t i = 0; i < e.size(); ++i) {
+        graph.setEdgeLabel(e[i].source, e[i].dest, "UNEXPLORED");
+    }
+
+    queue <Vertex> q;
+    q.push(start);
+
+    graph.setVertexLabel(start, "VISITED");
+
+    Vertex w = Vertex();
+
+    while (!q.empty()) {
+        w = q.front();
+        q.pop();
+
+        vector<Vertex> adjacent = graph.getAdjacent(w);
+
+        for (size_t i = 0; i < adjacent.size(); ++i) {
+            if (graph.getVertexLabel(adjacent[i]) == "UNEXPLORED") {
+                graph.setEdgeLabel(w, adjacent[i], "DISCOVERY");
+                graph.setVertexLabel(adjacent[i], "VISITED");
+                pair<Vertex, Vertex> pairVertex (adjacent[i], w);
+                parent.insert(pairVertex);
+                q.push(adjacent[i]);
+            } else if (graph.getEdgeLabel(w, adjacent[i]) == "UNEXPLORED") {
+                graph.setEdgeLabel(w, adjacent[i], "CORSS");
+            }
+        }
+    }
+
+    int distance = 0;
+
+    while (end != start) {
+        graph.setEdgeLabel(end, parent[end], "MINPATH");
+        end = parent[end];
+        ++distance;
+    }
+
+    return distance;
 }
 
 /**
@@ -74,4 +179,3 @@ void GraphTools::findMST(Graph& graph)
 {
     //TODO: YOUR CODE HERE
 }
-
